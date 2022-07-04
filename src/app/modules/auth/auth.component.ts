@@ -51,6 +51,8 @@ export class AuthComponent implements OnInit {
         data => {
           this.isLoggedIn = true;
           this.tokenService.saveToken(data.token);
+          console.log(data.token);
+          
           this.tokenService.saveUser(jwt_decode(data.token));
           this.router.navigate(['/home/']);
         }

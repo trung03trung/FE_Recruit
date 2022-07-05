@@ -53,7 +53,7 @@ const configToast: any = {
     ToastrModule.forRoot(configToast),
   ],
   bootstrap: [AppComponent],
-  providers: [  
+  providers: [
     {  
       provide: HTTP_INTERCEPTORS,  
       useClass: TokenInterceptor,  

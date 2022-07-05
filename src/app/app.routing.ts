@@ -2,6 +2,7 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AuthGuard } from './@core/guards/auth.guard';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   {
@@ -13,12 +14,16 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
-  { path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  { path: '**',
-    redirectTo: 'home',
+  // { path: '',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full',
+  // },
+  // { path: '**',
+  //   redirectTo: 'home',
+  // },
+  {
+    path:'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule),
   },
 ];
 

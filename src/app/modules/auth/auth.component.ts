@@ -70,7 +70,7 @@ export class AuthComponent implements OnInit {
             }
             else{
               // router public
-              this.router.navigate(['/auth'])
+              this.router.navigate(['/listje'])
             }
           }
         }

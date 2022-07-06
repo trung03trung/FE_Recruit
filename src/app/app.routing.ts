@@ -2,6 +2,8 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AuthGuard } from './@core/guards/auth.guard';
+import { RegisterComponent } from './modules/register/register.component';
+import { ListjeComponent } from './modules/listje/listje.component';
 
 export const routes: Routes = [
   {
@@ -13,13 +15,21 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
-  { path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+  // { path: '',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full',
+  // },
+  // { path: '**',
+  //   redirectTo: 'home',
+  // },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
-  { path: '**',
-    redirectTo: 'home',
-  },
+  {
+    path: 'listje',
+    component: ListjeComponent,
+  }
 ];
 
 const config: ExtraOptions = {

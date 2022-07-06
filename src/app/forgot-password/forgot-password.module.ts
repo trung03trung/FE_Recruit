@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import { ForgotPasswordComponent } from './forgot-password.component';
+import{MaterialModule} from '../shared/material.module';
 
 const routes: Routes = [{
   path: '',
@@ -24,6 +25,7 @@ const routes: Routes = [{
     InputTextModule,
     ReactiveFormsModule,
     FormsModule,
+    MaterialModule
   ]
 })
 export class ForgotPasswordModule { }

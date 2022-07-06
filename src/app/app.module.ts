@@ -21,6 +21,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { TokenInterceptor } from './@core/services/interceptor.service';
 
 const configToast: any = {
   timeOut: 3000,
@@ -52,6 +53,13 @@ const configToast: any = {
     ToastrModule.forRoot(configToast),
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {  
+      provide: HTTP_INTERCEPTORS,  
+      useClass: TokenInterceptor,  
+      multi: true  
+    }  
+  ],  
 })
 export class AppModule {
 }

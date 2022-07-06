@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   'vxymu3Q3flbieqI1HvuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAQUlEQVQ4jWNgGAWjgP6ASdncAEaiAhaGiACmFhCJLsMaIiDAEQEi0WXYEiMC' +
   'OCJAJIY9KuYGTC0gknpuHwXDGwAA5fsIZw0iYWYAAAAASUVORK5CYII=';
 
-  name=this.sessionService.getItem('auth-user')
+  name=this.sessionService.getItem('auth-user').sub;
 
   themes = [
     {
@@ -62,12 +62,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.user = this.sessionService.getItem('auth-user');
 
     this.menuService.onItemClick().subscribe((event)=>{
-      if(event.item.title==='Log out'){
+      if(event.item.title==='Đăng xuất'){
         this.sessionService.removeItem('auth-token'),
         this.sessionService.removeItem('auth-user'),
+        // localStorage.removeItem('user');
         this.router.navigate(['/auth/'])
       }
-      if(event.item.title==='Profile'){
+      if(event.item.title==='Thông tin cá nhân'){
         this.router.navigate(['/home/profile'])
       }
     });

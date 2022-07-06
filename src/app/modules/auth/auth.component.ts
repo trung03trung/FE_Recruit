@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../@core/services/auth.service';
 import { TokenService } from '../../@core/services/token.service';
+import jwt_decode from "jwt-decode";
+import { TokenInterceptor  } from "../../@core/services/interceptor.service";
+import { User } from '../home/profile/profile.model';
 
 @Component({
   selector: 'ngx-auth',
@@ -26,7 +29,7 @@ export class AuthComponent implements OnInit {
     this.initForm();
     if (this.tokenService.getToken()) {
       this.isLoggedIn = true;
-      // this.roles = this.tokenService.getUser().roles;
+      this.roles = this.tokenService.getUser().roles;
     }
 
   }
@@ -48,11 +51,29 @@ export class AuthComponent implements OnInit {
     if (this.formLogin.valid) {
       this.authService.login(this.formLogin.value).subscribe(
         data => {
+          console.log(data);
           this.isLoggedIn = true;
-          this.tokenService.saveToken(data.jwt);
-          this.tokenService.saveUser(data.username);
-          // this.roles = this.tokenService.getUser().roles;
-          this.router.navigate(['/home/']);
+          // save token sisson 
+          this.tokenService.saveToken(data.token);
+          this.tokenService.saveUser(jwt_decode(data.token));
+          // save user localstorage
+          var user = JSON.stringify(jwt_decode(data.token));
+          localStorage.setItem('user', user);
+          // router 
+          if(localStorage.getItem('user')!=null){
+            const userinfo = JSON.parse(localStorage.getItem('user'));
+            // lấy ra auth để router
+            const role = userinfo.auth;
+            console.log(role);
+            if(role === "ROLE_ADMIN" || role === "ROLE_JE"){
+              // router admin
+              this.router.navigate(['/home/'])
+            }
+            else{
+              // router public
+              this.router.navigate(['/auth'])
+            }
+          }
         }
       );
     }

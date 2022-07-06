@@ -1,29 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../@core/services/auth.service';
-import { TokenService } from '../../@core/services/token.service';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "../../@core/services/auth.service";
+import { TokenService } from "../../@core/services/token.service";
 import jwt_decode from "jwt-decode";
-import { TokenInterceptor  } from "../../@core/services/interceptor.service";
-import { User } from '../home/profile/profile.model';
+
 
 @Component({
-  selector: 'ngx-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: "ngx-auth",
+  templateUrl: "./auth.component.html",
+  styleUrls: ["./auth.component.scss"],
 })
 export class AuthComponent implements OnInit {
-
   formLogin: FormGroup;
   isSubmitted = false;
   roles: string[] = [];
   isLoggedIn = false;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -31,13 +35,20 @@ export class AuthComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.tokenService.getUser().roles;
     }
-
   }
-
+  message = "";
   initForm() {
     this.formLogin = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
+      userName: new FormControl("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      password: new FormControl("", [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(18),
+      ]),
     });
   }
 
@@ -45,37 +56,38 @@ export class AuthComponent implements OnInit {
     return this.formLogin.controls;
   }
 
-
   onSubmit() {
     this.isSubmitted = true;
     if (this.formLogin.valid) {
       this.authService.login(this.formLogin.value).subscribe(
-        data => {
+        (data) => {
           this.isLoggedIn = true;
-          // save token sisson 
+          // save token local
           this.tokenService.saveToken(data.token);
           this.tokenService.saveUser(jwt_decode(data.token));
-          // save user localstorage
-          var user = JSON.stringify(jwt_decode(data.token));
-          localStorage.setItem('user', user);
-          // router 
-          if(localStorage.getItem('user')!=null){
-            const userinfo = JSON.parse(localStorage.getItem('user'));
+
+          if (localStorage.getItem("auth-user") != null) {
+            const userinfo = JSON.parse(localStorage.getItem("auth-user"));
             // lấy ra auth để router
             const role = userinfo.auth;
-            console.log(role);
-            if(role === "ROLE_ADMIN" || role === "ROLE_JE"){
+            if (role === "ROLE_ADMIN" || role === "ROLE_JE") {
               // router admin
-              this.router.navigate(['/home/'])
-            }
-            else{
+              this.router.navigate(["/home/"]);
+            } else {
               // router public
-              this.router.navigate(['/listje'])
+              this.router.navigate(["/listje"]);
             }
+          }
+        },
+        (error) => {
+          if (error.status == "400") {
+            this.message = "Tài khoản hoặc mật khẩu sai.";
+          }
+          if (error.status == "401") {
+            this.message = "Tài khoản chưa kích hoạt.";
           }
         }
       );
     }
   }
-
 }

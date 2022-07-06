@@ -32,15 +32,15 @@
       <tbody>
         <tr *ngFor="">
           <td>{{user.id}}</td>
-          <td>{{employee.name}}</td>
-          <td>{{employee.email}}</td>
-          <td>{{employee.salary}}</td>
-          <td>{{user.id}}</td>
-          <td>{{user.id}}</td>
-          <td>{{user.id}}</td>
-          <td>{{user.id}}</td>
-          <td>{{user.id}}</td>
-          <td>{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phonenumber}}</td>
+          <td>{{user.hometown}}</td>
+          <td>{{user.gender}}</td>
+          <td>{{user.birtday}}</td>
+          <td>{{user.active}}</td>
+          <td>{{user.delete}}</td>
           <td>
               <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee" (click)="editEmployee(employee)">Edit</button>
               <button type="button" class="btn btn-outline-danger" (click)="deleteEmployee(employee)">Delete</button>

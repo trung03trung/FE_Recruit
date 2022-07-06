@@ -21,6 +21,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { LogupComponent } from './modules/logup/logup.component';
 
 const configToast: any = {
   timeOut: 3000,
@@ -32,7 +33,7 @@ const configToast: any = {
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LogupComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

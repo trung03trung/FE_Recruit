@@ -5,18 +5,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
-import { ForgotPasswordComponent } from './forgot-password.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangePasswordComponent } from './change-password.component';
 
 const routes: Routes = [{
   path: '',
-  component: ForgotPasswordComponent,
+  component: ChangePasswordComponent,
   children: [],
 }];
 
 @NgModule({
   declarations: [
-    ForgotPasswordComponent,
     ChangePasswordComponent,
   ],
   imports: [

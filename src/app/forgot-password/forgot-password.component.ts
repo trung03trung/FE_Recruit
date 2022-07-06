@@ -34,7 +34,9 @@ export class ForgotPasswordComponent implements OnInit {
     if ( this.formEmail.valid) {
       this.forgotPasswordService.sendOTP(this.formEmail.controls.email.value).subscribe(
         data => {
-                this.message=data.message   
+                this.message=data.message
+                if(this.message=='Gửi')
+                localStorage.setItem('email', this.formEmail.controls.email.value);   
         }
       );
     }

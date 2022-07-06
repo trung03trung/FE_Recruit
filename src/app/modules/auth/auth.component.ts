@@ -51,6 +51,7 @@ export class AuthComponent implements OnInit {
     if (this.formLogin.valid) {
       this.authService.login(this.formLogin.value).subscribe(
         data => {
+          console.log(data);
           this.isLoggedIn = true;
           // save token sisson 
           this.tokenService.saveToken(data.token);

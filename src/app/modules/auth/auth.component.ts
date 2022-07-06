@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../@core/services/auth.service';
 import { TokenService } from '../../@core/services/token.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'ngx-auth',
@@ -48,10 +49,12 @@ export class AuthComponent implements OnInit {
     if (this.formLogin.valid) {
       this.authService.login(this.formLogin.value).subscribe(
         data => {
+          console.log(data);
           this.isLoggedIn = true;
-          this.tokenService.saveToken(data.jwt);
-          this.tokenService.saveUser(data.username);
-          // this.roles = this.tokenService.getUser().roles;
+          this.tokenService.saveToken(data.token);
+          var decoded = jwt_decode(data.token);
+          this.tokenService.saveUser(jwt_decode(data.token));
+          console.log(decoded);
           this.router.navigate(['/home/']);
         }
       );

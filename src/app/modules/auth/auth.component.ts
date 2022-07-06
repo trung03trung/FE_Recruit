@@ -51,7 +51,6 @@ export class AuthComponent implements OnInit {
     if (this.formLogin.valid) {
       this.authService.login(this.formLogin.value).subscribe(
         data => {
-          console.log(data);
           this.isLoggedIn = true;
           // save token sisson 
           this.tokenService.saveToken(data.token);
@@ -64,7 +63,7 @@ export class AuthComponent implements OnInit {
             const userinfo = JSON.parse(localStorage.getItem('user'));
             // lấy ra auth để router
             const role = userinfo.auth;
-            console.log(role);
+            console.log('login wwith '+role);
             if(role === "ROLE_ADMIN" || role === "ROLE_JE"){
               // router admin
               this.router.navigate(['/home/'])

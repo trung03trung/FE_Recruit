@@ -26,4 +26,4 @@ const routes: Routes = [{
     FormsModule,
   ]
 })
-export class ForgotPasswordModule { }
+export class ChangePasswordModule { }

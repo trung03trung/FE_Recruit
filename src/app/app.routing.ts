@@ -25,6 +25,10 @@ export const routes: Routes = [
     path:'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule),
   },
+  {
+    path:'change-password',
+    loadChildren: () => import('./forgot-password/change-password/change-password.module').then(m => m.ChangePasswordModule),
+  },
 ];
 
 const config: ExtraOptions = {

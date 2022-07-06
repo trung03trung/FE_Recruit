@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import { ForgotPasswordComponent } from './forgot-password.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,7 +16,6 @@ const routes: Routes = [{
 @NgModule({
   declarations: [
     ForgotPasswordComponent,
-    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

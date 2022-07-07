@@ -25,8 +25,8 @@ import { SignupComponent } from './modules/signup/signup.component';
 import { TokenInterceptor } from './@core/services/interceptor.service';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
-import { RegisterComponent } from './modules/register/register.component';
 import { ListjeComponent } from './modules/listje/listje.component';
+
 
 const configToast: any = {
   timeOut: 3000,
@@ -38,12 +38,13 @@ const configToast: any = {
 
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, ActiveAccountComponent],
+  declarations: [AppComponent,SignupComponent,ListjeComponent, ActiveAccountComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
+        ReactiveFormsModule,
         NbSidebarModule.forRoot(),
         NbMenuModule.forRoot(),
         NbDatepickerModule.forRoot(),

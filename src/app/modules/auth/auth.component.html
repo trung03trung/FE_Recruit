@@ -114,12 +114,12 @@
             <!-- validators server -->
             <mat-error *ngIf="message !== ''" class="alert-danger">{{
               message
-            }}</mat-error>
+              }}</mat-error>
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
             <a routerLink="/forgot-password" class="text-body"
-              >Lấy lại mật khẩu?</a
+            >Lấy lại mật khẩu?</a
             >
           </div>
 
@@ -136,16 +136,16 @@
               (click)="onSubmit()"
             ></button>
             <!-- enter button -->
-            <script> 
+            <script>
               $("#p-inputtext-lg").keypress(function(event) {
-                  if (event.keyCode === 13) {
-                      $("#GFG_Button").click();
-                  }
+                if (event.keyCode === 13) {
+                  $("#GFG_Button").click();
+                }
               });
               $("#GFG_Button").click(function() {
-                  alert("Button clicked");
+                alert("Button clicked");
               });
-          </script> 
+            </script>
             <p class="small fw-bold mt-2 pt-1 mb-0">
               <a routerLink="/signup">Đăng ký tài khoản ?</a
               ><a href="https://itsol.vn/"></a>

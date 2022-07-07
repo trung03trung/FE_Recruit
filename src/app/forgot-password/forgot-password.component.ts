@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -7,6 +8,10 @@ import {
 } from "@angular/forms";
 import { ForgotPasswordService } from "../../app/@core/services/forgot-pass.service";
 import { Router } from "@angular/router";
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ForgotPasswordService } from '../../app/@core/services/forgot-pass.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "ngx-forgot-password",
@@ -17,17 +22,25 @@ export class ForgotPasswordComponent implements OnInit {
   message = "";
   formEmail = new FormGroup({
     email: new FormControl("", [Validators.email, Validators.required]),
+export class ForgotPasswordComponent implements OnInit, DoCheck {
+  message = '';
+  formEmail = new FormGroup({
+    email: new FormControl('', [Validators.email, Validators.required]),
   });
+  disableClick = "disableClick";
 
   constructor(
     private forgotPasswordService: ForgotPasswordService,
     private fb: FormBuilder,
     private router: Router
   ) {}
+  constructor(private forgotPasswordService: ForgotPasswordService, private fb: FormBuilder,
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.initForm();
   }
+
   initForm() {
     this.formEmail = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
@@ -49,6 +62,5 @@ export class ForgotPasswordComponent implements OnInit {
             console.log(this.message);
           });
       });
-    }
   }
 }

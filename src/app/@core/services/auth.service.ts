@@ -27,3 +27,4 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}signup`, form);
   }
 }
+}

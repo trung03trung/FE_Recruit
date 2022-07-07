@@ -1,3 +1,6 @@
+import {SignupComponent} from "./modules/signup/signup.component";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
@@ -43,6 +46,15 @@ export const routes: Routes = [
     path:'change-password',
     loadChildren: () => import('./forgot-password/change-password/change-password.module').then(m => m.ChangePasswordModule),
   },
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  {
+    path: 'active',
+    component: ActiveAccountComponent,
+  }
+
 ];
 
 const config: ExtraOptions = {

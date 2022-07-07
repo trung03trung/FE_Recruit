@@ -1,0 +1,48 @@
+<form [formGroup]="formSignup" action="">
+  <div class="container">
+    <h1>ĐĂNG KÝ</h1>
+    <hr>
+    <label><b>Tên người dùng</b></label><br>
+    <input type="text" placeholder="Nhập tên người dùng" name="psw-repeat" formControlName="userName" required>
+    <br>
+    <div *ngIf="!message" class="alert-danger">Tài khoản đã tồn tại</div>
+    <div class="alert-danger" *ngIf="!formSignup.get('userName').valid && formSignup.get('userName').touched">
+      Vui lòng nhập tên người dùng
+    </div>
+
+    <label><b>Email</b></label><br>
+    <input type="text" placeholder="Nhập Email" name="email" formControlName="email" required>
+    <br>
+    <div class="alert-danger" *ngIf="!formSignup.get('email').valid && formSignup.get('email').touched">
+      Vui lòng nhập một địa chỉ email hợp lệ
+    </div>
+
+    <label><b>Mật Khẩu</b></label><br>
+    <input type="password" placeholder="Nhập Mật Khẩu" name="psw" formControlName="newPassword" required>
+    <br>
+    <div class="alert-danger" *ngIf="!formSignup.get('newPassword').valid && formSignup.get('newPassword').touched">
+      Vui lòng nhập mật khẩu có 8 - 16 kí tự và có ít nhất 1 chữ và 1 kí tự đặc biệt
+    </div>
+
+    <label><b>Nhập Lại Mật Khẩu</b></label><br>
+    <input type="password" placeholder="Nhập Lại Mật Khẩu" name="psw-repeat" formControlName="password" required>
+    <br>
+    <div class="alert-danger" *ngIf="!formSignup.get('password').valid && formSignup.get('password').touched">
+      Mật khẩu không trùng khớp
+    </div>
+
+    <label><b>Số điện thoại</b></label><br>
+    <input type="text" placeholder="Nhập số điện thoại" name="psw-repeat" formControlName="phoneNumber" required>
+    <br>
+    <div class="alert-danger" *ngIf="!formSignup.get('phoneNumber').valid && formSignup.get('phoneNumber').touched">
+      Sai định dạng
+    </div>
+
+    <label><b>Ngày sinh</b></label><br>
+    <input type="date" placeholder="Nhập ngày sinh" name="psw-repeat" formControlName="birthDay" required>
+
+    <div class="clearfix">
+      <button type="submit" class="btn btn-success" (click)="signup()" [disabled]="!formSignup.valid">Đăng ký</button>
+    </div>
+  </div>
+</form>

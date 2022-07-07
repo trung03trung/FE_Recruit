@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit, DoCheck {
-
   message = '';
   formEmail = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -23,11 +22,13 @@ export class ForgotPasswordComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.initForm();
   }
+
   initForm() {
     this.formEmail = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     });
   }
+  
   ngDoCheck(): void {
     if (this.formEmail.valid) {
       this.disableClick = "";

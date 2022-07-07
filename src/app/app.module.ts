@@ -22,6 +22,8 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import { TokenInterceptor } from './@core/services/interceptor.service';
+import { RegisterComponent } from './modules/register/register.component';
+import { ListjeComponent } from './modules/listje/listje.component';
 
 const configToast: any = {
   timeOut: 3000,
@@ -33,7 +35,7 @@ const configToast: any = {
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RegisterComponent, ListjeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

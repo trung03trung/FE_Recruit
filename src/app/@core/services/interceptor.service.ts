@@ -12,7 +12,7 @@ import { map, catchError } from 'rxjs/operators';
 export class TokenInterceptor implements HttpInterceptor {  
 
   constructor(public http: TokenService,private router: Router) {}  
-  // Mục tiêu là JWT gửi đến local storage đưới dạng Authorization header in any HTTP request
+  // Mục tiêu là JWT gửi đến local storage Authorization header in any HTTP request
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {      
   if(localStorage.getItem('user')!=null){
     const userinfo = JSON.parse(localStorage.getItem('user'));

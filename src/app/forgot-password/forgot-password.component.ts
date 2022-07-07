@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForgotPasswordService } from '../../app/@core/services/forgot-pass.service';
 import { Router } from '@angular/router';
@@ -9,16 +9,15 @@ import { Router } from '@angular/router';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
-
+export class ForgotPasswordComponent implements OnInit, DoCheck {
   message = '';
   formEmail = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
   });
+  disableClick = "disableClick";
 
   constructor(private forgotPasswordService: ForgotPasswordService, private fb: FormBuilder,
-              private router: Router,) {
-  }
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -29,22 +28,26 @@ export class ForgotPasswordComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     });
   }
+  
+  ngDoCheck(): void {
+    if (this.formEmail.valid) {
+      this.disableClick = "";
+    } else {
+      this.disableClick = "disableClick";
+    }
+  }
+
 
   onSubmit() {
     if (this.formEmail.valid) {
-      const email = this.formEmail.controls.email.value;
-      this.forgotPasswordService.tranferMail(email);
-      this.forgotPasswordService.sendOTP(email).subscribe(
+
+
+      this.forgotPasswordService.tranferMail(this.formEmail.controls.email.value);
+      this.forgotPasswordService.sendOTP(this.formEmail.controls.email.value).subscribe(
         data => {
-          this.message = data.message
-          if (this.message == 'success')
+          this.message = data.status;
+          if (this.message == 'OK')
             this.router.navigate(['/change-password/'])
-          this.forgotPasswordService.sendOTP(this.formEmail.controls.email.value).subscribe(
-            data => {
-              this.message = data.message
-              console.log(this.message);
-            }
-          );
         });
     }
   }

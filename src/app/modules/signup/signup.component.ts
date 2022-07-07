@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+  message = 'a';
   formSignup: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -51,8 +51,11 @@ export class SignupComponent implements OnInit {
 
   signup() {
     this.authService.signup(this.formSignup.value).subscribe(data => {
-      console.log(data)
-    })
+      this.message = data
+      if (!this.message) {
+        this.router.navigate(['/auth']);
+      }
+    });
   }
 
 }

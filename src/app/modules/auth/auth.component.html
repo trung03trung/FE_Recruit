@@ -36,6 +36,7 @@
             <input
               id="p-inputtext-lg1"
               class="custom-input"
+              [disabled]="!this.formLogin.valid"
               formControlName="userName"
               type="userName"
               pInputText
@@ -76,7 +77,7 @@
               id="p-inputtext-lg"
               class="custom-input"
               formControlName="password"
-              type="text"
+              type="password"
               pInputText
             />
             <label for="p-inputtext-lg">Mật khẩu</label>
@@ -116,18 +117,6 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
-            <!-- Checkbox -->
-            <div class="form-check mb-0">
-              <input
-                class="form-check-input me-2"
-                type="checkbox"
-                value=""
-                id="form2Example3"
-              />
-              <label class="form-check-label" for="form2Example3">
-                Ghi nhớ tài khoản
-              </label>
-            </div>
             <a routerLink="/forgot-password" class="text-body"
               >Lấy lại mật khẩu?</a
             >
@@ -135,14 +124,30 @@
 
           <div class="text-center text-lg-start mt-4 pt-2">
             <button
+              class="{{disableClick}}"
               pButton
-              type="button"
+              id="GFG_Button"
+              type="submit"
+              title="Submit"
               label="Đăng nhập"
+              aria-label="Submit"
+              [disabled]="!this.formLogin.valid"
               (click)="onSubmit()"
             ></button>
+            <!-- enter button -->
+            <script> 
+              $("#p-inputtext-lg").keypress(function(event) {
+                  if (event.keyCode === 13) {
+                      $("#GFG_Button").click();
+                  }
+              });
+              $("#GFG_Button").click(function() {
+                  alert("Button clicked");
+              });
+          </script> 
             <p class="small fw-bold mt-2 pt-1 mb-0">
-              Đăng ký tài khoản ?
-              <a href="/register" class="link-danger">ITSOL</a>
+              <a routerLink="/signup">Đăng ký tài khoản ?</a
+              ><a href="https://itsol.vn/"></a>
             </p>
           </div>
         </form>

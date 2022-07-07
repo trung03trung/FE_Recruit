@@ -1,7 +1,9 @@
+import {SignupComponent} from "./modules/signup/signup.component";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
-import { RegisterComponent } from "./modules/register/register.component";
 import { ListjeComponent } from "./modules/listje/listje.component";
 // import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 
@@ -25,10 +27,6 @@ export const routes: Routes = [
   //   redirectTo: 'home',
   // },
   {
-    path: "register",
-    component: RegisterComponent,
-  },
-  {
     path: "forgot-password",
     loadChildren: () =>
       import("./forgot-password/forgot-password.module").then(
@@ -39,6 +37,19 @@ export const routes: Routes = [
     path: "listje",
     component: ListjeComponent,
   },
+  {
+    path:'change-password',
+    loadChildren: () => import('./forgot-password/change-password/change-password.module').then(m => m.ChangePasswordModule),
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  {
+    path: 'active',
+    component: ActiveAccountComponent,
+  }
+
 ];
 
 const config: ExtraOptions = {

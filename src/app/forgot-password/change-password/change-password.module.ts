@@ -5,18 +5,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
-import { ForgotPasswordComponent } from './forgot-password.component';
-import{MaterialModule} from '../shared/material.module';
+import { ChangePasswordComponent } from './change-password.component';
+import {ErrorStateMatcher} from '@angular/material/core';
+import{MaterialModule} from '../../shared/material.module'
 
 const routes: Routes = [{
   path: '',
-  component: ForgotPasswordComponent,
+  component: ChangePasswordComponent,
   children: [],
 }];
 
 @NgModule({
+  providers: [
+    {provide: ErrorStateMatcher}
+  ],
   declarations: [
-    ForgotPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +30,7 @@ const routes: Routes = [{
     ReactiveFormsModule,
     FormsModule,
     MaterialModule
+   
   ]
 })
-export class ForgotPasswordModule { }
+export class ChangePasswordModule { }

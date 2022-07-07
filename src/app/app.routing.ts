@@ -39,6 +39,10 @@ export const routes: Routes = [
     path: "listje",
     component: ListjeComponent,
   },
+  {
+    path:'change-password',
+    loadChildren: () => import('./forgot-password/change-password/change-password.module').then(m => m.ChangePasswordModule),
+  },
 ];
 
 const config: ExtraOptions = {

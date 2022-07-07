@@ -70,7 +70,8 @@ export class AuthComponent implements OnInit {
             const userinfo = JSON.parse(localStorage.getItem("auth-user"));
             // lấy ra auth để router
             const role = userinfo.auth;
-            if (role === "ROLE_ADMIN" || role === "ROLE_JE") {
+            console.log('login wwith '+role);
+            if(role === "ROLE_ADMIN" || role === "ROLE_JE"){
               // router admin
               this.router.navigate(["/home/"]);
             } else {

@@ -17,13 +17,13 @@ const routes: Routes = [{
   declarations: [
     AuthComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        ButtonModule,
-        InputTextModule,
-        ReactiveFormsModule,
-        MatFormFieldModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ButtonModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
+  ]
 })
 export class AuthModule { }

@@ -24,6 +24,7 @@ import {
 import { TokenInterceptor } from './@core/services/interceptor.service';
 import { RegisterComponent } from './modules/register/register.component';
 import { ListjeComponent } from './modules/listje/listje.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const configToast: any = {
   timeOut: 3000,
@@ -41,6 +42,7 @@ const configToast: any = {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),

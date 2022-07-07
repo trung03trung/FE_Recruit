@@ -14,6 +14,14 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean |
       UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (window.localStorage.getItem('auth-token')) {
+      if (localStorage.getItem("auth-user") != null) {
+        const userinfo = JSON.parse(localStorage.getItem("auth-user"));
+        // lấy ra auth để router
+        const role = userinfo.auth;
+        if (role === "ROLE_USER"){
+            this.router.navigate(["/listje"]);
+            return false;
+        }
       // logged in so return true
       return true;
     }
@@ -21,5 +29,5 @@ export class AuthGuard implements CanActivate {
     this.router.navigate(['/auth/'], { queryParams: { returnUrl: state.url } });
     return true;
   }
-
+      }
 }

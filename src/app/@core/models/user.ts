@@ -1,13 +1,22 @@
-// export class users{
-//         avatarName: string;
-//         birthDay: Date;
-//         email: "string";
-//         fullName: "string";
-//         gender: "string";
-//         homeTown: "string";
-//         name: "string";
-//         newPassword: "string";
-//         "password": "string";
-//         "phoneNumber": "string";
-//         "userName": "string"
-// }
+export class Users{
+    active: boolean;
+    avatarName: string;
+    birthDay: Date;
+    delete: boolean;
+    email: string;
+    gender: string;
+    homeTown: string;
+    id: number;
+    name: string;
+    password: string;
+    phoneNumber: string;
+    roles: [
+      {
+        code: string;
+        delete: true;
+        description: string;
+        id: number;
+      }
+    ];
+    userName: string
+}

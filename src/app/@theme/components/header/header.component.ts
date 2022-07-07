@@ -6,6 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SessionService } from '../../../@core/services/session.service';
 import { Router } from '@angular/router';
+import { LocalService } from '../../../@core/services/local.service';
 
 @Component({
   selector: 'ngx-header',
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   'vxymu3Q3flbieqI1HvuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAQUlEQVQ4jWNgGAWjgP6ASdncAEaiAhaGiACmFhCJLsMaIiDAEQEi0WXYEiMC' +
   'OCJAJIY9KuYGTC0gknpuHwXDGwAA5fsIZw0iYWYAAAAASUVORK5CYII=';
 
-  name=this.sessionService.getItem('auth-user').sub;
+  name=this.localService.getItem('auth-user').sub;
 
   themes = [
     {
@@ -52,6 +53,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               private sessionService: SessionService,
+              private localService: LocalService,
               private router: Router,
               ) {
   }
@@ -63,9 +65,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.menuService.onItemClick().subscribe((event)=>{
       if(event.item.title==='Đăng xuất'){
-        this.sessionService.removeItem('auth-token'),
-        this.sessionService.removeItem('auth-user'),
-        // localStorage.removeItem('user');
+        this.localService.removeItem('auth-token'),
+        this.localService.removeItem('auth-user'),
+        localStorage.removeItem('user');
         this.router.navigate(['/auth/'])
       }
       if(event.item.title==='Thông tin cá nhân'){

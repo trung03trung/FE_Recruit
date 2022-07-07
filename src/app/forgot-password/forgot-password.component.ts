@@ -36,7 +36,11 @@ export class ForgotPasswordComponent implements OnInit {
         data => { 
           this.message=data.message
           if(this.message == 'success')
-            this.router.navigate(['/change-password/'])  
+            this.router.navigate(['/change-password/'])
+      this.forgotPasswordService.sendOTP(this.formEmail.controls.email.value).subscribe(
+        data => {
+              this.message=data.message   
+              console.log(this.message);
         }
       );
     }

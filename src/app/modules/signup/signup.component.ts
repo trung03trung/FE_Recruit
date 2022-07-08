@@ -1,23 +1,31 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../@core/services/auth.service";
-import {TokenService} from "../../@core/services/token.service";
-import {Router} from "@angular/router";
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../../@core/services/auth.service";
+import { TokenService } from "../../@core/services/token.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'ngx-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, DoCheck {
   message = 'a';
   formSignup: FormGroup;
-
+  loading=""
   constructor(private fb: FormBuilder,
-              private authService: AuthService,
-              private tokenService: TokenService,
-              private router: Router,
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private router: Router,
   ) {
+  }
+  disableClick = "disableClick";
+  ngDoCheck(): void {
+    if (this.formSignup.valid) {
+      this.disableClick = "";
+    } else {
+      this.disableClick = "disableClick";
+    }
   }
 
   ngOnInit(): void {
@@ -50,11 +58,14 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    this.loading = "spinner-border spinner-border-sm";
     this.authService.signup(this.formSignup.value).subscribe(data => {
-      this.message = data
-      if (!this.message) {
+      this.message = data.status
+      if (this.message == 'OK') {
         this.router.navigate(['/auth']);
       }
+      else
+        this.loading="";
     });
   }
 

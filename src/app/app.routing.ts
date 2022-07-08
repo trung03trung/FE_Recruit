@@ -4,7 +4,6 @@ import {ActiveAccountComponent} from "./modules/signup/active-account/active-acc
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
-import { RegisterComponent } from "./modules/register/register.component";
 import { ListjeComponent } from "./modules/listje/listje.component";
 // import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 
@@ -27,10 +26,6 @@ export const routes: Routes = [
   // { path: '**',
   //   redirectTo: 'home',
   // },
-  {
-    path: "register",
-    component: RegisterComponent,
-  },
   {
     path: "forgot-password",
     loadChildren: () =>

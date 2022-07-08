@@ -1,26 +1,33 @@
-import { Component, OnInit } from "@angular/core";
+/* eslint-disable */
+import {
+  Component,
+  DoCheck,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { Router } from "@angular/router";
-import { AuthService } from "../../@core/services/auth.service";
-import { TokenService } from "../../@core/services/token.service";
-import jwt_decode from "jwt-decode";
-
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../@core/services/auth.service';
+import { TokenService } from '../../@core/services/token.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
-  selector: "ngx-auth",
-  templateUrl: "./auth.component.html",
-  styleUrls: ["./auth.component.scss"],
+  selector: 'ngx-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, DoCheck {
   formLogin: FormGroup;
   isSubmitted = false;
   roles: string[] = [];
   isLoggedIn = false;
+  disableClick = 'disableClick';
 
   constructor(
     private fb: FormBuilder,
@@ -36,18 +43,26 @@ export class AuthComponent implements OnInit {
       this.roles = this.tokenService.getUser().roles;
     }
   }
-  message = "";
+  ngDoCheck(): void {
+    if (this.formLogin.valid) {
+      this.disableClick = '';
+    } else {
+      this.disableClick = 'disableClick';
+    }
+  }
+  message = '';
   initForm() {
     this.formLogin = this.fb.group({
-      userName: new FormControl("", [
+      userName: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(20),
       ]),
-      password: new FormControl("", [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(18),
+        //Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$')
       ]),
     });
   }
@@ -61,31 +76,40 @@ export class AuthComponent implements OnInit {
     if (this.formLogin.valid) {
       this.authService.login(this.formLogin.value).subscribe(
         (data) => {
+
+          if(data.status=='NOT_FOUND'){
+            this.message = 'Không tìm thấy tài khoản';
+          }
+          if(data.status=='UNAUTHORIZED'){
+            this.message = 'Tài khoản chưa được xác thực';
+          }
+
           this.isLoggedIn = true;
-          // save token local
+          //save token local
           this.tokenService.saveToken(data.token);
           this.tokenService.saveUser(jwt_decode(data.token));
-
-          if (localStorage.getItem("auth-user") != null) {
-            const userinfo = JSON.parse(localStorage.getItem("auth-user"));
+          if (localStorage.getItem('auth-user') != null) {
+            const userinfo = JSON.parse(localStorage.getItem('auth-user'));
             // lấy ra auth để router
             const role = userinfo.auth;
-            console.log('login wwith '+role);
-            if(role === "ROLE_ADMIN" || role === "ROLE_JE"){
+            console.log('login wwith ' + role);
+            if (role === 'ROLE_ADMIN' || role === 'ROLE_JE') {
               // router admin
-              this.router.navigate(["/home/"]);
+              this.router.navigate(['/home/']);
             } else {
               // router public
-              this.router.navigate(["/listje"]);
+              this.router.navigate(['/listje']);
             }
           }
         },
         (error) => {
-          if (error.status == "400") {
-            this.message = "Tài khoản hoặc mật khẩu sai.";
+          console.log(error);
+
+          if (error.status == '400') {
+            this.message = 'Tài khoản hoặc mật khẩu sai.';
           }
-          if (error.status == "401") {
-            this.message = "Tài khoản chưa kích hoạt.";
+          if (error.status == '401') {
+            this.message = 'Tài khoản hoặc mật khẩu sai.';
           }
         }
       );

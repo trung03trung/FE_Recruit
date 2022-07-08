@@ -5,7 +5,7 @@
     <label><b>Tên người dùng</b></label><br>
     <input type="text" placeholder="Nhập tên người dùng" name="psw-repeat" formControlName="userName" required>
     <br>
-    <div *ngIf="!message" class="alert-danger">Tài khoản đã tồn tại</div>
+    <div *ngIf="message=='NOT_FOUND'" class="alert-danger">Tài khoản đã tồn tại</div>
     <div class="alert-danger" *ngIf="!formSignup.get('userName').valid && formSignup.get('userName').touched">
       Vui lòng nhập tên người dùng
     </div>
@@ -13,6 +13,7 @@
     <label><b>Email</b></label><br>
     <input type="text" placeholder="Nhập Email" name="email" formControlName="email" required>
     <br>
+    <div *ngIf="message=='NO_CONTENT'" class="alert-danger">Email đã tồn tại</div>
     <div class="alert-danger" *ngIf="!formSignup.get('email').valid && formSignup.get('email').touched">
       Vui lòng nhập một địa chỉ email hợp lệ
     </div>
@@ -27,7 +28,8 @@
     <label><b>Nhập Lại Mật Khẩu</b></label><br>
     <input type="password" placeholder="Nhập Lại Mật Khẩu" name="psw-repeat" formControlName="password" required>
     <br>
-    <div class="alert-danger" *ngIf="!formSignup.get('password').valid && formSignup.get('password').touched">
+    <div class="alert-danger"
+      *ngIf="formSignup.controls.password.value !== formSignup.controls.newPassword.value && formSignup.get('newPassword').touched">
       Mật khẩu không trùng khớp
     </div>
 
@@ -42,7 +44,9 @@
     <input type="date" placeholder="Nhập ngày sinh" name="psw-repeat" formControlName="birthDay" required>
 
     <div class="clearfix">
-      <button type="submit" class="btn btn-success" (click)="signup()" [disabled]="!formSignup.valid">Đăng ký</button>
+      <button type="submit" class="{{disableClick}}" class="btn btn-success" (click)="signup()"
+              [disabled]="!formSignup.valid"><span class="{{loading}}"></span>Đăng ký
+      </button>
     </div>
   </div>
 </form>

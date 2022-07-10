@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   [x: string]: any;
   formProfile: FormGroup;
   user: User;
-  username: string;
 
   constructor(
     private sessionService: SessionService,
@@ -30,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
   initForm(){
     this.formProfile = this.fb.group({
-      fullName: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       birthDay: ['', Validators.required],
@@ -40,8 +39,11 @@ export class ProfileComponent implements OnInit {
   }
 
   getByUserName(){
-    this.username=this.sessionService.getItem('auth-user');
-    this.profileService.getProfile(this.username).subscribe(
+    const userinfo = JSON.parse(localStorage.getItem('auth-user'));
+    const name = userinfo.sub;
+    console.log(name);
+    
+    this.profileService.getProfile(this.name).subscribe(
       (res)=>{
         this.updateForm(res);
       },
@@ -50,7 +52,7 @@ export class ProfileComponent implements OnInit {
 
   updateForm(user: User): void {
     this.formProfile.patchValue({
-      fullName:user.fullName,
+      name:user.name,
       email:user.email,
       phoneNumber:user.phoneNumber,
       birthDay:user.birthDay,

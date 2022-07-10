@@ -6,8 +6,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { log } from "console";
-import { Users } from "../../@core/models/user";
-import { UserService } from "../../@core/services/user.service";
+import { Users } from "../../../@core/models/user";
+import { UserService } from "../../../@core/services/user.service";
 
 @Component({
   selector: "ngx-listje",
@@ -15,7 +15,7 @@ import { UserService } from "../../@core/services/user.service";
   styleUrls: ["./listje.component.scss"],
 })
 export class ListjeComponent implements OnInit, OnDestroy {
-  userDetail: FormGroup;
+  userDetail !: FormGroup;
   userObj: Users = new Users();
   userList: Users[] = [];
 
@@ -28,14 +28,17 @@ export class ListjeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getAllUser();
+    this.getAllUserJe();
     this.initForm();
   }
   initForm() {
     this.userDetail = this.formBuilder.group({
       //id: new FormControl(["", [Validators.required]]),
-      name: new FormControl(["", [Validators.required]]),
-      email: new FormControl(["", [Validators.required]]),
+      name : [''],
+      email: ['']
+
+      // name: new FormControl(["", [Validators.required]]),
+      // email: new FormControl(["", [Validators.required]]),
       // userName: new FormControl(["", [Validators.required]]),
       // password: new FormControl(["", [Validators.required]]),
       // phoneNumber: new FormControl(["", [Validators.required]]),
@@ -57,8 +60,8 @@ export class ListjeComponent implements OnInit, OnDestroy {
     });
   }
 
-  getAllUser() {
-    this.userService.getAllUser().subscribe(
+  getAllUserJe() {
+    this.userService.getAllUserJe().subscribe(
       (res) => {
         this.userList = res;
         //console.log(res);
@@ -81,7 +84,7 @@ export class ListjeComponent implements OnInit, OnDestroy {
   addUserToData() {
     // alert("Employee deleted successfully");
     console.log(this.userDetail);
-    console.log(this.userObj);
+    //console.log(this.userObj);
 
     //this.userObj.id = this.userDetail.value.id;
     this.userObj.name = this.userDetail.value.name;
@@ -90,7 +93,7 @@ export class ListjeComponent implements OnInit, OnDestroy {
     this.userService.addUser(this.userObj).subscribe(
       (res) => {
         console.log(res);
-        this.getAllUser();
+        this.getAllUserJe();
       },
       (err) => {
         console.log(err);

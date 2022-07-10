@@ -8,17 +8,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Tính năng',
-    group: true,
+    title: 'Tin tuyển dụng',
+    icon: 'browser-outline',
+    link: '/home/profile',
   },
   {
-    title: 'Người dùng',
-    icon: 'person-outline',
-    link: '/home/user',
+    title: 'Hồ sơ tuyển dụng',
+    icon: 'briefcase-outline',
+    link: '/home/product',
   },
   {
-    title: 'Sản phẩm',
-    icon: 'globe-2-outline',
+    title: 'Danh sách quản trị viên',
+    icon: 'people-outline',
+    link: '/home/list-je',
+  },
+  {
+    title: 'Thông tin công ty và liên hệ',
+    icon: 'info-outline',
     link: '/home/product',
   },
 ];

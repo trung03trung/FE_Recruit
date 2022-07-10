@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Users } from "../models/user";
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: "root",
@@ -12,9 +13,10 @@ export class UserService {
   getUserJeURL: string;
   updateUserUrl: string;
   deactivateUserUrl: string;
-
+  private readonly baseUrl = `${environment.apiUrl}auth/`;
+  
   constructor(private http: HttpClient) {
-    this.addUserURL = "http://localhost:9090/api/public/user";
+    this.addUserURL = "http://localhost:9090/api/auth/signup";
     this.getUserURL = "http://localhost:9090/api/public/user";
     this.deactivateUserUrl = "http://localhost:9090/api/public/user/{id}?id=";
     this.getUserJeURL ="http://localhost:9090/api/public/userje";
@@ -28,6 +30,10 @@ export class UserService {
     return this.http.get<Users[]>(this.getUserJeURL);
   }
   
+  public add(form: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}signup`, form);
+  }
+
   addUser(user: Users): Observable<Users> {
     return this.http.post<Users>(this.addUserURL, user);
   }

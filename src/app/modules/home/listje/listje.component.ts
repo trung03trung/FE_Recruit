@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { log } from "console";
 import { Users } from "../../../@core/models/user";
 import { UserService } from "../../../@core/services/user.service";
 
@@ -33,30 +32,24 @@ export class ListjeComponent implements OnInit, OnDestroy {
   }
   initForm() {
     this.userDetail = this.formBuilder.group({
-      //id: new FormControl(["", [Validators.required]]),
-      name : [''],
-      email: ['']
-
-      // name: new FormControl(["", [Validators.required]]),
-      // email: new FormControl(["", [Validators.required]]),
-      // userName: new FormControl(["", [Validators.required]]),
-      // password: new FormControl(["", [Validators.required]]),
-      // phoneNumber: new FormControl(["", [Validators.required]]),
-      // homeTown: new FormControl(["", [Validators.required]]),
-      // avatarName: new FormControl(["", [Validators.required]]),
-      // gender: new FormControl(["", [Validators.required]]),
-      // birthDay: new FormControl(["", [Validators.required]]),
-      // roles: this.formBuilder.group({
-      //     id: new FormControl(["", [Validators.required]]),
-      //     code: new FormControl(["", [Validators.required]]),
-      //     description: new FormControl(["", [Validators.required]]),
-      //     delete: new FormControl(["", [Validators.required]])
-      //   }),
-      //   active: new FormControl(["", [Validators.required]]),
-      //   delete: new FormControl(["", [Validators.required]]),
-      // id : [''],
-      // name : [''],
-      // email: ['']
+      // id: new FormControl(["", [Validators.required]]),
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required]),
+    userName: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    //active: new FormControl('', [Validators.required]),
+    // homeTown: new FormControl('', [Validators.required]),
+    // avatarName: new FormControl('', [Validators.required]),
+    // gender: new FormControl('', [Validators.required]),
+    // birthDay: new FormControl('', [Validators.required]),
+    //   roles: this.formBuilder.group({
+    //     id: new FormControl('', [Validators.required]),
+    //     code: new FormControl('', [Validators.required]),
+    //     description: new FormControl('', [Validators.required]),
+    //     delete: new FormControl('', [Validators.required])
+    //     }),
+    //   delete: new FormControl('', [Validators.required]),
     });
   }
 
@@ -81,24 +74,29 @@ export class ListjeComponent implements OnInit, OnDestroy {
     console.log(this.userDetail);
   }
 
-  addUserToData() {
+  addUser() {
     // alert("Employee deleted successfully");
-    console.log(this.userDetail);
-    //console.log(this.userObj);
-
-    //this.userObj.id = this.userDetail.value.id;
+    //console.log(this.userDetail);
+    
     this.userObj.name = this.userDetail.value.name;
-    // this.userObj.salary = this.userDetail.value.salary;
     this.userObj.email = this.userDetail.value.email;
-    this.userService.addUser(this.userObj).subscribe(
-      (res) => {
-        console.log(res);
-        this.getAllUserJe();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.userObj.phoneNumber = this.userDetail.value.phoneNumber;
+    this.userObj.userName = this.userDetail.value.userName;
+    this.userObj.password = this.userDetail.value.password;
+    //this.userObj.active = this.userDetail.value.active;
+    // this.userService.addUser(this.userObj).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //     this.getAllUserJe();
+    //   },
+    //   (err) => {
+    //     //console.log(err);
+    //   }
+    // );
+
+    this.userService.add(this.userDetail.value).subscribe(data => {
+      console.log(data);
+    });
   }
 
   updateUser() {
@@ -115,8 +113,8 @@ export class ListjeComponent implements OnInit, OnDestroy {
   }
 
   deactivateUser(id: number) {
-    alert("User deactivate successfully");
-    console.log(id);
-    this.userService.deactivateUser(id).subscribe();
+    //alert("User deactivate successfully");
+    //console.log(id);
+    //this.userService.deactivateUser(id).subscribe();
   }
 }

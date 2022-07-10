@@ -73,6 +73,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if(event.item.title==='Thông tin cá nhân'){
         this.router.navigate(['/home/profile'])
       }
+      if(event.item.title==='Đổi mật khẩu'){
+        this.router.navigate(['/home/change-the-password'])
+      }
     });
 
     const { xl } = this.breakpointService.getBreakpointsMap();

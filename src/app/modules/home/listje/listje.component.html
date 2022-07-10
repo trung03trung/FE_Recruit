@@ -2,7 +2,7 @@
   <button
     class="btn btn-outline-success"
     data-bs-toggle="modal"
-    data-bs-target="#addEmployee"
+    data-bs-target="#addUser"
     type="submit"
   >
     Add User
@@ -29,16 +29,18 @@
             type="button"
             class="btn btn-outline-primary me-2"
             data-bs-toggle="modal"
-            data-bs-target="#editEmployee"
+            data-bs-target="#editUser"
             (click)="editUser(user)"
+            style="margin-right: 4px"
           >
             Edit
           </button>
           <button
             type="button"
             class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#deactivateUser"
             (click)="deactivateUser(user.id)"
-            style="margin-left: 10px"
           >
             Deactivate
           </button>
@@ -46,11 +48,10 @@
       </tr>
     </tbody>
   </table>
-
-  <!-- Add Users modal -->
+  <!-- Deactivate User -->
   <div
     class="modal fade"
-    id="addEmployee"
+    id="deactivateUser"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -58,122 +59,232 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add new User</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="userDetail">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Name </label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                id="name"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email </label>
-              <input
-                type="email"
-                formControlName="email"
-                class="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-dismiss="modal"
-                (click)="addUserToData()"
-              >
-                Add employee
-              </button>
-            </div>
-          </form>
+          <h2 class="modal-title" id="exampleModalLabel">Deactivate User</h2>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Edit employee modal -->
-  <div
-    class="modal fade"
-    id="editEmployee"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Edit employee details
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+    <!-- Add Users modal -->
+    <div
+      class="modal fade"
+      id="addUser"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">Add New User</h2>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="userDetail">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Họ và tên
+                </label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  id="name"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Email
+                </label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Phone
+                </label>
+                <input
+                  type="text"
+                  formControlName="phoneNumber"
+                  class="form-control"
+                  id="phoneNumber"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >User name
+                </label>
+                <input
+                  type="text"
+                  formControlName="userName"
+                  class="form-control"
+                  id="userName"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Password
+                </label>
+                <input
+                  type="text"
+                  formControlName="password"
+                  class="form-control"
+                  id="password"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <!-- <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                  Confirm password
+                </label>
+                <input
+                  type="text"
+                  formControlName="confirmPassword"
+                  class="form-control"
+                  id="confirmPassword"
+                  aria-describedby="emailHelp"
+                />
+              </div> -->
+              <!-- <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">
+                  Active</label
+                >
+                <input
+                  type="text"
+                  formControlName="active"
+                  class="form-control"
+                  id="active"
+                  aria-describedby="emailHelp"
+                />
+              </div> -->
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                  (click)="addUser()"
+                >
+                  Add User
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="modal-body">
-          <form [formGroup]="userDetail">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Name </label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                id="name"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email </label>
-              <input
-                type="email"
-                formControlName="email"
-                class="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-success"
-                (click)="updateUser()"
-                data-bs-dismiss="modal"
-              >
-                Update
-              </button>
-            </div>
-          </form>
+      </div>
+    </div>
+
+    <!-- Edit User modal -->
+    <div
+      class="modal fade"
+      id="editUser"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Edit User Details
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="userDetail">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Họ và tên
+                </label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  id="name"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Email
+                </label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Phone
+                </label>
+                <input
+                  type="text"
+                  formControlName="phoneNumber"
+                  class="form-control"
+                  id="phoneNumber"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >User name
+                </label>
+                <input
+                  type="text"
+                  formControlName="userName"
+                  class="form-control"
+                  id="userName"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="updateUser()"
+                  data-bs-dismiss="modal"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>

@@ -1,0 +1,193 @@
+
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8"><h2>Chi tiết tin <b>tuyển dụng</b></h2></div>
+                        
+                    </div>
+                        
+                        <div class="mb-5">
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Cập nhật
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Xem trước
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Xét duyệt
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Từ chối duyệt
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Đăng tuyển
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Dừng tuyển
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Đóng
+                                </button>
+                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Xóa
+                                </button>
+                            
+                        </div>
+                  
+                </div>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                       
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Id 
+                            </td>
+                            <td *ngIf="job"> 
+                               {{job.id}}
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Tên công việc
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Vị trí công việc
+                            </td>
+                            <td *ngIf="job"> 
+                                {{jobPosition.code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Số năm kinh nghiệm
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.numberExperience}}
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                             <td class="font-weight-bold"> 
+                                Hình thức làm việc
+                            </td>
+                            <td *ngIf="job"> 
+                                {{workingForm.code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Địa chỉ làm việc
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.addressWork}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Trình độ học vấn
+                            </td>
+                            <td *ngIf="job"> 
+                                {{academicLevel.code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Level
+                            </td>
+                            <td *ngIf="job"> 
+                                {{rank.code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Hạn nộp hồ sơ
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.dueDate}}
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Kĩ năng
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.skills}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Mô tả công việc
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.description}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Quyền lợi được hưởng
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.interest}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Yêu cầu công việc
+                            </td>
+                            <td *ngIf="job">  
+                                {{job.jobRequirement}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Mức lương
+                            </td>
+                            <td *ngIf="job"> 
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Người liên hệ
+                            </td>
+                            <td *ngIf="job"> 
+                                {{userContact.userName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Trạng thái
+                            </td>
+                            <td *ngIf="job"> 
+                                {{statusJob.code}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Lượt xem
+                            </td>
+                            <td *ngIf="job"> 
+                                {{job.views}}
+                            </td>
+                        </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>        
+    </div>     
+</body>
+

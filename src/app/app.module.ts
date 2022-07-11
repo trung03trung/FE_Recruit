@@ -28,6 +28,9 @@ import {ActiveAccountComponent} from "./modules/signup/active-account/active-acc
 import { ListjeComponent } from './modules/listje/listje.component';
 
 
+
+
+
 const configToast: any = {
   timeOut: 3000,
   positionClass: 'toast-top-right',

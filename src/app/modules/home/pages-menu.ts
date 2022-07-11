@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { link } from 'fs';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -20,5 +21,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Sản phẩm',
     icon: 'globe-2-outline',
     link: '/home/product',
+  },
+  {
+    title:'Tin tuyển dụng',
+    icon:'bookmark',
+    link:'/home/job'
   },
 ];

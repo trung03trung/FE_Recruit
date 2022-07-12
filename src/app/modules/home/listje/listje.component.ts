@@ -15,6 +15,7 @@ import { UserService } from "../../../@core/services/user.service";
 })
 export class ListjeComponent implements OnInit, OnDestroy {
   userDetail!: FormGroup;
+  seachUser!: FormGroup;
   userObj: Users = new Users();
   userList: Users[] = [];
   message = "";
@@ -74,18 +75,26 @@ export class ListjeComponent implements OnInit, OnDestroy {
       //     }),
       //   delete: new FormControl('', [Validators.required]),
     });
+    this.seachUser = this.formBuilder.group({
+      email: "",
+      name: "",
+      pageNumber: "",
+      pageSize: "",
+      userName: ""
+    });
+
   }
 
   getAllUserJe() {
-    this.userService.getAllUserJe().subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
+    // this.userService.getAllUserJe().subscribe(
+    //   (res) => {
+    //     //this.userList = res;
+    //     //console.log(res);
+    //   },
+    //   (err) => {
+    //     console.log("error while fetching data.");
+    //   }
+    // );
   }
 
   editUser(user: Users) {

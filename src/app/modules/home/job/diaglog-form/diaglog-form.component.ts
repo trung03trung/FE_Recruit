@@ -62,7 +62,24 @@ export class DiaglogFormComponent implements OnInit {
   }
   initForm() {
     this.formJob = this.fb.group({
+      name:["",[Validators.required,Validators.maxLength(150)]],
+      jobPositionId:["",Validators.required],
+      numberExperience:["",Validators.required],
+      workingFormId:["",Validators.required],
+      addressWork:["",Validators.required],
+      academicLevelId:["",Validators.required],
+      qtyPerson:["",[Validators.required,Validators.pattern('[0-9]')]],
+      rankId:["",Validators.required],
+      dueDate:["",Validators.required],
+      skills:["",Validators.required],
+      description:["",Validators.required],
+      salaryMin:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20)]],
+      salaryMax:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20)]],
+      statusId:["",Validators.required],
+      userContactId:["",Validators.required],
+      jobRequirement:["",Validators.required],
       interest: ["", Validators.required],
+      startDate:["",Validators.required],
     });
   }
   onSubmit() {

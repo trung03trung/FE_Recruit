@@ -26,6 +26,7 @@
                     <label class="label col-4 col-form-label">Năm kinh nghiệm</label>
                     <div class="col-8">
                         <input type="text" pInputText class="form-control" formControlName="numberExperience">
+                        <mat-error *ngIf="formJob.controls.numberExperience.errors?.required && formJob.get('numberExperience').touched">Không được để trống</mat-error>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
                     <label class="label col-4 col-form-label">Hình thức</label>
                     <div class="col-8">
                         <select class="form-control" formControlName="workingFormId">
-                            <option *ngFor="let i of workingForm" [ngValue]="i.id">{{i.code}}</option>
+                            <option *ngFor="let i of workingForm"  [ngValue]="i.id">{{i.code}}</option>
                         </select>
                     </div>
                 </div>

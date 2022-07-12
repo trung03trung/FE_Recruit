@@ -25,7 +25,8 @@ import { SignupComponent } from './modules/signup/signup.component';
 import { TokenInterceptor } from './@core/services/interceptor.service';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
-import { ListjeComponent } from './modules/listje/listje.component';
+
+
 
 
 
@@ -41,7 +42,7 @@ const configToast: any = {
 
 
 @NgModule({
-  declarations: [AppComponent,SignupComponent,ListjeComponent, ActiveAccountComponent],
+  declarations: [AppComponent,SignupComponent, ActiveAccountComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

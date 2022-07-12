@@ -15,7 +15,8 @@ import { DiaglogFormComponent } from './job/diaglog-form/diaglog-form.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
-
+import { ListjeComponent } from './listje/listje.component';
+import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
 
 const routes: Routes = [{
   path: '',
@@ -37,7 +38,13 @@ const routes: Routes = [{
       path:'job/detail/:id',
       component:DetailJobComponent
     },
-
+      path: 'list-je',
+      component: ListjeComponent,
+    },
+    {
+      path: 'change-the-password',
+      component: ChangethePasswordComponent,
+    },
   ],
 }];
 
@@ -48,6 +55,7 @@ const routes: Routes = [{
     JobComponent,
     DetailJobComponent,
     DiaglogFormComponent,
+    ListjeComponent
   ],
   imports: [
     CommonModule,

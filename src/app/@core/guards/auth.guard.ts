@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
         // lấy ra auth để router
         const role = userinfo.auth;
         if (role === "ROLE_USER"){
-            this.router.navigate(["/listje"]);
+            this.router.navigate(["/list-je"]);
             return false;
         }
       // logged in so return true

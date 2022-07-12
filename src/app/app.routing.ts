@@ -4,8 +4,6 @@ import {ActiveAccountComponent} from "./modules/signup/active-account/active-acc
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
-import { ListjeComponent } from "./modules/listje/listje.component";
-// import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 
 export const routes: Routes = [
   {
@@ -34,12 +32,8 @@ export const routes: Routes = [
       ),
   },
   {
-    path: "listje",
-    component: ListjeComponent,
-  },
-  {
     path:'change-password',
-    loadChildren: () => import('./forgot-password/change-password/change-password.module').then(m => m.ChangePasswordModule),
+      loadChildren: () => import('./forgot-password/change-password/change-password.module').then(m => m.ChangePasswordModule),
   },
   {
     path: 'signup',

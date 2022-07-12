@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit, DoCheck {
         newPassword: new FormControl(''),
         birthDay: new FormControl(''),
         phoneNumber: new FormControl(''),
-        fullName: new FormControl(''),
         name: new FormControl(''),
       }
     )
@@ -52,7 +51,6 @@ export class SignupComponent implements OnInit, DoCheck {
       newPassword: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$')]],
       birthDay: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})\\b')]],
-      fullName: "",
       name: "",
     });
   }

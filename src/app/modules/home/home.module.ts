@@ -8,6 +8,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from 'primeng/api';
 import { PrimengModule } from '../../shared/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { JobComponent } from './job/job.component';
+import { JobService } from '../../@core/services/job.service';
+import { DetailJobComponent } from './detail-job/detail-job.component';
+import { DiaglogFormComponent } from './job/diaglog-form/diaglog-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import{MaterialModule} from '../../shared/material.module';
 import { ListjeComponent } from './listje/listje.component';
 import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
 
@@ -24,6 +31,13 @@ const routes: Routes = [{
       component: ProfileComponent,
     },
     {
+      path:'job',
+      component:JobComponent
+    },
+    {
+      path:'job/detail/:id',
+      component:DetailJobComponent
+    },
       path: 'list-je',
       component: ListjeComponent,
     },
@@ -38,6 +52,9 @@ const routes: Routes = [{
   declarations: [
     HomeComponent,
     ProfileComponent,
+    JobComponent,
+    DetailJobComponent,
+    DiaglogFormComponent,
     ListjeComponent
   ],
   imports: [
@@ -47,7 +64,10 @@ const routes: Routes = [{
     NbMenuModule,
     ReactiveFormsModule,
     PrimengModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule,
+    ToastrModule.forRoot(),
+    MaterialModule
   ],
 })
 export class HomeModule { }

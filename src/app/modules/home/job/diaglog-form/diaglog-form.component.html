@@ -1,0 +1,193 @@
+<h1>Thêm mới tin tuyển dụng</h1>
+
+    <form class="pb-5" [formGroup]="formJob">
+        <div class="form-row mb-3">
+            <div class="form-group col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label ">Tên công việc</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="name">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Vị trí </label>
+                    <div class="col-8">
+                        <select class="form-control" formControlName="jobPositionId">
+                            <option *ngFor="let i of jobPosition" [ngValue]="i.id">{{i.code}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Năm kinh nghiệm</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="numberExperience">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Hình thức</label>
+                    <div class="col-8">
+                        <select class="form-control" formControlName="workingFormId">
+                            <option *ngFor="let i of workingForm" [ngValue]="i.id">{{i.code}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Địa chỉ</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="addressWork">
+                    </div>
+                </div>
+            </div>  
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Trình độ học vấn</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" formControlName="academicLevelId">
+                            <option *ngFor="let i of academicLevel" [ngValue]="i.id">{{i.code}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Số lượng cần tuyển</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="qtyPerson">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Level</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" formControlName="rankId">
+                            <option *ngFor="let i of rank" [ngValue]="i.id">{{i.code}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Hạn nộp hồ sơ</label>
+                    <div class="col-8">
+                        <input type="date" pInputText class="form-control" formControlName="dueDate">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Kĩ năng</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="skills">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Mô tả công việc</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="description">
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Quyền lợi được hưởng</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="interest"> 
+                        <mat-error *ngIf="formJob.controls.interest.errors?.required && formJob.get('interest').touched">Không được để trống</mat-error>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Mức lương tối thiểu</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="salaryMin">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Mức lương tối đa</label>
+                    <div class="col-8">
+                            <input type="text" pInputText class="form-control" formControlName="salaryMax">
+                    </div>
+                </div>
+            </div>
+        
+         <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Trạng thái</label>
+                    <div class="col-8">
+                        <select class="form-control" formControlName="statusId">
+                            <option *ngFor="let i of statusJob" [ngValue]="i.id">{{i.code}}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-row mb-3"> 
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Người liên hệ</label>
+                    <div class="col-8">
+                        <select class="form-control" formControlName="userContactId">
+                            <option *ngFor="let i of userContact" [ngValue]="i.id">{{i.userName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Yêu cầu công việc</label>
+                    <div class="col-8">
+                            <input type="text" pInputText class="form-control" formControlName="jobRequirement">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Ngày bắt đầu</label>
+                    <div class="col-8">
+                        <input type="date" pInputText class="form-control" formControlName="startDate">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" formControlName="userCreate">
+            <div class="card-footer">
+            <button  class="btn btn-success mr-3" (click)="onSubmit()" type="button">Lưu tin</button>
+            <button  class="btn btn-primary" (click)="onNoClick()" type="button">Đóng</button>
+        </div>
+    </form>
+   
+
+

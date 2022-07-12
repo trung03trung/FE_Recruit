@@ -26,8 +26,8 @@ export class JobService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  public getAllJob(pageNo:any): Observable<any> {
-    return this.http.get(`${this.baseUrl}job?pageNo=${pageNo}`,httpOptions)
+  public getAllJob(pageNo:any,pageSize): Observable<any> {
+    return this.http.get(`${this.baseUrl}job?pageNo=${pageNo}&pageSize=${pageSize}`,httpOptions)
   }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 import { Users } from "../../../../@core/models/user";
 import { JobService } from "../../../../@core/services/job.service";
 import { ToastrService } from "ngx-toastr";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: "ngx-diaglog-form",
@@ -42,6 +43,7 @@ export class DiaglogFormComponent implements OnInit {
     private jobService: JobService,
     private toastrService: ToastrService,
     private fb:FormBuilder,
+    private dialogRef: MatDialogRef<DiaglogFormComponent>,
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +74,8 @@ export class DiaglogFormComponent implements OnInit {
         this.toastrService.success("Thêm mới tin tuyển dụng thành công");
       }
     });
+  };
+  onNoClick(){
+    this.dialogRef.close()
   }
 }

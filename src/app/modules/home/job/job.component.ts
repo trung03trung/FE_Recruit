@@ -13,7 +13,7 @@ import { DiaglogFormComponent } from './diaglog-form/diaglog-form.component';
 })
 export class JobComponent implements OnInit {
   pageNo=0;
-  pageSize=0;
+  pageSize=2;
   totalPage=0;
   totalJob=0;
   listJob: job[]= [];
@@ -27,7 +27,7 @@ export class JobComponent implements OnInit {
   ngOnInit(): void {
 
     
-    this.jobService.getAllJob(this.pageNo).subscribe((data=>{
+    this.jobService.getAllJob(this.pageNo,this.pageSize).subscribe((data=>{
         this.getData(data)
     }));
      
@@ -48,7 +48,7 @@ export class JobComponent implements OnInit {
   onClick(page){
     this.pageNo=page
     this.router.navigate(['/home/job']);
-    this.jobService.getAllJob(this.pageNo).subscribe((data=>{
+    this.jobService.getAllJob(this.pageNo,this.pageSize).subscribe((data=>{
       this.getData(data)
   }));
   }

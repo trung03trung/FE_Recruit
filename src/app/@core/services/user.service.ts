@@ -20,6 +20,7 @@ export class UserService {
     this.getUserURL = "http://localhost:9090/api/public/user";
     this.deactivateUserUrl = "http://localhost:9090/api/public/user/{id}?id=";
     this.getUserJeURL ="http://localhost:9090/api/public/userje";
+    this.updateUserUrl="http://localhost:9090/api/public/updateUser";
   }
 
   getAllUser(): Observable<Users[]> {
@@ -29,16 +30,12 @@ export class UserService {
   getAllUserJe(): Observable<Users[]> {
     return this.http.get<Users[]>(this.getUserJeURL);
   }
-  
-  public add(form: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}signup`, form);
-  }
 
   addUser(user: Users): Observable<Users> {
     return this.http.post<Users>(this.addUserURL, user);
   }
 
-  updateEmployee(user: Users): Observable<Users> {
+  updateUser(user: Users): Observable<Users> {
     return this.http.put<Users>(this.updateUserUrl, user);
   }
 

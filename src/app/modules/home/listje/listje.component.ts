@@ -14,9 +14,10 @@ import { UserService } from "../../../@core/services/user.service";
   styleUrls: ["./listje.component.scss"],
 })
 export class ListjeComponent implements OnInit, OnDestroy {
-  userDetail !: FormGroup;
+  userDetail!: FormGroup;
   userObj: Users = new Users();
   userList: Users[] = [];
+  message = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,24 +33,46 @@ export class ListjeComponent implements OnInit, OnDestroy {
   }
   initForm() {
     this.userDetail = this.formBuilder.group({
-      // id: new FormControl(["", [Validators.required]]),
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.required]),
-    userName: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    //active: new FormControl('', [Validators.required]),
-    // homeTown: new FormControl('', [Validators.required]),
-    // avatarName: new FormControl('', [Validators.required]),
-    // gender: new FormControl('', [Validators.required]),
-    // birthDay: new FormControl('', [Validators.required]),
-    //   roles: this.formBuilder.group({
-    //     id: new FormControl('', [Validators.required]),
-    //     code: new FormControl('', [Validators.required]),
-    //     description: new FormControl('', [Validators.required]),
-    //     delete: new FormControl('', [Validators.required])
-    //     }),
-    //   delete: new FormControl('', [Validators.required]),
+      id: new FormControl("", [Validators.required]),
+      name: new FormControl("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      phoneNumber: new FormControl("", [
+        Validators.required,
+        Validators.pattern("(84|0[3|5|7|8|9])+([0-9]{8})\\b"),
+      ]),
+      userName: new FormControl("", [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      password: new FormControl("", [
+        Validators.required,
+        Validators.pattern(
+          "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$"
+        ),
+      ]),
+      confirmPassword: new FormControl("", [
+        Validators.required,
+        Validators.pattern(
+          "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$"
+        ),
+      ]),
+      //active: new FormControl('', [Validators.required]),
+      // homeTown: new FormControl('', [Validators.required]),
+      // avatarName: new FormControl('', [Validators.required]),
+      // gender: new FormControl('', [Validators.required]),
+      // birthDay: new FormControl('', [Validators.required]),
+      //   roles: this.formBuilder.group({
+      //     id: new FormControl('', [Validators.required]),
+      //     code: new FormControl('', [Validators.required]),
+      //     description: new FormControl('', [Validators.required]),
+      //     delete: new FormControl('', [Validators.required])
+      //     }),
+      //   delete: new FormControl('', [Validators.required]),
     });
   }
 
@@ -66,55 +89,69 @@ export class ListjeComponent implements OnInit, OnDestroy {
   }
 
   editUser(user: Users) {
-    // this.userDetail.controls['id'].setValue(user.id);
-    // this.userDetail.controls['name'].setValue(user.name);
-    // this.userDetail.controls['email'].setValue(user.email);
+    this.userDetail.controls["id"].setValue(user.id);
+    this.userDetail.controls["name"].setValue(user.name);
+    this.userDetail.controls["email"].setValue(user.email);
+    this.userDetail.controls["phoneNumber"].setValue(user.phoneNumber);
+    this.userDetail.controls["userName"].setValue(user.userName);
+    //this.userDetail.controls["password"].setValue(user.password);
+    //this.userDetail.controls["confirmPassword"].setValue(user.password);
   }
-  toFormAddUser(){
+  toFormAddUser() {
     console.log(this.userDetail);
   }
 
   addUser() {
-    // alert("Employee deleted successfully");
-    //console.log(this.userDetail);
-    
     this.userObj.name = this.userDetail.value.name;
     this.userObj.email = this.userDetail.value.email;
     this.userObj.phoneNumber = this.userDetail.value.phoneNumber;
     this.userObj.userName = this.userDetail.value.userName;
     this.userObj.password = this.userDetail.value.password;
     //this.userObj.active = this.userDetail.value.active;
-    // this.userService.addUser(this.userObj).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //     this.getAllUserJe();
-    //   },
-    //   (err) => {
-    //     //console.log(err);
-    //   }
-    // );
-
-    this.userService.add(this.userDetail.value).subscribe(data => {
-      console.log(data);
-    });
+    this.userService.addUser(this.userObj).subscribe(
+      (res) => {
+        console.log(res);
+        if (res == null) {
+          alert("Tài khoản hoặc email đã sử dụng");
+        } else {
+          alert("Đăng ký tài khoản thành công");
+        }
+        this.getAllUserJe();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    // this.userService.add(this.userDetail.value).subscribe(data => {
+    //   console.log(data);
+    // });
   }
 
   updateUser() {
-    // this.empObj.id = this.empDetail.value.id;
-    // this.empObj.name = this.empDetail.value.name;
-    // this.empObj.salary = this.empDetail.value.salary;
-    // this.empObj.email = this.empDetail.value.email;
-    // this.empService.updateEmployee(this.empObj).subscribe(res=>{
-    //   console.log(res);
-    //   this.getAllEmployee();
-    // },err=>{
-    //   console.log(err);
-    // })
+    this.userObj.id = this.userDetail.value.id;
+    this.userObj.name = this.userDetail.value.name;
+    this.userObj.password = this.userDetail.value.password;
+    this.userObj.email = this.userDetail.value.email;
+    this.userObj.phoneNumber = this.userDetail.value.phoneNumber;
+    this.userObj.userName = this.userDetail.value.userName;
+    this.userService.updateUser(this.userObj).subscribe(
+      (res) => {
+        console.log(res);
+        this.getAllUserJe();
+      },
+      (error) => {
+        console.log(error);
+        if (error.status == "500") {
+          alert("Tài khoản hoặc số email đã sử dụng.");
+        }
+      }
+    );
   }
 
   deactivateUser(id: number) {
-    //alert("User deactivate successfully");
-    //console.log(id);
+    this.userObj.id = this.userDetail.value.id;
+    console.log(this.userObj);
+
     //this.userService.deactivateUser(id).subscribe();
   }
 }

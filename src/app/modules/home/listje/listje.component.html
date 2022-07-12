@@ -1,4 +1,10 @@
 <div class="container-fluid">
+  <!-- <div class="input-group rounded">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <span class="input-group-text border-0" id="search-addon">
+      <i class="fas fa-search"></i>
+    </span>
+  </div> -->
   <button
     class="btn btn-outline-success"
     data-bs-toggle="modal"
@@ -10,8 +16,9 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th scope="col">ID</th>
         <th scope="col">USER NAME</th>
-        <th scope="col">PASSWORD</th>
+        <!-- <th scope="col">PASSWORD</th> -->
         <th scope="col">EMAIL</th>
         <th scope="col">PHONE</th>
         <th scope="col">ACTIVE</th>
@@ -19,8 +26,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of userList">
+        <td>{{ user.id }}</td>
         <td>{{ user.userName }}</td>
-        <td>{{ user.password }}</td>
+        <!-- <td>{{ user.passwoed }}</td> -->
         <td>{{ user.email }}</td>
         <td>{{ user.phoneNumber }}</td>
         <td>{{ user.active }}</td>
@@ -29,8 +37,8 @@
             type="button"
             class="btn btn-outline-primary me-2"
             data-bs-toggle="modal"
-            data-bs-target="#editUser"
             (click)="editUser(user)"
+            data-bs-target="#editUser"
             style="margin-right: 4px"
           >
             Edit
@@ -39,8 +47,8 @@
             type="button"
             class="btn btn-outline-danger"
             data-bs-toggle="modal"
-            data-bs-target="#deactivateUser"
             (click)="deactivateUser(user.id)"
+            data-bs-target="#deactivateUser"
           >
             Deactivate
           </button>
@@ -58,107 +66,215 @@
   >
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">Deactivate User</h2>
+        <div class="modal-header" class="text-center">
+          <h1 class="modal-title" id="exampleModalLabel" style="margin: auto">
+            Deactivate User
+          </h1>
         </div>
       </div>
     </div>
   </div>
 
-    <!-- Add Users modal -->
-    <div
-      class="modal fade"
-      id="addUser"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="exampleModalLabel">Add New User</h2>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form [formGroup]="userDetail">
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Họ và tên
-                </label>
-                <input
-                  type="text"
-                  formControlName="name"
-                  class="form-control"
-                  id="name"
-                  aria-describedby="emailHelp"
-                />
+  <!-- Add Users modal -->
+  <div
+    class="modal fade"
+    id="addUser"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Add New User</h2>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="userDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Họ và tên
+              </label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                id="name"
+                name="name"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.name.errors?.required &&
+                  userDetail.touched
+                "
+              >
+                Không được để trống họ và tên
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.name.errors?.minlength &&
+                  userDetail.touched
+                "
+              >
+                Họ và tên phải trên 5 ký tự
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.name.errors?.maxlength &&
+                  userDetail.touched
+                "
+              >
+                Họ và tên không quá 20 ký tự
+              </mat-error>
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email </label>
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                name="email"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div *ngIf="message == 'NO_CONTENT'" class="alert-danger">
+                Email đã tồn tại
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Email
-                </label>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  !userDetail.get('email').valid &&
+                  userDetail.get('email').touched
+                "
+              >
+                Email không hợp lệ
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Phone
-                </label>
-                <input
-                  type="text"
-                  formControlName="phoneNumber"
-                  class="form-control"
-                  id="phoneNumber"
-                  aria-describedby="emailHelp"
-                />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Phone </label>
+              <input
+                type="text"
+                formControlName="phoneNumber"
+                class="form-control"
+                id="phoneNumber"
+                name="phoneNumber"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  !userDetail.get('phoneNumber').valid &&
+                  userDetail.get('phoneNumber').touched
+                "
+              >
+                Số điện thoại không hợp lệ
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >User name
-                </label>
-                <input
-                  type="text"
-                  formControlName="userName"
-                  class="form-control"
-                  id="userName"
-                  aria-describedby="emailHelp"
-                />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >User name
+              </label>
+              <input
+                type="text"
+                formControlName="userName"
+                class="form-control"
+                id="userName"
+                name="userName"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div *ngIf="message == 'NOT_FOUND'" class="alert-danger">
+                Tài khoản đã tồn tại
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Password
-                </label>
-                <input
-                  type="text"
-                  formControlName="password"
-                  class="form-control"
-                  id="password"
-                  aria-describedby="emailHelp"
-                />
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.userName.errors?.required &&
+                  userDetail.touched
+                "
+              >
+                Không được để trống tài khoản
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.userName.errors?.minlength &&
+                  userDetail.touched
+                "
+              >
+                Tài khoản phải trên 5 ký tự
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.userName.errors?.maxlength &&
+                  userDetail.touched
+                "
+              >
+                Tài khoản không quá 20 ký tự
+              </mat-error>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Password
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                id="password"
+                name="password"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  !userDetail.get('password').valid &&
+                  userDetail.get('password').touched
+                "
+              >
+                Vui lòng nhập mật khẩu có 8 - 16 kí tự và có ít nhất 1 chữ và 1
+                kí tự đặc biệt
               </div>
-              <!-- <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
-                  Confirm password
-                </label>
-                <input
-                  type="text"
-                  formControlName="confirmPassword"
-                  class="form-control"
-                  id="confirmPassword"
-                  aria-describedby="emailHelp"
-                />
-              </div> -->
-              <!-- <div class="mb-3">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">
+                Confirm password
+              </label>
+              <input
+                type="password"
+                formControlName="confirmPassword"
+                class="form-control"
+                id="confirmPassword"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.password.value !==
+                    userDetail.controls.confirmPassword.value &&
+                  userDetail.get('confirmPassword').touched
+                "
+              >
+                Mật khẩu không trùng khớp
+              </div>
+            </div>
+            <!-- <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">
                   Active</label
                 >
@@ -171,120 +287,273 @@
                 />
               </div> -->
 
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  (click)="addUser()"
-                >
-                  Add User
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Edit User modal -->
-    <div
-      class="modal fade"
-      id="editUser"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Edit User Details
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form [formGroup]="userDetail">
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Họ và tên
-                </label>
-                <input
-                  type="text"
-                  formControlName="name"
-                  class="form-control"
-                  id="name"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Email
-                </label>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Phone
-                </label>
-                <input
-                  type="text"
-                  formControlName="phoneNumber"
-                  class="form-control"
-                  id="phoneNumber"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >User name
-                </label>
-                <input
-                  type="text"
-                  formControlName="userName"
-                  class="form-control"
-                  id="userName"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-success"
-                  (click)="updateUser()"
-                  data-bs-dismiss="modal"
-                >
-                  Update
-                </button>
-              </div>
-            </form>
-          </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                (click)="addUser()"
+              >
+                Add User
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Edit User modal -->
+  <div
+    class="modal fade"
+    id="editUser"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Edit User Details</h2>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="userDetail">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >ID (không thể thay đổi)
+              </label>
+              <input
+                type="id"
+                formControlName="id"
+                class="form-control"
+                id="id"
+                name="id"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                *ngIf="
+                  userDetail.controls.password.value !==
+                  userDetail.controls.password.value
+                "
+              >
+                ID không thể thay đổi
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Họ và tên
+              </label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                id="name"
+                name="name"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.name.errors?.required &&
+                  userDetail.touched
+                "
+              >
+                Không được để trống họ và tên
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.name.errors?.minlength &&
+                  userDetail.touched
+                "
+              >
+                Họ và tên phải trên 5 ký tự
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.name.errors?.maxlength &&
+                  userDetail.touched
+                "
+              >
+                Họ và tên không quá 20 ký tự
+              </mat-error>
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email </label>
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                name="email"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div *ngIf="message == 'NO_CONTENT'" class="alert-danger">
+                Email đã tồn tại
+              </div>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  !userDetail.get('email').valid &&
+                  userDetail.get('email').touched
+                "
+              >
+                Email không hợp lệ
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Phone </label>
+              <input
+                type="text"
+                formControlName="phoneNumber"
+                class="form-control"
+                id="phoneNumber"
+                name="phoneNumber"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  !userDetail.get('phoneNumber').valid &&
+                  userDetail.get('phoneNumber').touched
+                "
+              >
+                Số điện thoại không hợp lệ
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >User name
+              </label>
+              <input
+                type="text"
+                formControlName="userName"
+                class="form-control"
+                id="userName"
+                name="userName"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div *ngIf="message == 'NOT_FOUND'" class="alert-danger">
+                Tài khoản đã tồn tại
+              </div>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.userName.errors?.required &&
+                  userDetail.touched
+                "
+              >
+                Không được để trống tài khoản
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.userName.errors?.minlength &&
+                  userDetail.touched
+                "
+              >
+                Tài khoản phải trên 5 ký tự
+              </mat-error>
+              <mat-error
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.userName.errors?.maxlength &&
+                  userDetail.touched
+                "
+              >
+                Tài khoản không quá 20 ký tự
+              </mat-error>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"
+                >Password
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                id="password"
+                name="password"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  !userDetail.get('password').valid &&
+                  userDetail.get('password').touched
+                "
+              >
+                Vui lòng nhập mật khẩu có 8 - 16 kí tự và có ít nhất 1 chữ và 1
+                kí tự đặc biệt
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">
+                Confirm password
+              </label>
+              <input
+                type="password"
+                formControlName="confirmPassword"
+                class="form-control"
+                id="confirmPassword"
+                aria-describedby="emailHelp"
+              />
+              <br />
+              <div
+                class="alert-danger"
+                *ngIf="
+                  userDetail.controls.password.value !==
+                    userDetail.controls.confirmPassword.value &&
+                  userDetail.get('confirmPassword').touched
+                "
+              >
+                Mật khẩu không trùng khớp
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                id="GFG_Button"
+                class="btn btn-outline-success"
+                [disabled]="!this.userDetail.valid"
+                (click)="updateUser()"
+                data-bs-dismiss="modal"
+              >
+                Update
+              </button>
+              <!-- enter button -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class SignupComponent implements OnInit, DoCheck {
   message = 'a';
   formSignup: FormGroup;
-
+  loading=""
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
@@ -56,11 +56,14 @@ export class SignupComponent implements OnInit, DoCheck {
   }
 
   signup() {
+    this.loading = "spinner-border spinner-border-sm";
     this.authService.signup(this.formSignup.value).subscribe(data => {
       this.message = data.status
       if (this.message == 'OK') {
         this.router.navigate(['/auth']);
       }
+      else
+        this.loading="";
     });
   }
 

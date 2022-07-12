@@ -29,6 +29,9 @@ import {ActiveAccountComponent} from "./modules/signup/active-account/active-acc
 
 
 
+
+
+
 const configToast: any = {
   timeOut: 3000,
   positionClass: 'toast-top-right',

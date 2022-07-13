@@ -1,7 +1,7 @@
 
 <body>
     <div class="container">
-        <div class="table-responsive">
+        <div class="table-responsive-sm">
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
@@ -10,16 +10,16 @@
                     </div>
                         
                         <div class="mb-5">
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="openDialog()"  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Cập nhật
                                 </button>
                                 <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xem trước
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="statusAccept()" *ngIf="role==='ROLE_ADMIN'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xét duyệt
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button *ngIf="role==='ROLE_ADMIN'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Từ chối duyệt
                                 </button>
                                 <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
@@ -31,7 +31,7 @@
                                 <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Đóng
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button *ngIf="role=='ROLE_ADMIN'"  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xóa
                                 </button>
                             
@@ -43,7 +43,7 @@
                         <th></th>
                         <th></th>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                        
                         <tr>
                             <td class="font-weight-bold"> 
@@ -116,7 +116,7 @@
                                 Hạn nộp hồ sơ
                             </td>
                             <td *ngIf="job"> 
-                                {{job.dueDate}}
+                                {{job.dueDate|date:'dd/MM/yyyy'}}
                             </td>
                             
                         </tr>

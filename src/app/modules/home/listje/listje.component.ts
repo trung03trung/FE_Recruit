@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { Users } from "../../../@core/models/user";
+import { SeachUser } from "../../../@core/models/seachUser";
 import { UserService } from "../../../@core/services/user.service";
 
 @Component({
@@ -15,10 +16,13 @@ import { UserService } from "../../../@core/services/user.service";
 })
 export class ListjeComponent implements OnInit, OnDestroy {
   userDetail!: FormGroup;
-  seachUser!: FormGroup;
+  seachUser: FormGroup;
+  deactivate: FormGroup;
+  seachU: SeachUser = new SeachUser();
   userObj: Users = new Users();
-  userList: Users[] = [];
+  userList: Users[];
   message = "";
+  pageNumber = [1, 2, 3];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,39 +66,35 @@ export class ListjeComponent implements OnInit, OnDestroy {
           "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$"
         ),
       ]),
-      //active: new FormControl('', [Validators.required]),
-      // homeTown: new FormControl('', [Validators.required]),
-      // avatarName: new FormControl('', [Validators.required]),
-      // gender: new FormControl('', [Validators.required]),
-      // birthDay: new FormControl('', [Validators.required]),
-      //   roles: this.formBuilder.group({
-      //     id: new FormControl('', [Validators.required]),
-      //     code: new FormControl('', [Validators.required]),
-      //     description: new FormControl('', [Validators.required]),
-      //     delete: new FormControl('', [Validators.required])
-      //     }),
-      //   delete: new FormControl('', [Validators.required]),
     });
     this.seachUser = this.formBuilder.group({
       email: "",
       name: "",
-      pageNumber: "",
-      pageSize: "",
-      userName: ""
+      pageNumber: 1,
+      pageSize: 6,
+      userName: "",
+      sortT: "ASC",
+      sortColum: "id",
     });
-
   }
 
   getAllUserJe() {
-    // this.userService.getAllUserJe().subscribe(
-    //   (res) => {
-    //     //this.userList = res;
-    //     //console.log(res);
-    //   },
-    //   (err) => {
-    //     console.log("error while fetching data.");
-    //   }
-    // );
+    this.seachU.name = "";
+    this.seachU.email = "";
+    this.seachU.pageNumber = 1;
+    this.seachU.userName = "";
+    this.seachU.pageSize = 6;
+    this.seachU.sortT = "ASC";
+    this.seachU.sortColum = "id";
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
   }
 
   editUser(user: Users) {
@@ -103,8 +103,6 @@ export class ListjeComponent implements OnInit, OnDestroy {
     this.userDetail.controls["email"].setValue(user.email);
     this.userDetail.controls["phoneNumber"].setValue(user.phoneNumber);
     this.userDetail.controls["userName"].setValue(user.userName);
-    //this.userDetail.controls["password"].setValue(user.password);
-    //this.userDetail.controls["confirmPassword"].setValue(user.password);
   }
   toFormAddUser() {
     console.log(this.userDetail);
@@ -116,13 +114,17 @@ export class ListjeComponent implements OnInit, OnDestroy {
     this.userObj.phoneNumber = this.userDetail.value.phoneNumber;
     this.userObj.userName = this.userDetail.value.userName;
     this.userObj.password = this.userDetail.value.password;
-    //this.userObj.active = this.userDetail.value.active;
     this.userService.addUser(this.userObj).subscribe(
       (res) => {
         console.log(res);
-        if (res == null) {
+        if (
+          res == null ||
+          res.status == "NO_CONTENT" ||
+          res.status == "NOT_FOUND"
+        ) {
           alert("Tài khoản hoặc email đã sử dụng");
-        } else {
+        }
+        if (res.status == "OK") {
           alert("Đăng ký tài khoản thành công");
         }
         this.getAllUserJe();
@@ -131,11 +133,86 @@ export class ListjeComponent implements OnInit, OnDestroy {
         console.log(err);
       }
     );
-    // this.userService.add(this.userDetail.value).subscribe(data => {
-    //   console.log(data);
-    // });
   }
+  setPage(n: number) {
+    this.seachU.name = "";
+    this.seachU.email = "";
+    this.seachU.pageNumber = n;
+    this.seachU.userName = "";
+    this.seachU.pageSize = 6;
+    this.seachU.sortT = "ASC";
+    this.seachU.sortColum = "id";
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
+  }
+  sortIdMinToMax() {
+    this.seachU.sortT = "ASC";
+    this.seachU.sortColum = "id";
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
+  }
+  sortUser() {
+    this.seachU.sortT = "ASC";
+    this.seachU.sortColum = "user_name";
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
+  }
+  seach(s: string) {
+    this.seachU.name = s ;
+    this.seachU.email = s;
+    this.seachU.userName = s;
+  }
+  sortPhone() {
+    this.seachU.sortT = "ASC";
+    this.seachU.sortColum = "phone_number";
+    console.log(this.seachU);
 
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
+  }
+  sortIdMaxToMin() {
+    this.seachU.sortT = "DESC";
+    this.seachU.sortColum = "id";
+    console.log(this.seachU);
+
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
+  }
   updateUser() {
     this.userObj.id = this.userDetail.value.id;
     this.userObj.name = this.userDetail.value.name;
@@ -145,7 +222,7 @@ export class ListjeComponent implements OnInit, OnDestroy {
     this.userObj.userName = this.userDetail.value.userName;
     this.userService.updateUser(this.userObj).subscribe(
       (res) => {
-        console.log(res);
+        //console.log(res);
         this.getAllUserJe();
       },
       (error) => {
@@ -157,10 +234,14 @@ export class ListjeComponent implements OnInit, OnDestroy {
     );
   }
 
-  deactivateUser(id: number) {
-    this.userObj.id = this.userDetail.value.id;
+  deactivateUser(id: number, userName: string) {
+    //console.log(id);
+    this.userObj.id = id;
+    this.userObj.userName = userName;
     console.log(this.userObj);
-
-    //this.userService.deactivateUser(id).subscribe();
+    this.userService.deactivateUser(this.userObj).subscribe((data) => {
+      console.log(data);
+      this.message="Deactivate User Successfull"
+    });
   }
 }

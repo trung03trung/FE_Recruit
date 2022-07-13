@@ -19,7 +19,7 @@
                                 <button (click)="statusAccept()" *ngIf="role==='ROLE_ADMIN' &&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xét duyệt
                                 </button>
-                                <button *ngIf="role==='ROLE_ADMIN'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button *ngIf="role==='ROLE_ADMIN'&&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Từ chối duyệt
                                 </button>
                                 <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">

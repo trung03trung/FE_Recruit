@@ -5,14 +5,52 @@
       <i class="fas fa-search"></i>
     </span>
   </div> -->
-  <button
-    class="btn btn-outline-success"
-    data-bs-toggle="modal"
-    data-bs-target="#addUser"
-    type="submit"
-  >
-    Add User
-  </button>
+  <div class="dropdown" style="position: relative">
+    <button
+      class="btn btn-outline-success"
+      data-bs-toggle="modal"
+      data-bs-target="#addUser"
+      type="submit"
+    >
+      Add User
+    </button>
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      style="margin-left: 40px"
+    >
+      Sort
+    </button>
+    <!-- <div
+      class="position-absolute top-0 start-100 translate-middle"
+      class="input-group rounded"
+      style="position: absolute"
+    >
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+      />
+      <span class="input-group-text border-0" id="search-addon">
+        <i (click)="seach()"  class="fas fa-search"></i>
+      </span>
+    </div> -->
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li>
+        <a class="dropdown-item" (click)="sortIdMinToMax()">ID tăng dần</a>
+      </li>
+      <li>
+        <a class="dropdown-item" (click)="sortIdMaxToMin()">ID tăng giảm dần</a>
+      </li>
+      <li><a class="dropdown-item" (click)="sortUser()">User name</a></li>
+      <li><a class="dropdown-item" (click)="sortPhone()">Phone</a></li>
+    </ul>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -21,7 +59,7 @@
         <!-- <th scope="col">PASSWORD</th> -->
         <th scope="col">EMAIL</th>
         <th scope="col">PHONE</th>
-        <th scope="col">ACTIVE</th>
+        <!-- <th scope="col">ACTIVE</th> -->
       </tr>
     </thead>
     <tbody>
@@ -31,7 +69,7 @@
         <!-- <td>{{ user.passwoed }}</td> -->
         <td>{{ user.email }}</td>
         <td>{{ user.phoneNumber }}</td>
-        <td>{{ user.active }}</td>
+        <!-- <td>{{ user.active }}</td> -->
         <td>
           <button
             type="button"
@@ -47,8 +85,8 @@
             type="button"
             class="btn btn-outline-danger"
             data-bs-toggle="modal"
-            (click)="deactivateUser(user.id)"
-            data-bs-target="#deactivateUser"
+            (click)="deactivateUser(user.id, user.userName)"
+            data-bs-target="#notification"
           >
             Deactivate
           </button>
@@ -56,10 +94,30 @@
       </tr>
     </tbody>
   </table>
-  <!-- Deactivate User -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+
+      <li *ngFor="let n of pageNumber" class="page-item">
+        <a class="page-link" (click)="setPage(n)">{{ n }}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- notification -->
   <div
     class="modal fade"
-    id="deactivateUser"
+    id="notification"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -68,7 +126,7 @@
       <div class="modal-content">
         <div class="modal-header" class="text-center">
           <h1 class="modal-title" id="exampleModalLabel" style="margin: auto">
-            Deactivate User
+            {{this.message}}
           </h1>
         </div>
       </div>
@@ -310,6 +368,8 @@
     </div>
   </div>
 
+  
+
   <!-- Edit User modal -->
   <div
     class="modal fade"
@@ -484,7 +544,7 @@
                 Tài khoản không quá 20 ký tự
               </mat-error>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label"
                 >Password
               </label>
@@ -530,7 +590,7 @@
               >
                 Mật khẩu không trùng khớp
               </div>
-            </div>
+            </div> -->
             <div class="modal-footer">
               <button
                 type="button"
@@ -543,7 +603,6 @@
                 type="button"
                 id="GFG_Button"
                 class="btn btn-outline-success"
-                [disabled]="!this.userDetail.valid"
                 (click)="updateUser()"
                 data-bs-dismiss="modal"
               >

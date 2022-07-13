@@ -1,16 +1,16 @@
-import { Component, DoCheck, OnInit } from "@angular/core";
+import { Component, DoCheck, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 import { Users } from "../../../../@core/models/user";
 import { JobService } from "../../../../@core/services/job.service";
 import { ToastrService } from "ngx-toastr";
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
-  selector: "ngx-diaglog-form",
-  templateUrl: "./diaglog-form.component.html",
-  styleUrls: ["./diaglog-form.component.scss"],
+  selector: "ngx-diaglog-update",
+  templateUrl: "./diaglog-update.component.html",
+  styleUrls: ["./diaglog-update.component.scss"],
 })
-export class DiaglogFormComponent implements OnInit,DoCheck {
+export class DiaglogUpdateComponent implements OnInit,DoCheck {
   jobPosition;
   academicLevel;
   workingForm;
@@ -18,10 +18,13 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
   statusJob;
   userContact: Users;
   userCreateName;
+  jpSelect = '';
   disableClick = "disableClick";
+  dueDateFormat='';
   formJob = new FormGroup({
-    name: new FormControl(""),
-    jobPositionId: new FormControl(""),
+    id:new FormControl(this.data.id),
+    name: new FormControl(this.data.name),
+    jobPositionId: new FormControl(),
     numberExperience: new FormControl(""),
     workingFormId: new FormControl(""),
     addressWork: new FormControl(""),
@@ -45,10 +48,12 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
     private jobService: JobService,
     private toastrService: ToastrService,
     private fb:FormBuilder,
-    private dialogRef: MatDialogRef<DiaglogFormComponent>,
+    private dialogRef: MatDialogRef<DiaglogUpdateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:any,
   ) {}
 
   ngOnInit(): void {
+    this.jpSelect = this.data.jobPosition.code;
     const a = JSON.parse(localStorage.getItem("auth-user"));
     this.userCreateName = a.sub;
     this.jobService.getFieldSelect().subscribe((data) => {
@@ -58,7 +63,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       this.rank = data.ranks;
       this.userContact = data.users;
       this.statusJob = data.statusJobs;
-      
+      console.log(this.statusJob[0].code);
     });
     this.initForm();
   }
@@ -70,24 +75,29 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
     }
   }
   initForm() {
+    
+    let date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(this.data.dueDate)
+    console.log(this.data.dueDate);
+    
     this.formJob = this.fb.group({
-      name:["",[Validators.required,Validators.maxLength(150)]],
-      jobPositionId:["",Validators.required],
-      numberExperience:["",Validators.required],
+      id:[this.data.id],
+      name:[this.data.name,[Validators.required,Validators.maxLength(150)]],
+      jobPositionId:['',Validators.required],
+      numberExperience:[this.data.numberExperience,Validators.required],
       workingFormId:["",Validators.required],
-      addressWork:["",Validators.required],
+      addressWork:[this.data.addressWork,Validators.required],
       academicLevelId:["",Validators.required],
-      qtyPerson:["",[Validators.required,Validators.pattern('^[0-9]{1,3}$')]],
+      qtyPerson:[this.data.qtyPerson,[Validators.required,Validators.pattern('^[0-9]{1,3}$')]],
       rankId:["",Validators.required],
-      dueDate:["",Validators.required],
-      skills:["",Validators.required],
-      description:["",Validators.required],
-      salaryMin:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
-      salaryMax:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
-      statusId:[""],
+      dueDate:[this.data.dueDate,Validators.required],
+      skills:[this.data.skills,Validators.required],
+      description:[this.data.description,Validators.required],
+      salaryMin:[this.data.salaryMin,[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
+      salaryMax:[this.data.salaryMax,[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
+      statusId:["",Validators.required],
       userContactId:["",Validators.required],
-      jobRequirement:["",Validators.required],
-      interest: ["", Validators.required],
+      jobRequirement:[this.data.jobRequirement,Validators.required],
+      interest: [this.data.interest, Validators.required],
       startDate:["",Validators.required],
       userCreate:[this.userCreateName],
     });
@@ -95,8 +105,6 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
   onSubmit() {
     this.formJob.patchValue({ userCreate: this.userCreateName });
     this.toastrService.success("Thêm mới tin tuyển dụng thành công");
-    console.log(this.formJob.value);
-    
     this.jobService.addNewJob(this.formJob.value).subscribe((data) => {
       if (data != null) {
         alert("Thêm mới tin tuyển dụng thành công");

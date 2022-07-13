@@ -1,6 +1,7 @@
 <h1>Thêm mới tin tuyển dụng</h1>
 
     <form class="pb-5" [formGroup]="formJob">
+        <input type="hidden"  formControlName="id">
         <div class="form-row mb-3">
             <div class="form-group col-md-4">
                 <div class="row">
@@ -15,9 +16,11 @@
                 <div class="row">
                     <label class="label col-4 col-form-label">Vị trí </label>
                     <div class="col-8">
-                        <select class="form-control" formControlName="jobPositionId">
-                            <option value="">Chọn vị trí</option>
-                            <option *ngFor="let jp of jobPosition" [ngValue]="jp.id">{{jp.code}}</option>
+                        <select class="form-control" formControlName="jobPositionId" [(ngModel)]="data.jobPosition.id"> 
+                            <option *ngFor="let jp of jobPosition; let a = index;"
+                            [ngValue]="jp.id" >
+                            {{jp.code}}
+                        </option>
                         </select>
                         <mat-error *ngIf="formJob.controls.jobPositionId.errors?.required && formJob.get('jobPositionId').touched">Không được để trống</mat-error>
                     </div>
@@ -37,11 +40,10 @@
         <div class="form-row mb-3">
             <div class="col-md-4">
                 <div class="row">
-                    <label class="label col-4 col-form-label">Hình thức làm việc</label>
+                    <label class="label col-4 col-form-label">Hình thức</label>
                     <div class="col-8">
-                        <select class="form-control" formControlName="workingFormId">
-                            <option value="">Chọn hình thức</option>
-                            <option *ngFor="let wf of workingForm"  [ngValue]="wf.id">{{wf.code}}</option>
+                        <select class="form-control" formControlName="workingFormId" [(ngModel)]="data.workingForm.id">
+                            <option *ngFor="let wf of workingForm"  [ngValue]="wf.id" >{{wf.code}}</option>
                         </select>
                         <mat-error *ngIf="formJob.controls.workingFormId.errors?.required && formJob.get('workingFormId').touched">Không được để trống</mat-error>
                     </div>
@@ -61,9 +63,8 @@
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Trình độ học vấn</label>
                     <div class="col-sm-8">
-                        <select class="form-control" formControlName="academicLevelId">
-                            <option value="">Chọn trình độ</option>
-                            <option *ngFor="let al of academicLevel; let l = last" [ngValue]="al.id" >{{al.code}}</option>
+                        <select class="form-control" formControlName="academicLevelId" [(ngModel)]="data.academicLevel.id">
+                            <option *ngFor="let al of academicLevel;" [ngValue]="al.id">{{al.code}}</option>
                         </select>
                         <mat-error *ngIf="formJob.controls.academicLevelId.errors?.required && formJob.get('academicLevelId').touched">Không được để trống</mat-error>
                     </div>
@@ -87,9 +88,8 @@
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Level</label>
                     <div class="col-sm-8">
-                        <select class="form-control" formControlName="rankId" >
-                            <option value="">Chọn level </option>
-                            <option *ngFor="let r of rank" [ngValue]="r.id">{{r.code}}</option>
+                        <select class="form-control" formControlName="rankId" [(ngModel)]="data.rank.id">
+                            <option *ngFor="let r of rank;" [ngValue]="r.id" >{{r.code}}</option>
                         </select>
                         <mat-error *ngIf="formJob.controls.rankId.errors?.required && formJob.get('rankId').touched">Không được để trống</mat-error>
                     </div>
@@ -161,17 +161,14 @@
                     
                 </div>
             </div>
-        
-         
         </div>
         <div class="form-row mb-3"> 
             <div class="col-md-4">
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Người liên hệ</label>
                     <div class="col-8">
-                        <select class="form-control" formControlName="userContactId">
-                            <option value="">Chọn người liên hệ</option>
-                            <option *ngFor="let uc of userContact;let l=last;"  [ngValue]="uc.id">{{uc.userName}}</option>
+                        <select class="form-control" formControlName="userContactId" [(ngModel)]="data.userContact.id">
+                            <option *ngFor="let uc of userContact" [ngValue]="uc.id">{{uc.userName}}</option>
                         </select>
                         <mat-error *ngIf="formJob.controls.userContactId.errors?.required && formJob.get('userContactId').touched">Không được để trống</mat-error>
                     </div>
@@ -191,18 +188,18 @@
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Ngày bắt đầu</label>
                     <div class="col-8">
-                        <input type="date" pInputText class="form-control" formControlName="startDate">
+                        <input type="date" pInputText class="form-control" formControlName="startDate" [value]="data.startDate| date:'yyyy-MM-dd'">
                         <mat-error *ngIf="formJob.controls.startDate.errors?.required && formJob.get('startDate').touched">Không được để trống</mat-error>
                     </div>
                 </div>
             </div>
         </div>
         <input type="hidden" formControlName="userCreate">
-            <div class="card-footer">
-            <button class="{{disableClick}}" class="btn btn-success mr-3"  (click)="onSubmit()"  [disabled]="!formJob.valid" type="button">Lưu tin</button>
-            <button  class="btn btn-primary" (click)="onNoClick()" type="button">Đóng</button>
+        <div class="card-footer">
+            <button class="{{disableClick}}"  class="btn btn-success mr-3"  (click)="onSubmit()"  [disabled]="!this.formJob.valid" type="button">Lưu tin</button>
+            <button class="btn btn-primary" (click)="onNoClick()" type="button">Đóng</button>
         </div>
-    </form>
+ </form>
    
 
 

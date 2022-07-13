@@ -5,6 +5,8 @@ import { job } from '../../../@core/models/job';
 import { JobService } from '../../../@core/services/job.service';
 import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DiaglogFormComponent } from './diaglog-form/diaglog-form.component';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'ngx-job',
@@ -20,6 +22,10 @@ export class JobComponent implements OnInit {
   totalPageNumRe:Number[]=[];
   totalPageNum:Number[]=[]
   index:Number[]=[];
+  sortBy='dueDate';
+  sortDir='asc';
+  isClick=false;
+  statusJob;
   // @Output() jobDetail=new EventEmitter<job>();
   constructor(private jobService:JobService,private router:Router,
     private dialog:MatDialog) { }
@@ -27,8 +33,10 @@ export class JobComponent implements OnInit {
   ngOnInit(): void {
 
     
-    this.jobService.getAllJob(this.pageNo,this.pageSize).subscribe((data=>{
+    this.jobService.getAllJob(this.pageNo,this.pageSize,this.sortBy,this.sortDir).subscribe((data=>{
         this.getData(data)
+        console.log(data);
+        
     }));
      
   }
@@ -46,9 +54,9 @@ export class JobComponent implements OnInit {
   }
 
   onClick(page){
-    this.pageNo=page
+    this.pageNo=page;
     this.router.navigate(['/home/job']);
-    this.jobService.getAllJob(this.pageNo,this.pageSize).subscribe((data=>{
+    this.jobService.getAllJob(this.pageNo,this.pageSize,this.sortBy,this.sortDir).subscribe((data=>{
       this.getData(data)
   }));
   }
@@ -64,6 +72,44 @@ export class JobComponent implements OnInit {
   
   openDialog(){
     this.dialog.open(DiaglogFormComponent)
+  }
+  sortByName(){
+    if(!this.isClick){
+      this.sortDir='desc';
+      this.isClick=true;
+    }
+    else{
+      this.sortDir='asc';
+      this.isClick=false;
+    }
+    this.sortBy="name";
+    this.jobService.getAllJob(this.pageNo,this.pageSize,this.sortBy,this.sortDir).subscribe((data=>{
+      this.getData(data)
+  }));
+  }
+  sortByDueDate(){
+    if(!this.isClick){
+      this.sortDir='desc';
+      this.isClick=true;
+    }
+    else{
+      this.sortDir='asc';
+      this.isClick=false;
+    }
+    this.sortBy="dueDate";
+    this.jobService.getAllJob(this.pageNo,this.pageSize,this.sortBy,this.sortDir).subscribe((data=>{
+      this.getData(data)
+  }));
+  }
+  exportPDF(id){
+    this.jobService.exportPDF(id).subscribe((data =>{
+        console.log(data);
+    }));
+  }
+  changePageSize(e){
+    this.jobService.getAllJob(this.pageNo,e.target.value,this.sortBy,this.sortDir).subscribe((data=>{
+      this.getData(data)
+  }));
   }
 }
 

@@ -80,7 +80,7 @@ export class ListjeComponent implements OnInit, OnDestroy {
     this.userService.getAllUserJe().subscribe(
       (res) => {
         this.userList = res;
-        //console.log(res);
+        console.log(res);
       },
       (err) => {
         console.log("error while fetching data.");

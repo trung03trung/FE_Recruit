@@ -17,6 +17,8 @@ import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
 import { ListjeComponent } from './listje/listje.component';
 import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
+import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-update.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -38,6 +40,7 @@ const routes: Routes = [{
       path:'job/detail/:id',
       component:DetailJobComponent
     },
+    {
       path: 'list-je',
       component: ListjeComponent,
     },
@@ -55,7 +58,8 @@ const routes: Routes = [{
     JobComponent,
     DetailJobComponent,
     DiaglogFormComponent,
-    ListjeComponent
+    ListjeComponent,
+    DiaglogUpdateComponent,
   ],
   imports: [
     CommonModule,

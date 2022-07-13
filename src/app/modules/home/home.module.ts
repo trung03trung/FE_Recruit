@@ -17,16 +17,17 @@ import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
 import { ListjeComponent } from './listje/listje.component';
 import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
+import{StatisticalComponent} from '../../modules/home/statistical/statistical.component';
 import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-update.component';
 import { DialogRejectComponent } from './detail-job/dialog-reject/dialog-reject.component';
-
 
 const routes: Routes = [{
   path: '',
   component: HomeComponent,
   children: [
     {
-      path: 'dashboard',
+      path: 'statistical',
+      component: StatisticalComponent,
       // loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
@@ -59,6 +60,7 @@ const routes: Routes = [{
     JobComponent,
     DetailJobComponent,
     DiaglogFormComponent,
+    ChangethePasswordComponent,
     ListjeComponent,
     DiaglogUpdateComponent,
     DialogRejectComponent,

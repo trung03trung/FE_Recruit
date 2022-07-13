@@ -4,5 +4,24 @@
 }
 .datetime{
     text-align: center;
-    
+    margin-top: -14px;
+}
+
+div .mat-card {
+    width: 24%;
+    border: 1px black;
+    font-size: 0.69rem;
+
+}
+
+.fix-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.fix-column {
+    justify-content: space-between;
+    margin-top: 16px;
 }

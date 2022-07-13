@@ -21,10 +21,13 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { MatTableModule } from '@angular/material/table';
 import { SignupComponent } from './modules/signup/signup.component';
 import { TokenInterceptor } from './@core/services/interceptor.service';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
+import { MatCardModule } from '@angular/material/card';
+import { StatisticalComponent } from './modules/home/statistical/statistical.component';
 
 
 
@@ -42,9 +45,11 @@ const configToast: any = {
 
 
 @NgModule({
-  declarations: [AppComponent,SignupComponent, ActiveAccountComponent],
+  declarations: [AppComponent,SignupComponent, ActiveAccountComponent,StatisticalComponent],
     imports: [
         BrowserModule,
+        MatCardModule,
+        BrowserModule, MatTableModule,
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
@@ -71,6 +76,7 @@ const configToast: any = {
       multi: true
     }
   ],
+  
 })
 export class AppModule {
 }

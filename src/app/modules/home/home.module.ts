@@ -18,7 +18,7 @@ import{MaterialModule} from '../../shared/material.module';
 import { ListjeComponent } from './listje/listje.component';
 import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
 import{StatisticalComponent} from '../../modules/home/statistical/statistical.component';
-
+import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-update.component';
 
 const routes: Routes = [{
   path: '',
@@ -60,7 +60,8 @@ const routes: Routes = [{
     DetailJobComponent,
     DiaglogFormComponent,
     ChangethePasswordComponent,
-    ListjeComponent
+    ListjeComponent,
+    DiaglogUpdateComponent,
   ],
   imports: [
     CommonModule,

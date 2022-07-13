@@ -1,3 +1,4 @@
+import { NumberSymbol } from '@angular/common';
 import { HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,6 +15,13 @@ const httpOptions = {
   }),
 };
 
+const httpOptionspdf = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/pdf',
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  }),
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -26,8 +34,8 @@ export class JobService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  public getAllJob(pageNo:any,pageSize): Observable<any> {
-    return this.http.get(`${this.baseUrl}job?pageNo=${pageNo}&pageSize=${pageSize}`,httpOptions)
+  public getAllJob(pageNo:any,pageSize,sortBy,sortDir): Observable<any> {
+    return this.http.get(`${this.baseUrl}job?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`,httpOptions)
   }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -57,5 +65,11 @@ export class JobService {
   }
   public addNewJob(form:any):Observable<any>{
     return this.http.post(`${this.baseUrl}job`, form,httpOptions);
+  }
+  public exportPDF(id:any):Observable<any>{
+    return this.http.get(`${this.baseUrl}pdf?id=${id}`,httpOptionspdf);
+  }
+  public changeStatus(id:Number,code:string):Observable<any>{
+    return this.http.post(`${this.baseUrl}job/${id}?code=${code}`,"",httpOptions);
   }
 }

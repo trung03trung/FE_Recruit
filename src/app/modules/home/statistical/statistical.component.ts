@@ -1,34 +1,37 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { Chart } from "chart.js";
-import { productSales, productSalesMulti } from "./data";
+import { StatisticalService } from "../../../@core/services/statistical.service";
+import { jobS } from "./data";
 @Component({
   selector: "ngx-statistical",
   templateUrl: "./statistical.component.html",
   styleUrls: ["./statistical.component.scss"],
 })
 export class StatisticalComponent implements OnInit {
-  monthchosse = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  viewJob = "7";
+  [x: string]: any;
+  monthchosse = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   todate = "";
   fromdate = "";
-  ppRegSuccess = "1";
+  total_view_job = "7";
+  success_recruited_applicant = "1";
+  total_apply = "16";
+  
   ppRegFaile = "2";
-  JobPost = "8";
-  PpPAplicants = "16";
+  all_job = "8";
   jobFaile = "4";
   profileY = "2";
   profileN = "3";
   seachData: FormGroup;
+  dataS = [];
+  
 
-  constructor(private formBuilder: FormBuilder) {
-    Object.assign(this, { productSales, productSalesMulti });
+  constructor(
+    private formBuilder: FormBuilder,
+    private statisticalService: StatisticalService
+  ) {
+    Object.assign(this, { jobS });
   }
   ngOnInit(): void {
     this.initForm();
@@ -36,19 +39,31 @@ export class StatisticalComponent implements OnInit {
 
   initForm() {
     this.seachData = this.formBuilder.group({
-      month: '',
-      dateS: '',
-      dateE: '',
+      month: "",
+      dateS: "",
+      dateE: "",
     });
   }
-  selectMonth(month: number){
-      alert(month);
-  };
-  selectDateS(dateS: Date){
-      alert(dateS);
+
+  getAllUserJe() {
+    this.statisticalService.getStatistical(this.seachData.value).subscribe(
+      (res) => {
+        this.dataS = res;
+        
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
   }
-  selectDateE(dateE:Date){
-      alert(dateE)
+  selectMonth(month: number) {
+    alert(month);
+  }
+  selectDateS(dateS: Date) {
+    alert(dateS);
+  }
+  selectDateE(dateE: Date) {
+    alert(dateE);
   }
 
   canvas: any;
@@ -64,7 +79,7 @@ export class StatisticalComponent implements OnInit {
         datasets: [
           {
             label: "Số thành viên cần tuyển",
-            data: [0, 20, 40, 50],
+            data: [0, 20, 25, 30, 40, 50, 51],
             borderColor: "#007ee7",
             fill: true,
           },
@@ -75,13 +90,13 @@ export class StatisticalComponent implements OnInit {
             fill: true,
           },
         ],
-        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"],
+        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
       },
     });
   }
 
-  productSales: any[];
-  productSalesMulti: any[];
+  jobS: any[];
+  jobSalesMulti: any[];
   view: any[] = [600, 300];
   showLegend: boolean = true;
   showLabels: boolean = true;
@@ -89,7 +104,16 @@ export class StatisticalComponent implements OnInit {
   isDoughnut: boolean = true;
   legendPosition: string = "below";
   colorScheme = {
-    domain: ["#704FC4", "#4B852C", "#B67A3D"],
+    domain: [
+      "#704FC4",
+      "#4B852C",
+      "#B67A3D",
+      "#CA4E79",
+      "#FFF80A",
+      "#293462",
+      "#7A86B6",
+      "377D71",
+    ],
   };
   onActivate(data): void {
     console.log("Activate", JSON.parse(JSON.stringify(data)));

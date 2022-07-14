@@ -22,6 +22,7 @@ export class ListjeComponent implements OnInit {
   userList: Users[];
   message = "";
   pageNumber = [1, 2, 3];
+  click = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -157,22 +158,18 @@ export class ListjeComponent implements OnInit {
       }
     );
   }
-  sortIdMinToMax() {
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "id";
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
   sortUser() {
-    this.seachU.sortT = "ASC";
     this.seachU.sortColum = "user_name";
+    if(!this.click){
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "user_name";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "user_name";
+      this.click = false;
+    }
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
         this.userList = res;
@@ -184,9 +181,16 @@ export class ListjeComponent implements OnInit {
     );
   }
   sortPhone() {
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "phone_number";
-    console.log(this.seachU);
+    if(!this.click){
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "phone_number";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "phone_number";
+      this.click = false;
+    }
 
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
@@ -199,10 +203,16 @@ export class ListjeComponent implements OnInit {
     );
   }
   sortEmail() {
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "email";
-    console.log(this.seachU);
-
+    if(!this.click){
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "email";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "email";
+      this.click = false;
+    }
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
         this.userList = res;
@@ -213,11 +223,17 @@ export class ListjeComponent implements OnInit {
       }
     );
   }
-  sortIdMaxToMin() {
-    this.seachU.sortT = "DESC";
-    this.seachU.sortColum = "id";
-    console.log(this.seachU);
-
+  sortId() {
+    if(!this.click){
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "id";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "id";
+      this.click = false;
+    }
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
         this.userList = res;

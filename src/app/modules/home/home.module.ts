@@ -9,7 +9,6 @@ import { SharedModule } from 'primeng/api';
 import { PrimengModule } from '../../shared/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JobComponent } from './job/job.component';
-import { JobService } from '../../@core/services/job.service';
 import { DetailJobComponent } from './detail-job/detail-job.component';
 import { DiaglogFormComponent } from './job/diaglog-form/diaglog-form.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -28,7 +27,6 @@ const routes: Routes = [{
     {
       path: 'statistical',
       component: StatisticalComponent,
-      // loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
       path: 'profile',
@@ -49,6 +47,10 @@ const routes: Routes = [{
     {
       path: 'change-the-password',
       component: ChangethePasswordComponent,
+    },
+    {
+      path: 'job/add',
+      component: DiaglogFormComponent,
     },
   ],
 }];

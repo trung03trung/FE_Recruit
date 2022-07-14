@@ -1,12 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { job } from '../../../@core/models/job';
 import { JobService } from '../../../@core/services/job.service';
 import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DiaglogFormComponent } from './diaglog-form/diaglog-form.component';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
+import { jsPDF } from "jspdf";
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'ngx-job',
@@ -15,7 +15,7 @@ import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 })
 export class JobComponent implements OnInit {
   pageNo=0;
-  pageSize=2;
+  pageSize=5;
   totalPage=0;
   totalJob=0;
   listJob: job[]= [];
@@ -23,10 +23,12 @@ export class JobComponent implements OnInit {
   totalPageNum:Number[]=[]
   index:Number[]=[];
   sortBy='dueDate';
+  sortSearchBy='due_date'
   sortDir='asc';
   isClick=false;
   statusJob;
-  // @Output() jobDetail=new EventEmitter<job>();
+  name='';
+  isSearch=false;
   constructor(private jobService:JobService,private router:Router,
     private dialog:MatDialog) { }
 
@@ -35,15 +37,13 @@ export class JobComponent implements OnInit {
     
     this.jobService.getAllJob(this.pageNo,this.pageSize,this.sortBy,this.sortDir).subscribe((data=>{
         this.getData(data)
-        console.log(data);
-        
     }));
      
   }
 
   getData(data){
     const start=0
-    this.listJob=data.jobs;
+        this.listJob=data.jobs;
         this.pageNo=data.pageNo;
         this.pageSize=data.pageSize;
         this.totalJob=data.totalElements;
@@ -54,11 +54,24 @@ export class JobComponent implements OnInit {
   }
 
   onClick(page){
+    if(!this.isSearch){
     this.pageNo=page;
     this.router.navigate(['/home/job']);
     this.jobService.getAllJob(this.pageNo,this.pageSize,this.sortBy,this.sortDir).subscribe((data=>{
       this.getData(data)
-  }));
+   
+      }));
+    }
+   else{
+    const data={name:this.name,pageNo:page,
+      totalPages:this.totalPage,pageSize:this.pageSize,
+      sortBy:this.sortSearchBy,sortDir:this.sortDir}
+    this.router.navigate(['/home/job']);
+    this.jobService.searchJob(data).subscribe((data=>{
+      this.getData(data)
+      this.isSearch=true;
+      }));
+   }
   }
   // addJobDetail(value:job){
   //   this.jobDetail.emit(value);
@@ -67,11 +80,11 @@ export class JobComponent implements OnInit {
     this.jobService.tranferData(job);
   }
   getDetail(job:job){
-    this.router.navigate[`home/job/detail?id=${job.id}`];
+    this.router.navigate([`/home/job/detail?id=${job.id}`]);
   }
-  
-  openDialog(){
-    this.dialog.open(DiaglogFormComponent)
+  openFormAdd(){
+    console.log(1);
+    this.router.navigate(['/home/job/add']);
   }
   sortByName(){
     if(!this.isClick){
@@ -101,15 +114,46 @@ export class JobComponent implements OnInit {
       this.getData(data)
   }));
   }
-  exportPDF(id){
-    this.jobService.exportPDF(id).subscribe((data =>{
-        console.log(data);
-    }));
+  // exportPDF(id){
+  //   this.jobService.exportPDF(id).subscribe((data =>{
+  //       console.log(data);
+  //   }));
+  // }
+  
+  public downloadPDF(job):void {
+    const doc = new jsPDF();
+    // doc.addFileToVFS("Amiri-Regular.ttf", AmiriRegular);
+    // doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+ 
+    // doc.setFont("Amiri");
+    autoTable(doc, {
+      styles: { font:'Times-Roman'},
+      head: [['Tên công việc', 'Vị trí công việc', 'Mức lương đề xuất','Hạn nộp hồ sơ','Trạng thái']],
+      body: [
+        [job.name, job.jobPosition.code, job.salaryMax,job.dueDate,job.statusJob.code],
+        
+      ],
+    })
+    doc.save('table.pdf')
   }
+
   changePageSize(e){
     this.jobService.getAllJob(this.pageNo,e.target.value,this.sortBy,this.sortDir).subscribe((data=>{
       this.getData(data)
   }));
+  };
+  onChangeEvent(event: any){
+    const data={name:event.target.value,pageNo:this.pageNo,
+      totalPages:this.totalPage,pageSize:this.pageSize,
+      sortBy:this.sortSearchBy,sortDir:this.sortDir}
+      this.name=event.target.value;
+    this.jobService.searchJob(data).subscribe((data=>{
+     
+      this.getData(data)
+      console.log(this.listJob)
+      this.isSearch=true;
+  }));
+
   }
 }
 

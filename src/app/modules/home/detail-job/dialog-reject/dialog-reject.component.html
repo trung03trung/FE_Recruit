@@ -1,19 +1,21 @@
-<h1>Thêm mới tin tuyển dụng</h1>
+<h1>Lý do từ chối </h1>
 
-    <form class="pb-5">
+
+    <form class="pb-5" [formGroup]="formReason">
+    <div class="card-body">
         <div class="form-row mb-3">
             <div class="form-group">
                 <div class="row">
-                    <label class="label col-form-label ">Tên công việc</label>
+                    <label class="label col-form-label ">Lý do từ chối</label>
                         <input type="text" pInputText class="form-control" formControlName="name">
+                        <mat-error *ngIf="formReason.controls.name.errors?.required && formReason.get('name').touched">Không được để trống</mat-error>
                 </div>
             </div>
         </div>
-      
-        <input type="hidden" formControlName="userCreate">
+      </div>
             <div class="card-footer">
-            <button class="btn btn-success mr-3"  type="button">Lưu tin</button>
-            <button  class="btn btn-primary" type="button">Đóng</button>
+            <button class="btn btn-success mr-3" (click)="rejectJob()" [disabled]="!this.formReason.valid" type="button">Submit</button>
+            <button  class="btn btn-primary" (click)="onNoClick()" type="button">Đóng</button>
         </div>
     </form>
    

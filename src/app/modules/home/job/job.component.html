@@ -1,5 +1,5 @@
 <body>
-    <div class="container">
+    <div class="container p-0">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -7,7 +7,7 @@
                         <div class="col-sm-7"><h2>Tin <b>tuyển dụng</b></h2></div>
                 
                         <div class="col-sm-5">
-                            <button  type="button" class="btn btn-primary" (click)="openDialog()"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                            <button  type="button" class="btn btn-primary" (click)="openFormAdd()"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -19,7 +19,7 @@
                                 </button>
                             <div class="search-box">
                                 <i class="material-icons">&#xE8B6;</i>
-                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                                <input type="text" (change)="onChangeEvent($event)" class="form-control" placeholder="Search&hellip;">
                             </div>
                         </div>
                     </div>
@@ -39,17 +39,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let job of listJob;let i=index;" [routerLink]="['/home/job/detail', job.id]" style="cursor: pointer;">
+                        <tr *ngFor="let job of listJob;let i=index;" style="cursor: pointer;">
                             <td>{{i+1}}</td>
-                            <td>{{job.name}}</td>
-                            <td>{{job.jobPosition.code}}</td>
-                            <td>{{job.salaryMax}}</td>
-                            <td>{{job.dueDate|date:'dd/MM/yyyy'}} </td>
-                            <td>{{job.statusJob.code}}</td>
+                            <td>{{job?.name}}</td>
+                            <td>{{job?.jobPosition?.code}}</td>
+                            <td>{{job?.salaryMax}}</td>
+                            <td>{{job?.dueDate|date:'dd/MM/yyyy'}} </td>
+                            <td>{{job?.statusJob?.code}}</td>
                             <td></td>
                             <td>
-                                <a  class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                <a class="edit" title="Export PDF" data-toggle="tooltip"><i (click)="exportPDF(job.id)" class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                <a  class="view"  [routerLink]="['/home/job/detail', job?.id]" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                                <a class="edit" title="Export PDF" data-toggle="tooltip"><i (click)="downloadPDF(job)" class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
                                     <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
                                     <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                   </svg></i></a>
@@ -64,10 +64,9 @@
                 </table>
                 <div class="clearfix">
                     <div class="hint-text">Hiển thị <b><select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control-sm" (change)="changePageSize($event)">
-                            <option value="2">2</option>
+                            <option value="5">5</option>
                             <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
+                            <option value="15">15</option>
                         </select></b> mục</div>
                     <ul class="pagination" *ngFor="let page of totalPageNum">
                         <!-- <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li> -->

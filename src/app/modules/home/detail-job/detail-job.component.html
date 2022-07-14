@@ -10,40 +10,39 @@
                     </div>
                         
                         <div class="mb-5">
-                                <button (click)="openDialog()"  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="openDialog()"  type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Cập nhật
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button  type="button" class="btn btn btn-outline-primary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xem trước
                                 </button>
-                                <button (click)="statusAccept()" *ngIf="role==='ROLE_ADMIN' &&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="statusAccept()" *ngIf="role==='ROLE_ADMIN' &&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xét duyệt
                                 </button>
-                                <button *ngIf="role==='ROLE_ADMIN'&&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button *ngIf="role==='ROLE_ADMIN'&&statusJob.code==='Chờ xét duyệt'" (click)="openDialogReject()" type="button" class="btn btn-outline-info mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Từ chối duyệt
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Đăng tuyển
+                                <button (click)="statusRecruit()" *ngIf="statusJob.code==='Chưa đăng tuyển'"  type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Đang tuyển
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button  (click)="statusStopRecruit()"  type="button" *ngIf="statusJob.code==='Đang tuyển'"  class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Dừng tuyển
                                 </button>
-                                <button  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="statusClosed()"  *ngIf="statusJob.code==='Đang tuyển'||statusJob.code==='Đang không tuyển'"  type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Đóng
                                 </button>
-                                <button *ngIf="role=='ROLE_ADMIN'"  type="button" class="btn btn-primary mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="deleteJob()" *ngIf="role=='ROLE_ADMIN'&&statusJob.code==='Đã từ chối'||role=='ROLE_ADMIN'&&statusJob.code==='Đã đóng'"  type="button" class="btn btn-outline-danger mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xóa
                                 </button>
                             
                         </div>
                   
                 </div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-bordered">
                     <thead>
-                        <th></th>
-                        <th></th>
+                        
                     </thead>
-                    <tbody class="text-center">
+                    <tbody class="">
                        
                         <tr>
                             <td class="font-weight-bold"> 

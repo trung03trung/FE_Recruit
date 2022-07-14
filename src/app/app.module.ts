@@ -25,13 +25,7 @@ import { SignupComponent } from './modules/signup/signup.component';
 import { TokenInterceptor } from './@core/services/interceptor.service';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
-
-
-
-
-
-
-
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
 
 const configToast: any = {
   timeOut: 3000,
@@ -63,6 +57,12 @@ const configToast: any = {
         ThemeModule.forRoot(),
         ToastrModule.forRoot(configToast),
         ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastNotificationsModule,
+
+
+
+
     ],
   bootstrap: [AppComponent],
   providers: [

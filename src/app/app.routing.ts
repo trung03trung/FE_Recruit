@@ -4,7 +4,7 @@ import {ActiveAccountComponent} from "./modules/signup/active-account/active-acc
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
-import { recruitmentPublicComponent } from "./modules/recruitmentPublic/recruitmentPublic.component";
+import { RecruitmentPublicComponent } from "./modules/recruitmentPublic/recruitmentPublic.component";
 
 export const routes: Routes = [
   {
@@ -46,7 +46,7 @@ export const routes: Routes = [
   },
   {
     path: 'itsol',
-    component: recruitmentPublicComponent,
+    component: RecruitmentPublicComponent,
   },
 ];
 

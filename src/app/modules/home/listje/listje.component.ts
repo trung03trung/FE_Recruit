@@ -8,29 +8,27 @@ import {
 import { Users } from "../../../@core/models/user";
 import { SeachUser } from "../../../@core/models/seachUser";
 import { UserService } from "../../../@core/services/user.service";
+import { Toaster } from "ngx-toast-notifications";
 
 @Component({
   selector: "ngx-listje",
   templateUrl: "./listje.component.html",
   styleUrls: ["./listje.component.scss"],
 })
-export class ListjeComponent implements OnInit, OnDestroy {
+export class ListjeComponent implements OnInit {
   userDetail!: FormGroup;
-  seachUser: FormGroup;
-  deactivate: FormGroup;
   seachU: SeachUser = new SeachUser();
   userObj: Users = new Users();
   userList: Users[];
   message = "";
   pageNumber = [1, 2, 3];
+  click = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private toaster: Toaster
   ) {}
-  ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
-  }
 
   ngOnInit(): void {
     this.getAllUserJe();
@@ -38,7 +36,7 @@ export class ListjeComponent implements OnInit, OnDestroy {
   }
   initForm() {
     this.userDetail = this.formBuilder.group({
-      id: new FormControl("", [Validators.required]),
+      id: new FormControl("id", [Validators.required]),
       name: new FormControl("", [
         Validators.required,
         Validators.minLength(5),
@@ -66,13 +64,8 @@ export class ListjeComponent implements OnInit, OnDestroy {
           "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$"
         ),
       ]),
-    });
-    this.seachUser = this.formBuilder.group({
-      email: "",
-      name: "",
       pageNumber: 1,
       pageSize: 6,
-      userName: "",
       sortT: "ASC",
       sortColum: "id",
     });
@@ -86,6 +79,9 @@ export class ListjeComponent implements OnInit, OnDestroy {
     this.seachU.pageSize = 6;
     this.seachU.sortT = "ASC";
     this.seachU.sortColum = "id";
+    //console.log(this.userDetail.value.name);
+    
+
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
         this.userList = res;
@@ -96,13 +92,23 @@ export class ListjeComponent implements OnInit, OnDestroy {
       }
     );
   }
-
   editUser(user: Users) {
     this.userDetail.controls["id"].setValue(user.id);
     this.userDetail.controls["name"].setValue(user.name);
     this.userDetail.controls["email"].setValue(user.email);
     this.userDetail.controls["phoneNumber"].setValue(user.phoneNumber);
     this.userDetail.controls["userName"].setValue(user.userName);
+  }
+  seach() {
+    this.userService.getAllUserJeForm(this.userDetail.value).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
   }
   toFormAddUser() {
     console.log(this.userDetail);
@@ -120,25 +126,26 @@ export class ListjeComponent implements OnInit, OnDestroy {
         if (
           res == null ||
           res.status == "NO_CONTENT" ||
-          res.status == "NOT_FOUND"
+          res.status == "NOT_FOUND"||
+          res.status == "500"
         ) {
-          alert("Tài khoản hoặc email đã sử dụng");
+          this.showToaster("Tài khoản hoặc email đã sử dụng", "danger");
         }
         if (res.status == "OK") {
-          alert("Đăng ký tài khoản thành công");
+          this.showToaster("Đăng ký tài khoản thành công", "success");
+          this.userDetail.reset();
+
         }
         this.getAllUserJe();
       },
       (err) => {
         console.log(err);
+        this.showToaster("Tài khoản hoặc email đã sử dụng", "danger");
       }
     );
   }
   setPage(n: number) {
-    this.seachU.name = "";
-    this.seachU.email = "";
     this.seachU.pageNumber = n;
-    this.seachU.userName = "";
     this.seachU.pageSize = 6;
     this.seachU.sortT = "ASC";
     this.seachU.sortColum = "id";
@@ -152,22 +159,18 @@ export class ListjeComponent implements OnInit, OnDestroy {
       }
     );
   }
-  sortIdMinToMax() {
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "id";
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
   sortUser() {
-    this.seachU.sortT = "ASC";
     this.seachU.sortColum = "user_name";
+    if(!this.click){
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "user_name";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "user_name";
+      this.click = false;
+    }
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
         this.userList = res;
@@ -177,16 +180,18 @@ export class ListjeComponent implements OnInit, OnDestroy {
         console.log("error while fetching data.");
       }
     );
-  }
-  seach(s: string) {
-    this.seachU.name = s ;
-    this.seachU.email = s;
-    this.seachU.userName = s;
   }
   sortPhone() {
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "phone_number";
-    console.log(this.seachU);
+    if(!this.click){
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "phone_number";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "phone_number";
+      this.click = false;
+    }
 
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
@@ -198,11 +203,38 @@ export class ListjeComponent implements OnInit, OnDestroy {
       }
     );
   }
-  sortIdMaxToMin() {
-    this.seachU.sortT = "DESC";
-    this.seachU.sortColum = "id";
-    console.log(this.seachU);
-
+  sortEmail() {
+    if(!this.click){
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "email";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "email";
+      this.click = false;
+    }
+    this.userService.getAllUserJe(this.seachU).subscribe(
+      (res) => {
+        this.userList = res;
+        //console.log(res);
+      },
+      (err) => {
+        console.log("error while fetching data.");
+      }
+    );
+  }
+  sortId() {
+    if(!this.click){
+      this.seachU.sortT = "DESC";
+      this.seachU.sortColum = "id";
+      this.click = true;
+    }
+    else{
+      this.seachU.sortT = "ASC";
+      this.seachU.sortColum = "id";
+      this.click = false;
+    }
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {
         this.userList = res;
@@ -224,11 +256,12 @@ export class ListjeComponent implements OnInit, OnDestroy {
       (res) => {
         //console.log(res);
         this.getAllUserJe();
+        this.showToaster("Update thành công", "success");
       },
       (error) => {
         console.log(error);
         if (error.status == "500") {
-          alert("Tài khoản hoặc số email đã sử dụng.");
+          this.showToaster("Tài khoản hoặc số email đã sử dụng.", "danger");
         }
       }
     );
@@ -241,7 +274,16 @@ export class ListjeComponent implements OnInit, OnDestroy {
     console.log(this.userObj);
     this.userService.deactivateUser(this.userObj).subscribe((data) => {
       console.log(data);
-      this.message="Deactivate User Successfull"
+      this.showToaster("Deactivate User Successfull.", "success");
+    });
+  }
+  showToaster(message: string, typea: any) {
+    const type = typea;
+    this.toaster.open({
+      text: message,
+      caption: "Status",
+      type: type,
+      duration: 3000,
     });
   }
 }

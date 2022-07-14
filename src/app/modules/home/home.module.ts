@@ -89,7 +89,7 @@ const routes: Routes = [{
     SharedModule,
     MatDialogModule,
     ToastrModule.forRoot(),
-    MaterialModule
+    MaterialModule,
   ],
 })
-export class HomeModule { }
+export class HomeModule {}

@@ -32,8 +32,11 @@ export class UserService {
     return this.http.get<Users[]>(this.getUserURL);
   }
 
-  getAllUserJe(seachUser: SeachUser): Observable<Users[]> {
-    return this.http.post<Users[]>(this.getUserJeURL, seachUser);
+  getAllUserJe(seachUser: any): Observable<any> {
+    return this.http.post<any>(this.getUserJeURL, seachUser);
+  }
+  getAllUserJeForm(seachUser: any): Observable<any> {
+    return this.http.post<any>(this.getUserJeURL, seachUser);
   }
 
   addUser(user: Users): Observable<any> {

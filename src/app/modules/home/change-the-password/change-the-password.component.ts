@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { Toaster } from "ngx-toast-notifications";
 import { UserService } from "../../../@core/services/user.service";
 
 @Component({
@@ -18,7 +19,8 @@ export class ChangethePasswordComponent implements OnInit {
   message = "";
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private toaster: Toaster
   ) {}
 
   ngOnDestroy(): void {
@@ -31,7 +33,7 @@ export class ChangethePasswordComponent implements OnInit {
   initForm() {
     this.changeThePassw = this.formBuilder.group({
       //id: new FormControl("", [Validators.required]),
-      userName: new FormControl("", [Validators.required]),
+      userName: new FormControl("username", [Validators.required]),
       password: new FormControl("", [
         Validators.required,
         Validators.pattern(
@@ -47,7 +49,15 @@ export class ChangethePasswordComponent implements OnInit {
       confirmNewPassword: new FormControl("", [Validators.required]),
     });
   }
-
+  showToaster(message: string, typea: any) {
+    const type = typea;
+    this.toaster.open({
+      text: message,
+      caption: "Status",
+      type: type,
+      duration: 3000,
+    });
+  }
   changeThePass() {
     const userinfo = JSON.parse(localStorage.getItem("auth-user"));
     const user = userinfo.sub;
@@ -55,10 +65,10 @@ export class ChangethePasswordComponent implements OnInit {
     this.userService.changeThePassword(this.changeThePassw.value).subscribe(
       (data) => {
         if (data.body.status == "BAD_REQUEST") {
-          this.message = "Mật khẩu hiện tại sai";
+          this.showToaster("Mật khẩu hiện tại sai", "danger");
         }
         if (data.body.status == "OK") {
-          this.message = "Đổi mật khẩu thành công";
+          this.showToaster("Đổi mật khẩu thành công", "success");
         }
       },
       (error) => {

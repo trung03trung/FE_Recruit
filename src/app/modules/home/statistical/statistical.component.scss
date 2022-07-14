@@ -1,6 +1,6 @@
 .date{
-    margin-left: 10px;
-    margin-right:10px; 
+    margin-left: 30px;
+    margin-right:10px;
 }
 .datetime{
     text-align: center;
@@ -10,8 +10,7 @@
 div .mat-card {
     width: 24%;
     border: 1px black;
-    font-size: 0.69rem;
-
+    font-size: 16px;
 }
 
 .fix-card {
@@ -24,4 +23,5 @@ div .mat-card {
 .fix-column {
     justify-content: space-between;
     margin-top: 16px;
+    font-size: 16px;
 }

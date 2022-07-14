@@ -2,8 +2,8 @@ import { Component, DoCheck, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 import { Users } from "../../../../@core/models/user";
 import { JobService } from "../../../../@core/services/job.service";
-import { ToastrService } from "ngx-toastr";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Toaster } from "ngx-toast-notifications";
 
 @Component({
   selector: "ngx-diaglog-update",
@@ -37,7 +37,6 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
     interest: new FormControl(""),
     salaryMin: new FormControl(""),
     salaryMax: new FormControl(""),
-    statusId: new FormControl(""),
     userContactId: new FormControl(""),
     userCreate: new FormControl("userCreate"),
     jobRequirement: new FormControl(""),
@@ -46,10 +45,10 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
   });
   constructor(
     private jobService: JobService,
-    private toastrService: ToastrService,
     private fb:FormBuilder,
     private dialogRef: MatDialogRef<DiaglogUpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any,
+    private toaster:Toaster,
   ) {}
 
   ngOnInit(): void {
@@ -62,8 +61,6 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       this.workingForm = data.workingForms;
       this.rank = data.ranks;
       this.userContact = data.users;
-      this.statusJob = data.statusJobs;
-      console.log(this.statusJob[0].code);
     });
     this.initForm();
   }
@@ -89,12 +86,11 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       academicLevelId:["",Validators.required],
       qtyPerson:[this.data.qtyPerson,[Validators.required,Validators.pattern('^[0-9]{1,3}$')]],
       rankId:["",Validators.required],
-      dueDate:[this.data.dueDate,Validators.required],
+      dueDate:["",Validators.required],
       skills:[this.data.skills,Validators.required],
       description:[this.data.description,Validators.required],
       salaryMin:[this.data.salaryMin,[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
       salaryMax:[this.data.salaryMax,[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
-      statusId:["",Validators.required],
       userContactId:["",Validators.required],
       jobRequirement:[this.data.jobRequirement,Validators.required],
       interest: [this.data.interest, Validators.required],
@@ -104,14 +100,24 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
   }
   onSubmit() {
     this.formJob.patchValue({ userCreate: this.userCreateName });
-    this.toastrService.success("Thêm mới tin tuyển dụng thành công");
     this.jobService.addNewJob(this.formJob.value).subscribe((data) => {
       if (data != null) {
-        alert("Thêm mới tin tuyển dụng thành công");
+        this.showToaster('Thêm mới tin tuyển dụng thành công','success');
       }
+      else
+      this.showToaster('Thêm mới tin tuyển dụng thất bại','danger');
     });
   };
   onNoClick(){
     this.dialogRef.close()
+  }
+  showToaster(message: string,typea:any) {
+    const type = typea;
+    this.toaster.open({
+      text: message,
+      caption: 'Thành công',
+      type: type,
+      duration: 3000
+    });
   }
 }

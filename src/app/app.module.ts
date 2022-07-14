@@ -33,7 +33,6 @@ import { ToastNotificationsModule } from "ngx-toast-notifications";
 import { RecruitmentPublicComponent } from "./modules/recruitmentPublic/recruitmentPublic.component";
 import { MatIconModule } from '@angular/material/icon'
 
-
 const configToast: any = {
   timeOut: 3000,
   positionClass: "toast-top-right",

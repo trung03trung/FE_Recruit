@@ -1,4 +1,3 @@
-
 <body>
     <div class="container">
         <div class="table-responsive-sm">
@@ -10,31 +9,21 @@
                     </div>
                         
                         <div class="mb-5">
-                                <button (click)="openDialog()"  type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Cập nhật
+                                <button   type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Tải xuống CV
                                 </button>
-                                <button  type="button" class="btn btn btn-outline-primary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Xem trước
-                                </button>
-                                <button (click)="statusAccept()" *ngIf="role==='ROLE_ADMIN' &&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button   type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xét duyệt
                                 </button>
-                                <button *ngIf="role==='ROLE_ADMIN'&&statusJob.code==='Chờ xét duyệt'" (click)="openDialogReject()" type="button" class="btn btn-outline-info mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Từ chối duyệt
+                                <button  type="button" class="btn btn-outline-info mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Từ chối ứng viên
                                 </button>
-                                <button (click)="statusRecruit()" *ngIf="statusJob.code==='Chưa đăng tuyển'"  type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Đang tuyển
+                                <button   type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Xem lý do
                                 </button>
-                                <button  (click)="statusStopRecruit()"  type="button" *ngIf="statusJob.code==='Đang tuyển'"  class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Dừng tuyển
+                                <button    class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Đặt lịch phỏng vấn
                                 </button>
-                                <button (click)="statusClosed()"  *ngIf="statusJob.code==='Đang tuyển'||statusJob.code==='Đang không tuyển'"  type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Đóng
-                                </button>
-                                <button (click)="deleteJob()" *ngIf="role=='ROLE_ADMIN'&&statusJob.code==='Đã từ chối'||role=='ROLE_ADMIN'&&statusJob.code==='Đã đóng'"  type="button" class="btn btn-outline-danger mr-3"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                    Xóa
-                                </button>
-                            
                         </div>
                   
                 </div>
@@ -88,68 +77,12 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
-                                Địa chỉ làm việc
-                            </td>
-                            <td *ngIf="job"> 
-                                {{job.addressWork}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Trình độ học vấn
-                            </td>
-                            <td *ngIf="job"> 
-                                {{academicLevel.code}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Level
-                            </td>
-                            <td *ngIf="job"> 
-                                {{rank.code}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
                                 Hạn nộp hồ sơ
                             </td>
                             <td *ngIf="job"> 
                                 {{job.dueDate|date:'dd/MM/yyyy'}}
                             </td>
                             
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Kĩ năng
-                            </td>
-                            <td *ngIf="job"> 
-                                {{job.skills}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Mô tả công việc
-                            </td>
-                            <td *ngIf="job"> 
-                                {{job.description}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Quyền lợi được hưởng
-                            </td>
-                            <td *ngIf="job"> 
-                                {{job.interest}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Yêu cầu công việc
-                            </td>
-                            <td *ngIf="job">  
-                                {{job.jobRequirement}}
-                            </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
@@ -161,32 +94,72 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
-                                Người liên hệ
+                                Tên ứng viên
                             </td>
                             <td *ngIf="job"> 
-                                {{userContact.userName}}
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            </td>
+                        </tr>
+                         <tr>
+                            <td class="font-weight-bold"> 
+                                Email
+                            </td>
+                            <td *ngIf="job"> 
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
-                                Trạng thái
+                                Số điện thoại
                             </td>
                             <td *ngIf="job"> 
-                                {{statusJob.code}}
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
-                                Lượt xem
+                                Kĩ năng ứng viên
                             </td>
                             <td *ngIf="job"> 
-                                {{job.views}}
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
                             </td>
                         </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Năm kinh nghiệm ứng viên
+                            </td>
+                            <td *ngIf="job"> 
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Năm kinh nghiệm ứng viên
+                            </td>
+                            <td *ngIf="job"> 
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Mức lương mong muốn
+                            </td>
+                            <td *ngIf="job"> 
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
+                                Hình thức mong muốn
+                            </td>
+                            <td *ngIf="job"> 
+                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            </td>
+                        </tr>
+                        
                 </tbody>
                 </table>
             </div>
         </div>        
     </div>     
 </body>
-

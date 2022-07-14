@@ -2,9 +2,9 @@ import { Users } from "./user";
 import { User } from "./user.model";
 
 export class job{
-    id: number;
-    name:String;
-    jobPosition: [
+    id?: number;
+    name?:String;
+    jobPosition?: [
         {
             id: number;
             code: String;
@@ -12,8 +12,8 @@ export class job{
             isDelete: boolean;
         }
     ];
-    numberExperience: String;
-    workingForm: [
+    numberExperience?: String;
+    workingForm?: [
         {
             id: number;
             code: String;
@@ -21,8 +21,8 @@ export class job{
             isDelete: boolean;
         }
     ]
-    addressWork: String;
-    academicLevel: [
+    addressWork?: String;
+    academicLevel?: [
         {
             id: number;
             code: String;
@@ -30,7 +30,7 @@ export class job{
             isDelete: boolean;
         }
     ]
-    rank: [
+    rank?: [
         {
             id: number;
             code: String;
@@ -38,20 +38,20 @@ export class job{
             isDelete: boolean;
         }
     ]
-    qtyPerson: number;
-    startDate: Date;
-    dueDate: Date;
-    skills: String;
-    description: String;
-    interest: String;
-    jobRequirement: String;
-    salaryMin: number;
-    salaryMax: number;
-    userContact: Users;
-    userCreate: Users;
-    createdDate: Date;
-    userUpdate: Users;
-    statusJob: [
+    qtyPerson?: number;
+    startDate?: Date;
+    dueDate?: Date;
+    skills?: String;
+    description?: String;
+    interest?: String;
+    jobRequirement?: String;
+    salaryMin?: number;
+    salaryMax?: number;
+    userContact?: Users;
+    userCreate?: Users;
+    createdDate?: Date;
+    userUpdate?: Users;
+    statusJob?: [
         {
             id: number;
             code: String;
@@ -59,7 +59,7 @@ export class job{
             isDelete: boolean;
         }
     ]
-    views: number;
-    isDelete: boolean;
+    views?: number;
+    isDelete?: boolean;
 
 }

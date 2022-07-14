@@ -1,4 +1,4 @@
-<h1>Thêm mới tin tuyển dụng</h1>
+<h1>Cập nhật</h1>
 
     <form class="pb-5" [formGroup]="formJob">
         <input type="hidden"  formControlName="id">
@@ -188,7 +188,7 @@
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Ngày bắt đầu</label>
                     <div class="col-8">
-                        <input type="date" pInputText class="form-control" formControlName="startDate" [value]="data.startDate| date:'yyyy-MM-dd'">
+                        <input type="date" pInputText class="form-control" formControlName="startDate" >
                         <mat-error *ngIf="formJob.controls.startDate.errors?.required && formJob.get('startDate').touched">Không được để trống</mat-error>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
         </div>
         <input type="hidden" formControlName="userCreate">
         <div class="card-footer">
-            <button class="{{disableClick}}"  class="btn btn-success mr-3"  (click)="onSubmit()"  [disabled]="!this.formJob.valid" type="button">Lưu tin</button>
+            <button   class="btn btn-success mr-3"  (click)="onSubmit()"  [disabled]="!this.formJob.valid" type="button">Lưu tin</button>
             <button class="btn btn-primary" (click)="onNoClick()" type="button">Đóng</button>
         </div>
  </form>

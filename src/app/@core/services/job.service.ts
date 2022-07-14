@@ -30,6 +30,7 @@ export class JobService {
   listJob:job[]=[];
   index:number;
   job:job;
+  token=localStorage.getItem('auth-token');
   private readonly baseUrl = `${environment.apiUrl}admin/`;
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -67,9 +68,20 @@ export class JobService {
     return this.http.post(`${this.baseUrl}job`, form,httpOptions);
   }
   public exportPDF(id:any):Observable<any>{
-    return this.http.get(`${this.baseUrl}pdf?id=${id}`,httpOptionspdf);
+    return this.http.get(`${this.baseUrl}pdf/${id}?token=${this.token}`,httpOptionspdf);
   }
   public changeStatus(id:Number,code:string):Observable<any>{
     return this.http.post(`${this.baseUrl}job/${id}?code=${code}`,"",httpOptions);
+  }
+  public rejectJob(id:Number,code:string,reason:String):Observable<any>{
+    return this.http.post(`${this.baseUrl}job-reject/${id}?code=${code}&reason=${reason}`,"",httpOptions);
+  }
+
+  public deleteJobById(id:Number):Observable<any>{
+    return this.http.delete(`${this.baseUrl}job/${id}`,httpOptions);
+  }
+
+  public searchJob(data:any):Observable<any>{
+    return this.http.post(`${this.baseUrl}job/search`,data,httpOptions);
   }
 }

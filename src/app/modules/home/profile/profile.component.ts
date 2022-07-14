@@ -31,30 +31,26 @@ export class ProfileComponent implements OnInit {
   }
   initForm() {
     this.formProfile = this.fb.group({
-      name: ["", Validators.required],
-      email: ["", Validators.required],
-      phoneNumber: ["", Validators.required],
-      birthDay: ["", Validators.required],
-      homeTown: ["", Validators.required],
-      gender: ["", Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      birthDay: ['', Validators.required],
+      homeTown: ['', Validators.required],
+      gender: ['Nam', Validators.required],
     });
   }
 
-  getByUserName() {
-    const userinfo = JSON.parse(localStorage.getItem("auth-user"));
-    this.userName = userinfo.sub;
-    console.log(this.userName);
-
-    this.profileService.getProfile(this.userName).subscribe((res) => {
-      // this.updateForm(res);
-      console.log(res);
-      // this.userDetail.controls["name"].setValue(user.id);
-      // this.userDetail.controls["email"].setValue(user.name);
-      // this.userDetail.controls["phoneNumber"].setValue(user.email);
-      // this.userDetail.controls["birthDay"].setValue(user.phoneNumber);
-      // this.userDetail.controls["homeTown"].setValue(user.userName);
-      // this.userDetail.controls["gender"].setValue(user.email);
-    });
+  getByUserName(){
+    const userinfo = JSON.parse(localStorage.getItem('auth-user'));
+    const name = userinfo.sub;
+    console.log(name);
+    
+    this.profileService.getProfile(name).subscribe(
+      (res)=>{
+        this.updateForm(res);
+        console.log(res);
+      },
+    );
   }
 
   updateForm(user: User): void {

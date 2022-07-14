@@ -1,6 +1,87 @@
-<div class="datetime">
+<form [formGroup]="seachData">
+  <div class="datetime">
     <span class="sp">Từ ngày</span>
-    <input type="date" class="date" placeholder="Nhập ngày sinh" name="psw-repeat" formControlName="" required>
+    <input
+      type="date"
+      class="date"
+      id="todate"
+      formControlName="datestart"
+      name="psw-repeat"
+      required
+    />
     <span class="sp">Đến ngày</span>
-    <input type="date" class="date" placeholder="Nhập ngày sinh" name="psw-repeat" formControlName="" required>
-</div>
+    <input
+      type="date"
+      class="date"
+      id="fromdate"
+      formControlName="dateend"
+      name="psw-repeat"
+      required
+    />
+  </div>
+  <div class="fix-column">
+    <div  class="fix-card">
+      <mat-card>Tổng số việc đã đăng tuyển: {{ statisticalObj.all_job }}</mat-card>
+      <mat-card>Tổng số ứng viên ứng tuyển: {{ statisticalObj.total_apply }} </mat-card>
+      <mat-card>Tổng số lượt xem job: {{ statisticalObj.total_view_job }}</mat-card>
+      <mat-card
+        >Tổng số hồ sơ chờ phỏng vấn: {{ statisticalObj.waiting_for_interview }}</mat-card
+      >
+    </div>
+
+    <div class="fix-card">
+      <mat-card>Tổng số hồ sơ đang phỏng vấn : {{ statisticalObj.interviewing }}</mat-card>
+      <mat-card
+        >Tổng số ứng viên đã tuyển: {{ statisticalObj.success_recruited_applicant }}</mat-card
+      >
+      <mat-card>Tổng số ứng viên đã từ chối: {{ ppRegFaile }}</mat-card>
+      <mat-card>Tổng số job chưa hoàn thiện : {{ jobFaile }}</mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-group">
+        <button
+          class="btn btn-secondary btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Tháng
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let s of monthchosse">
+            <a
+              class="dropdown-item"
+              >{{ s }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <canvas id="myChart" width="100%" height="58%" #mychart></canvas>
+    </div>
+
+    <div class="col-md-5">
+      <table>
+        <tr>
+          <td>
+            <ngx-charts-pie-chart
+              [results]="jobS"
+              [view]="view"
+              [scheme]="colorScheme"
+              [gradient]="gradient"
+              [legend]="showLegend"
+              [legendPosition]="legendPosition"
+              [labels]="showLabels"
+              [doughnut]="isDoughnut"
+              (select)="onSelect($event)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
+            >
+            </ngx-charts-pie-chart>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</form>

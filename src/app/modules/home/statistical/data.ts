@@ -1,14 +1,14 @@
 export var jobS = [
   {
     name: "Ứng tuyển",
-    value: 27,
+    value: 3,
   },
   {
     name: "Tuyển thành công",
-    value: 15,
+    value: 2,
   },
   {
     name: "Từ chối",
-    value: 12,
+    value: 1,
   },
 ];

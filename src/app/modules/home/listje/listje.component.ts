@@ -80,6 +80,7 @@ export class ListjeComponent implements OnInit {
     this.seachU.sortT = "ASC";
     this.seachU.sortColum = "id";
     //console.log(this.userDetail.value.name);
+    
 
     this.userService.getAllUserJe(this.seachU).subscribe(
       (res) => {

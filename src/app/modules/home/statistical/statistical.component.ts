@@ -1,7 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 
 import { Chart } from "chart.js";
+import { Statistical } from "../../../@core/models/statistical";
+import { TimeForm } from "../../../@core/models/timeForm";
 import { StatisticalService } from "../../../@core/services/statistical.service";
 import { jobS } from "./data";
 @Component({
@@ -10,22 +17,25 @@ import { jobS } from "./data";
   styleUrls: ["./statistical.component.scss"],
 })
 export class StatisticalComponent implements OnInit {
-  [x: string]: any;
   monthchosse = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  todate = "";
-  fromdate = "";
-  total_view_job = "7";
-  success_recruited_applicant = "1";
-  total_apply = "16";
-  
-  ppRegFaile = "2";
-  all_job = "8";
+  total_view_job = "";
+  success_recruited_applicant = "";
+  total_apply = "";
+  waiting_for_interview = "";
+  interviewing = "";
+  all_job = "";
+  statisticalObj: Statistical = new Statistical();
+  data: number[] = new Array();
+  jobSa: String[] = new Array();
+  timeForm: TimeForm = new TimeForm();
+  statisList: Statistical[];
+
+  ppRegFaile = "6";
   jobFaile = "4";
   profileY = "2";
   profileN = "3";
   seachData: FormGroup;
-  dataS = [];
-  
+  liveCharrt: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,21 +45,31 @@ export class StatisticalComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initForm();
+    this.chart();
+    this.getAllUserJe();
+    //console.log(this.liveCharrt.data);
   }
 
   initForm() {
     this.seachData = this.formBuilder.group({
-      month: "",
-      dateS: "",
-      dateE: "",
+      dateend: new FormControl("", [Validators.required]),
+      datestart: new FormControl("", [Validators.required]),
+      month: new FormControl("", [Validators.required]),
     });
   }
 
   getAllUserJe() {
+    //console.log(this.seachData.value);
+
     this.statisticalService.getStatistical(this.seachData.value).subscribe(
       (res) => {
-        this.dataS = res;
-        
+        this.statisticalObj = res[0];
+        (this.data[0] = 5),
+          (this.data[1] = 10),
+          (this.data[2] = 11),
+          (this.data[3] = 15),
+          (this.data[4] = 21);
+        //console.log(this.data);
       },
       (err) => {
         console.log("error while fetching data.");
@@ -68,18 +88,18 @@ export class StatisticalComponent implements OnInit {
 
   canvas: any;
   ctx: any;
-  @ViewChild("mychart") mychart: any;
-  ngAfterViewInit() {
-    this.canvas = this.mychart.nativeElement;
+  // @ViewChild("mychart") mychart: any;
+  chart() {
+    this.canvas = document.getElementById("myChart");
     this.ctx = this.canvas.getContext("2d");
 
-    new Chart(this.ctx, {
+    this.liveCharrt = new Chart(this.ctx, {
       type: "line",
       data: {
         datasets: [
           {
             label: "Số thành viên cần tuyển",
-            data: [0, 20, 25, 30, 40, 50, 51],
+            data: this.data,
             borderColor: "#007ee7",
             fill: true,
           },

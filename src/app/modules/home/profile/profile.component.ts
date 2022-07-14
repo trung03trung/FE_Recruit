@@ -1,64 +1,70 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PrimeNGConfig } from 'primeng/api';
-import { SessionService } from '../../../@core/services/session.service';
-import { User } from './profile.model';
-import { ProfileService } from './profile.service';
+import { HttpResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { PrimeNGConfig } from "primeng/api";
+import { SessionService } from "../../../@core/services/session.service";
+import { User } from "./profile.model";
+import { ProfileService } from "./profile.service";
 
 @Component({
-  selector: 'ngx-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: "ngx-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
 })
 export class ProfileComponent implements OnInit {
   [x: string]: any;
   formProfile: FormGroup;
   user: User;
+  userName: any;
 
   constructor(
     private sessionService: SessionService,
     private profileService: ProfileService,
     private fb: FormBuilder,
-    private primengConfig: PrimeNGConfig) { }
+    private primengConfig: PrimeNGConfig
+  ) {}
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.getByUserName();
     this.initForm();
   }
-  initForm(){
+  initForm() {
     this.formProfile = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      birthDay: ['', Validators.required],
-      homeTown: ['', Validators.required],
-      gender: ['', Validators.required],
+      name: ["", Validators.required],
+      email: ["", Validators.required],
+      phoneNumber: ["", Validators.required],
+      birthDay: ["", Validators.required],
+      homeTown: ["", Validators.required],
+      gender: ["", Validators.required],
     });
   }
 
-  getByUserName(){
-    const userinfo = JSON.parse(localStorage.getItem('auth-user'));
-    const name = userinfo.sub;
-    console.log(name);
-    
-    this.profileService.getProfile(this.name).subscribe(
-      (res)=>{
-        this.updateForm(res);
-      },
-    );
+  getByUserName() {
+    const userinfo = JSON.parse(localStorage.getItem("auth-user"));
+    this.userName = userinfo.sub;
+    console.log(this.userName);
+
+    this.profileService.getProfile(this.userName).subscribe((res) => {
+      // this.updateForm(res);
+      console.log(res);
+      // this.userDetail.controls["name"].setValue(user.id);
+      // this.userDetail.controls["email"].setValue(user.name);
+      // this.userDetail.controls["phoneNumber"].setValue(user.email);
+      // this.userDetail.controls["birthDay"].setValue(user.phoneNumber);
+      // this.userDetail.controls["homeTown"].setValue(user.userName);
+      // this.userDetail.controls["gender"].setValue(user.email);
+    });
   }
 
   updateForm(user: User): void {
     this.formProfile.patchValue({
-      name:user.name,
-      email:user.email,
-      phoneNumber:user.phoneNumber,
-      birthDay:user.birthDay,
-      homeTown:user.homeTown,
+      name: user.name,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      birthDay: user.birthDay,
+      homeTown: user.homeTown,
       gender: user.gender,
     });
   }
-
 }

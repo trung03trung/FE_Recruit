@@ -8,10 +8,10 @@ export class StatisticalService {
   Urlstatistical: string;
 
   constructor(private http: HttpClient) {
-    this.Urlstatistical = "http://localhost:9090/api/admin/statistical";
+    this.Urlstatistical = "http://localhost:9090/api/public/statistical";
   }
 
   getStatistical(stati: any): Observable<any> {
-    return this.http.get<any>(this.Urlstatistical,stati);
+    return this.http.post<any>(this.Urlstatistical,stati);
   }
 }

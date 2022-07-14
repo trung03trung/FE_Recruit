@@ -23,10 +23,6 @@ export class ChangethePasswordComponent implements OnInit {
     private toaster: Toaster
   ) {}
 
-  ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
-  }
-
   ngOnInit(): void {
     this.initForm();
   }

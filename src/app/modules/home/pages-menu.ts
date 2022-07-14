@@ -16,7 +16,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Hồ sơ tuyển dụng',
     icon: 'briefcase-outline',
-    link: '/home/product',
+    link: '/home/job-register',
   },
   {
     title: 'Danh sách quản trị viên',

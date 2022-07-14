@@ -2,8 +2,9 @@ import { Component, DoCheck, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 import { Users } from "../../../../@core/models/user";
 import { JobService } from "../../../../@core/services/job.service";
-import { ToastrService } from "ngx-toastr";
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { Toaster } from "ngx-toast-notifications";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "ngx-diaglog-form",
@@ -34,7 +35,6 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
     interest: new FormControl(""),
     salaryMin: new FormControl(""),
     salaryMax: new FormControl(""),
-    statusId: new FormControl(""),
     userContactId: new FormControl(""),
     userCreate: new FormControl("userCreate"),
     jobRequirement: new FormControl(""),
@@ -43,9 +43,9 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
   });
   constructor(
     private jobService: JobService,
-    private toastrService: ToastrService,
     private fb:FormBuilder,
-    private dialogRef: MatDialogRef<DiaglogFormComponent>,
+    private toaster:Toaster,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +57,6 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       this.workingForm = data.workingForms;
       this.rank = data.ranks;
       this.userContact = data.users;
-      this.statusJob = data.statusJobs;
       
     });
     this.initForm();
@@ -84,7 +83,6 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       description:["",Validators.required],
       salaryMin:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
       salaryMax:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
-      statusId:[""],
       userContactId:["",Validators.required],
       jobRequirement:["",Validators.required],
       interest: ["", Validators.required],
@@ -94,16 +92,28 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
   }
   onSubmit() {
     this.formJob.patchValue({ userCreate: this.userCreateName });
-    this.toastrService.success("Thêm mới tin tuyển dụng thành công");
     console.log(this.formJob.value);
     
     this.jobService.addNewJob(this.formJob.value).subscribe((data) => {
       if (data != null) {
-        alert("Thêm mới tin tuyển dụng thành công");
+        this.showToaster('Cập nhật tin tuyển dụng thành công','success');
+        this.route.navigate(['home/job'])
+      }
+      else{
+        this.showToaster('Cập nhật tin tuyển dụng thất bại','danger');
       }
     });
   };
-  onNoClick(){
-    this.dialogRef.close()
+  // onNoClick(){
+  //   this.dialogRef.close()
+  // }
+  showToaster(message: string,typea:any) {
+    const type = typea;
+    this.toaster.open({
+      text: message,
+      caption: 'Thành công',
+      type: type,
+      duration: 3000
+    });
   }
 }

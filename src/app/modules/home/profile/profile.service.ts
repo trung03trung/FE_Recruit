@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class ProfileService {
 
-  private readonly profileAPI = `${environment.apiUrl}public/user/{userName}?userName=`;
+  private readonly profileAPI = `${environment.apiUrl}public/user-profile?userName=`;
 
   constructor(private http: HttpClient) { }
   

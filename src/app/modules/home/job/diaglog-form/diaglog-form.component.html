@@ -1,8 +1,8 @@
 <h1>Thêm mới tin tuyển dụng</h1>
 
-    <form class="pb-5" [formGroup]="formJob">
-        <div class="form-row mb-3">
-            <div class="form-group col-md-4">
+    <form class="" [formGroup]="formJob">
+        <div class="form-row">
+            <div class="form-group col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label ">Tên công việc</label>
                     <div class="col-8">
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label">Vị trí </label>
                     <div class="col-8">
@@ -24,7 +24,9 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="form-row mb-3"> 
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label">Năm kinh nghiệm</label>
                     <div class="col-8">
@@ -33,9 +35,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label">Hình thức làm việc</label>
                     <div class="col-8">
@@ -48,7 +48,9 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="form-row mb-3"> 
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label">Địa chỉ</label>
                     <div class="col-8">
@@ -57,7 +59,7 @@
                     </div>
                 </div>
             </div>  
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Trình độ học vấn</label>
                     <div class="col-sm-8">
@@ -72,7 +74,7 @@
             </div>
         </div>
         <div class="form-row mb-3">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label">Số lượng cần tuyển</label>
                     <div class="col-8">
@@ -83,7 +85,7 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Level</label>
                     <div class="col-sm-8">
@@ -96,7 +98,9 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="form-row mb-3"> 
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-4 col-form-label">Hạn nộp hồ sơ</label>
                     <div class="col-8">
@@ -106,66 +110,7 @@
                 </div>
 
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <div class="col-md-4">
-                <div class="row">
-                    <label class="label col-sm-4 col-form-label">Kĩ năng</label>
-                    <div class="col-8">
-                        <input type="text" pInputText class="form-control" formControlName="skills">
-                        <mat-error *ngIf="formJob.controls.skills.errors?.required && formJob.get('skills').touched">Không được để trống</mat-error>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <label class="label col-4 col-form-label">Mô tả công việc</label>
-                    <div class="col-8">
-                        <input type="text" pInputText class="form-control" formControlName="description">
-                        <mat-error *ngIf="formJob.controls.description.errors?.required && formJob.get('description').touched">Không được để trống</mat-error>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="col-md-4">
-                <div class="row">
-                    <label class="label col-sm-4 col-form-label">Quyền lợi được hưởng</label>
-                    <div class="col-8">
-                        <input type="text" pInputText class="form-control" formControlName="interest"> 
-                        <mat-error *ngIf="formJob.controls.interest.errors?.required && formJob.get('interest').touched">Không được để trống</mat-error>
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-        <div class="form-row mb-3">
-            <div class="col-md-4">
-                <div class="row">
-                    <label class="label col-4 col-form-label">Mức lương tối thiểu</label>
-                    <div class="col-8">
-                        <input type="text" pInputText class="form-control" formControlName="salaryMin">
-                        <mat-error *ngIf="formJob.controls.salaryMin.errors?.required && formJob.get('salaryMin').touched">Không được để trống</mat-error>
-                        <mat-error *ngIf="formJob.controls.salaryMin.errors?.pattern && formJob.get('salaryMin').touched">Chỉ nhập số</mat-error>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <label class="label col-sm-4 col-form-label">Mức lương tối đa</label>
-                    <div class="col-8">
-                            <input type="text" pInputText class="form-control" formControlName="salaryMax">
-                            <mat-error *ngIf="formJob.controls.salaryMax.errors?.required && formJob.get('salaryMax').touched">Không được để trống</mat-error>
-                            <mat-error *ngIf="formJob.controls.salaryMax.errors?.pattern && formJob.get('salaryMax').touched">Chỉ nhập số</mat-error>
-                    </div>
-                    
-                </div>
-            </div>
-        
-         
-        </div>
-        <div class="form-row mb-3"> 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Người liên hệ</label>
                     <div class="col-8">
@@ -177,17 +122,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-md-6">
                 <div class="row">
-                    <label class="label col-4 col-form-label">Yêu cầu công việc</label>
+                    <label class="label col-sm-4 col-form-label">Kĩ năng</label>
                     <div class="col-8">
-                            <input type="text" pInputText class="form-control" formControlName="jobRequirement">
-                            <mat-error *ngIf="formJob.controls.jobRequirement.errors?.required && formJob.get('jobRequirement').touched">Không được để trống</mat-error>
+                        <textarea type="text" pInputText class="form-control" formControlName="skills"></textarea>
+                        <mat-error *ngIf="formJob.controls.skills.errors?.required && formJob.get('skills').touched">Không được để trống</mat-error>
                     </div>
                 </div>
-
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Ngày bắt đầu</label>
                     <div class="col-8">
@@ -197,12 +143,62 @@
                 </div>
             </div>
         </div>
+        <div class="form-row mb-3"> 
+            <div class="col-md-6">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Quyền lợi được hưởng</label>
+                    <div class="col-8">
+                        <textarea type="text" pInputText class="form-control" formControlName="interest"></textarea>
+                        <mat-error *ngIf="formJob.controls.interest.errors?.required && formJob.get('interest').touched">Không được để trống</mat-error>
+                    </div>
+                </div>
+            </div>
+       
+            <div class="col-md-6">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Yêu cầu công việc</label>
+                    <div class="col-8">
+                            <textarea type="text" pInputText class="form-control" formControlName="jobRequirement"></textarea>
+                            <mat-error *ngIf="formJob.controls.jobRequirement.errors?.required && formJob.get('jobRequirement').touched">Không được để trống</mat-error>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="form-row mb-3">
+            <div class="col-md-6">
+                <div class="row">
+                    <label class="label col-4 col-form-label">Mức lương tối thiểu</label>
+                    <div class="col-8">
+                        <input type="text" pInputText class="form-control" formControlName="salaryMin">
+                        <mat-error *ngIf="formJob.controls.salaryMin.errors?.required && formJob.get('salaryMin').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formJob.controls.salaryMin.errors?.pattern && formJob.get('salaryMin').touched">Chỉ nhập số</mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label class="label col-sm-4 col-form-label">Mức lương tối đa</label>
+                    <div class="col-8">
+                            <input type="text" pInputText class="form-control" formControlName="salaryMax">
+                            <mat-error *ngIf="formJob.controls.salaryMax.errors?.required && formJob.get('salaryMax').touched">Không được để trống</mat-error>
+                            <mat-error *ngIf="formJob.controls.salaryMax.errors?.pattern && formJob.get('salaryMax').touched">Chỉ nhập số</mat-error>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-3"> 
+        
+                <div class="row">
+                    <label class="label col-sm-2 col-form-label">Mô tả công việc</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" pInputText class="form-control" formControlName="description"></textarea>
+                        <mat-error *ngIf="formJob.controls.description.errors?.required && formJob.get('description').touched">Không được để trống</mat-error>
+                    </div>
+                </div>
+        </div>
         <input type="hidden" formControlName="userCreate">
             <div class="card-footer">
-            <button class="{{disableClick}}" class="btn btn-success mr-3"  (click)="onSubmit()"  [disabled]="!formJob.valid" type="button">Lưu tin</button>
-            <button  class="btn btn-primary" (click)="onNoClick()" type="button">Đóng</button>
+            <button class="{{disableClick}}" class="btn btn-success mr-3"  (click)="onSubmit()"  [disabled]="!this.formJob.valid" type="button">Lưu tin</button>
+            <button  class="btn btn-primary"  type="button" routerLink="/home/job">Đóng</button>
         </div>
     </form>
-   
-
-

@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   }
   initForm(){
     this.formProfile = this.fb.group({
+      id:[''],
       name: ['', Validators.required],
       email: ['', Validators.required],
       phoneNumber: ['', Validators.required],
@@ -46,13 +47,13 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile(name).subscribe(
       (res)=>{
         this.updateForm(res);
-        console.log(res);
       },
     );
   }
 
   updateForm(user: User): void {
     this.formProfile.patchValue({
+      id:user.id,
       name:user.name,
       email:user.email,
       phoneNumber:user.phoneNumber,

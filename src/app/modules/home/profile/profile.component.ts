@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
       phoneNumber: ['', Validators.required],
       birthDay: ['', Validators.required],
       homeTown: ['', Validators.required],
-      gender: ['', Validators.required],
+      gender: ['Nam', Validators.required],
     });
   }
 
@@ -43,9 +43,10 @@ export class ProfileComponent implements OnInit {
     const name = userinfo.sub;
     console.log(name);
     
-    this.profileService.getProfile(this.name).subscribe(
+    this.profileService.getProfile(name).subscribe(
       (res)=>{
         this.updateForm(res);
+        console.log(res);
       },
     );
   }

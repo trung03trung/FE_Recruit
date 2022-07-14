@@ -19,6 +19,8 @@ import { ChangethePasswordComponent } from './change-the-password/change-the-pas
 import{StatisticalComponent} from '../../modules/home/statistical/statistical.component';
 import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-update.component';
 import { DialogRejectComponent } from './detail-job/dialog-reject/dialog-reject.component';
+import { JobsRegisterComponent } from './jobs-register/jobs-register.component';
+import { DetailJobregisComponent } from './jobs-register/detail-jobregis/detail-jobregis.component';
 
 const routes: Routes = [{
   path: '',
@@ -52,6 +54,14 @@ const routes: Routes = [{
       path: 'job/add',
       component: DiaglogFormComponent,
     },
+    {
+      path: 'job-register',
+      component: JobsRegisterComponent,
+    },
+    {
+      path:'job-register/detail/:id',
+      component:DetailJobregisComponent
+    },
   ],
 }];
 
@@ -66,6 +76,8 @@ const routes: Routes = [{
     ListjeComponent,
     DiaglogUpdateComponent,
     DialogRejectComponent,
+    JobsRegisterComponent,
+    DetailJobregisComponent,
   ],
   imports: [
     CommonModule,

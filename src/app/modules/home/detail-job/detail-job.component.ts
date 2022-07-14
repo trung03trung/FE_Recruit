@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 import { job } from '../../../@core/models/job';
 import { JobService } from '../../../@core/services/job.service';
 import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';

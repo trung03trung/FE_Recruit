@@ -29,7 +29,8 @@ export class JobService {
     
   listJob:job[]=[];
   index:number;
-  job:job;
+  data:any;
+  update: boolean;
   token=localStorage.getItem('auth-token');
   private readonly baseUrl = `${environment.apiUrl}admin/`;
 
@@ -55,8 +56,9 @@ export class JobService {
     this.listJob = listJob;
     this.index=index;
   }
-  public tranferData(job:job){
-    this.job=job;
+  public tranferData(data:any){
+    this.data=data;
+    
   }
   public getJobById(id:any):Observable<any>{
     return this.http.get(`${this.baseUrl}job/${id}`,httpOptions).pipe(catchError(this.handleError));
@@ -84,4 +86,5 @@ export class JobService {
   public searchJob(data:any):Observable<any>{
     return this.http.post(`${this.baseUrl}job/search`,data,httpOptions);
   }
+
 }

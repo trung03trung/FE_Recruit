@@ -12,10 +12,10 @@
                                 <button   type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Tải xuống CV
                                 </button>
-                                <button   type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button *ngIf="statusJobRegister?.code==='Chờ duyệt'" (click)="statusAccept('Chờ phỏng vấn')" type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xét duyệt
                                 </button>
-                                <button  type="button" class="btn btn-outline-info mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button *ngIf="statusJobRegister?.code==='Chờ duyệt'||statusJobRegister?.code==='Chờ phỏng vấn'" (click)="openDialogReject()" type="button" class="btn btn-outline-info mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Từ chối ứng viên
                                 </button>
                                 <button   type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
@@ -55,7 +55,7 @@
                                 Vị trí công việc
                             </td>
                             <td *ngIf="job"> 
-                                {{jobPosition.code}}
+                                {{job?.jobPosition?.code}}
                             </td>
                         </tr>
                         <tr>
@@ -63,7 +63,7 @@
                                 Số năm kinh nghiệm
                             </td>
                             <td *ngIf="job"> 
-                                {{job.numberExperience}}
+                                {{job?.numberExperience}}
                             </td>
                             
                         </tr>
@@ -72,7 +72,7 @@
                                 Hình thức làm việc
                             </td>
                             <td *ngIf="job"> 
-                                {{workingForm.code}}
+                                {{job?.workingForm?.code}}
                             </td>
                         </tr>
                         <tr>
@@ -94,10 +94,18 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
+                                Ngày ứng tuyển
+                            </td>
+                            <td > 
+                                {{jobRegister?.dateRegister|date:'dd/MM/yyyy'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold"> 
                                 Tên ứng viên
                             </td>
                             <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                                {{user?.userName}}
                             </td>
                         </tr>
                          <tr>
@@ -105,7 +113,7 @@
                                 Email
                             </td>
                             <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                                {{user?.email}}
                             </td>
                         </tr>
                         <tr>
@@ -113,7 +121,7 @@
                                 Số điện thoại
                             </td>
                             <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                                {{user?.phoneNumber}}
                             </td>
                         </tr>
                         <tr>
@@ -121,7 +129,7 @@
                                 Kĩ năng ứng viên
                             </td>
                             <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                                {{profile?.skills}}
                             </td>
                         </tr>
                         <tr>
@@ -129,31 +137,23 @@
                                 Năm kinh nghiệm ứng viên
                             </td>
                             <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold"> 
-                                Năm kinh nghiệm ứng viên
-                            </td>
-                            <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                                {{profile?.numberYearExperience}}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
                                 Mức lương mong muốn
                             </td>
-                            <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            <td > 
+                                {{profile?.desiredSalary}}
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold"> 
                                 Hình thức mong muốn
                             </td>
-                            <td *ngIf="job"> 
-                                Từ {{job.salaryMin}} đến {{job.salaryMax}}
+                            <td > 
+                                {{profile?.desiredWorkingForm}}
                             </td>
                         </tr>
                         

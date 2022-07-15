@@ -62,6 +62,10 @@ const routes: Routes = [{
       path:'job-register/detail/:id',
       component:DetailJobregisComponent
     },
+    {
+      path: 'job/update',
+      component: DiaglogUpdateComponent,
+    },
   ],
 }];
 

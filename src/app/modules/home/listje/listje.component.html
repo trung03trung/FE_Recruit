@@ -1,4 +1,4 @@
-<div class="container-fluid" >
+<div class="container-fluid">
   <div>
     <form [formGroup]="userDetail">
       <div class="dropdown">
@@ -9,7 +9,6 @@
               class="btn btn-outline-success btnadduser col-2"
               data-bs-toggle="modal"
               data-bs-target="#addUser"
-             
               style="border-radius: 4px"
             >
               Add User
@@ -26,19 +25,19 @@
             <input
               type="search"
               class="form-control rounded col-2 mr-2"
-              placeholder="Email"
+              placeholder="Name"
               aria-label="Search"
-              formControlName="email"
-              id="email"
+              formControlName="name"
+              id="name"
               aria-describedby="search-addon"
             />
             <input
               type="search"
               class="form-control rounded col-2 mr-2"
-              placeholder="Name"
+              placeholder="Email"
               aria-label="Search"
-              formControlName="name"
-              id="name"
+              formControlName="email"
+              id="email"
               aria-describedby="search-addon"
             />
             <button
@@ -55,32 +54,35 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">
-            ID <i (click)="sortId()" class="fa fa-sort"></i>
+          <th (click)="sort('id')" scope="col">
+            ID <i class="fa fa-sort"></i>
           </th>
-          <th scope="col">
-            USER NAME <i (click)="sortUser()" class="fa fa-sort"></i>
+          <th (click)="sort('user_name')" scope="col">
+            USER NAME <i class="fa fa-sort"></i>
+          </th>
+          <th (click)="sort('name')" scope="col">
+            NAME <i class="fa fa-sort"></i>
           </th>
           <!-- <th scope="col">PASSWORD</th> -->
-          <th scope="col">
-            EMAIL <i (click)="sortEmail()" class="fa fa-sort"></i>
+          <th (click)="sort('email')" scope="col">
+            EMAIL <i class="fa fa-sort"></i>
           </th>
-          <th scope="col">
-            PHONE <i (click)="sortPhone()" class="fa fa-sort"></i>
+          <th (click)="sort('phone_number')" scope="col">
+            PHONE <i class="fa fa-sort"></i>
           </th>
           <th scope="col">ACTIVE <i class="fa fa-sort"></i></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of userList">
-          <td>{{ user.id}}</td>
+          <td>{{ user.id }}</td>
           <td>{{ user.userName }}</td>
-          <!-- <td>{{ user.passwoed }}</td> -->
+          <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phoneNumber }}</td>
           <td>
-            <p *ngIf="user.active">Kích hoạt</p>
-            <p *ngIf="!user.active">Chưa Kích hoạt</p>
+            <p *ngIf="user.activate">Đã kích hoạt</p>
+            <p *ngIf="!user.activate">Chưa Kích hoạt</p>
           </td>
           <td>
             <button
@@ -93,13 +95,15 @@
             >
               Edit
             </button>
+
             <button
               type="button"
-              class="btn btn-outline-danger"
+              class="btn btn-outline-primary"
               data-bs-toggle="modal"
-              (click)="deactivateUser(user.id, user.userName)"
+              (click)="onChangeActive(user.id)"
             >
-              Deactivate
+              <div *ngIf="user.activate">Deactivate</div>
+              <div *ngIf="!user.activate">Activate</div>
             </button>
           </td>
         </tr>

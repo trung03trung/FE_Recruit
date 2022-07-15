@@ -4,7 +4,9 @@ import {ActiveAccountComponent} from "./modules/signup/active-account/active-acc
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
-import { RecruitmentPublicComponent } from "./modules/recruitmentPublic/recruitmentPublic.component";
+import { ProfileUserPComponent } from "./modules/recruitmentPublic/profileUserP/profileUserP.component";
+import { DetaileJobPComponent } from "./modules/recruitmentPublic/detalJob/detailJob.component";
+
 
 export const routes: Routes = [
   {
@@ -12,6 +14,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () =>
       import("./modules/home/home.module").then((m) => m.HomeModule),
+  },
+  {
+    path: "itsol",
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./modules/recruitmentPublic/recruitmentPublic.module").then((m) => m.RecruitmentPublicModule),
   },
   {
     path: "auth",
@@ -41,12 +49,16 @@ export const routes: Routes = [
     component: SignupComponent,
   },
   {
-    path: 'active',
-    component: ActiveAccountComponent,
+    path: 'profile-public',
+    component: ProfileUserPComponent,
   },
   {
-    path: 'itsol',
-    component: RecruitmentPublicComponent,
+    path:'job/detail/:id',
+    component: DetaileJobPComponent,
+  },
+  {
+    path: 'active',
+    component: ActiveAccountComponent,
   },
 ];
 

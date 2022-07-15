@@ -9,6 +9,7 @@ import { Users } from "../../../@core/models/user";
 import { SeachUser } from "../../../@core/models/seachUser";
 import { UserService } from "../../../@core/services/user.service";
 import { Toaster } from "ngx-toast-notifications";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "ngx-listje",
@@ -31,8 +32,9 @@ export class ListjeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllUserJe();
+    //this.getAllUserJe();
     this.initForm();
+    this.seach();
   }
   initForm() {
     this.userDetail = this.formBuilder.group({
@@ -71,35 +73,25 @@ export class ListjeComponent implements OnInit {
     });
   }
 
-  getAllUserJe() {
-    this.seachU.name = "";
-    this.seachU.email = "";
-    this.seachU.pageNumber = 1;
-    this.seachU.userName = "";
-    this.seachU.pageSize = 6;
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "id";
-    //console.log(this.userDetail.value.name);
-    
 
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
+  sort(sortColum: string){
+      this.userDetail.value.sortColum = sortColum;
+      if(this.click){
+        this.userDetail.value.sortT = "ASC"
+        this.click = false;
       }
-    );
+      else{
+        this.userDetail.value.sortT = "DESC"
+        this.click = true;
+      }
+      this.seach();
   }
-  editUser(user: Users) {
-    this.userDetail.controls["id"].setValue(user.id);
-    this.userDetail.controls["name"].setValue(user.name);
-    this.userDetail.controls["email"].setValue(user.email);
-    this.userDetail.controls["phoneNumber"].setValue(user.phoneNumber);
-    this.userDetail.controls["userName"].setValue(user.userName);
-  }
+
   seach() {
+    if(this.userDetail.value.sortT==null || this.userDetail.value.sortColum ==null){
+      this.userDetail.value.sortT = "DESC"
+      this.userDetail.value.sortColum  ="id"
+    }
     this.userService.getAllUserJeForm(this.userDetail.value).subscribe(
       (res) => {
         this.userList = res;
@@ -114,19 +106,34 @@ export class ListjeComponent implements OnInit {
     console.log(this.userDetail);
   }
 
+  setPage(n: number) {
+    this.userDetail.value.pageNumber = n,
+    this.seach();
+  }
+
+  editUser(user: Users) {
+    this.userDetail.controls["id"].setValue(user.id);
+    this.userDetail.controls["name"].setValue(user.name);
+    this.userDetail.controls["email"].setValue(user.email);
+    this.userDetail.controls["phoneNumber"].setValue(user.phoneNumber);
+    this.userDetail.controls["userName"].setValue(user.userName);
+  }
+
   addUser() {
     this.userObj.name = this.userDetail.value.name;
     this.userObj.email = this.userDetail.value.email;
     this.userObj.phoneNumber = this.userDetail.value.phoneNumber;
     this.userObj.userName = this.userDetail.value.userName;
     this.userObj.password = this.userDetail.value.password;
+    console.log(this.userObj);
+    
     this.userService.addUser(this.userObj).subscribe(
       (res) => {
         console.log(res);
         if (
           res == null ||
           res.status == "NO_CONTENT" ||
-          res.status == "NOT_FOUND"||
+          res.status == "NOT_FOUND" ||
           res.status == "500"
         ) {
           this.showToaster("Tài khoản hoặc email đã sử dụng", "danger");
@@ -134,9 +141,7 @@ export class ListjeComponent implements OnInit {
         if (res.status == "OK") {
           this.showToaster("Đăng ký tài khoản thành công", "success");
           this.userDetail.reset();
-
         }
-        this.getAllUserJe();
       },
       (err) => {
         console.log(err);
@@ -144,107 +149,7 @@ export class ListjeComponent implements OnInit {
       }
     );
   }
-  setPage(n: number) {
-    this.seachU.pageNumber = n;
-    this.seachU.pageSize = 6;
-    this.seachU.sortT = "ASC";
-    this.seachU.sortColum = "id";
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
-  sortUser() {
-    this.seachU.sortColum = "user_name";
-    if(!this.click){
-      this.seachU.sortT = "DESC";
-      this.seachU.sortColum = "user_name";
-      this.click = true;
-    }
-    else{
-      this.seachU.sortT = "ASC";
-      this.seachU.sortColum = "user_name";
-      this.click = false;
-    }
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
-  sortPhone() {
-    if(!this.click){
-      this.seachU.sortT = "DESC";
-      this.seachU.sortColum = "phone_number";
-      this.click = true;
-    }
-    else{
-      this.seachU.sortT = "ASC";
-      this.seachU.sortColum = "phone_number";
-      this.click = false;
-    }
 
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
-  sortEmail() {
-    if(!this.click){
-      this.seachU.sortT = "ASC";
-      this.seachU.sortColum = "email";
-      this.click = true;
-    }
-    else{
-      this.seachU.sortT = "DESC";
-      this.seachU.sortColum = "email";
-      this.click = false;
-    }
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
-  sortId() {
-    if(!this.click){
-      this.seachU.sortT = "DESC";
-      this.seachU.sortColum = "id";
-      this.click = true;
-    }
-    else{
-      this.seachU.sortT = "ASC";
-      this.seachU.sortColum = "id";
-      this.click = false;
-    }
-    this.userService.getAllUserJe(this.seachU).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
-      },
-      (err) => {
-        console.log("error while fetching data.");
-      }
-    );
-  }
   updateUser() {
     this.userObj.id = this.userDetail.value.id;
     this.userObj.name = this.userDetail.value.name;
@@ -254,8 +159,6 @@ export class ListjeComponent implements OnInit {
     this.userObj.userName = this.userDetail.value.userName;
     this.userService.updateUser(this.userObj).subscribe(
       (res) => {
-        //console.log(res);
-        this.getAllUserJe();
         this.showToaster("Update thành công", "success");
       },
       (error) => {
@@ -267,16 +170,22 @@ export class ListjeComponent implements OnInit {
     );
   }
 
-  deactivateUser(id: number, userName: string) {
-    //console.log(id);
+  onChangeActive(id: number) {
     this.userObj.id = id;
-    this.userObj.userName = userName;
-    console.log(this.userObj);
     this.userService.deactivateUser(this.userObj).subscribe((data) => {
-      console.log(data);
-      this.showToaster("Deactivate User Successfull.", "success");
+      this.seach();
+      if(data.activate){
+          this.showToaster("Successfull.", "success");
+      }else{
+        this.showToaster("Successfull.", "success");
+      }
+      
+     
+    },(error: HttpErrorResponse)=>{
+      this.showToaster(error.message, "danger");
     });
   }
+
   showToaster(message: string, typea: any) {
     const type = typea;
     this.toaster.open({

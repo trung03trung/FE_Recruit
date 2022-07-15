@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { JobService } from "../../../@core/services/job.service";
 import { Router } from "@angular/router";
 import { JobRegisterService } from "../../../@core/services/job-register.service";
+import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 @Component({
   selector: "ngx-jobs-register",
   templateUrl: "./jobs-register.component.html",

@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { job } from '../../../@core/models/job';
 import { JobService } from '../../../@core/services/job.service';
 import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DiaglogUpdateComponent } from './diaglog-update/diaglog-update.component';
 import { DialogRejectComponent } from './dialog-reject/dialog-reject.component';
 import { Toaster } from 'ngx-toast-notifications';
 
@@ -49,15 +48,20 @@ export class DetailJobComponent implements OnInit {
       this.userContact=this.job.userContact;
   });
   }
-
+  
   openDialog(){
-    const dialogRef=this.dialog.open(DiaglogUpdateComponent,{
-      data:this.job,
-    });
-    dialogRef.afterClosed().subscribe(data=>this.geJobById());
+    this.jobService.tranferData(this.job);
+   this.router.navigate(['home/job/update']);
   };
 
+
+  update(){
+    this.jobService.tranferData(this.job);
+    this.router.navigate(['home/job/addorupdate']);
+  }
+
   openDialogReject(){
+  
     const dialogRef=this.dialog.open(DialogRejectComponent,{
       data:this.job,
     })

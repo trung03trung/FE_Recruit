@@ -4,40 +4,37 @@ import { User } from "./user.model";
 export class job{
     id?: number;
     name?:String;
-    jobPosition?: [
+    jobPosition?:
         {
             id: number;
             code: String;
             description: String;
             isDelete: boolean;
-        }
-    ];
+        };
     numberExperience?: String;
-    workingForm?: [
+    workingForm?: 
         {
             id: number;
             code: String;
             description: String;
             isDelete: boolean;
         }
-    ]
+    
     addressWork?: String;
-    academicLevel?: [
+    academicLevel?: 
         {
             id: number;
             code: String;
             description: String;
             isDelete: boolean;
         }
-    ]
-    rank?: [
+    rank?: 
         {
             id: number;
             code: String;
             description: String;
             isDelete: boolean;
         }
-    ]
     qtyPerson?: number;
     startDate?: Date;
     dueDate?: Date;
@@ -51,14 +48,13 @@ export class job{
     userCreate?: Users;
     createdDate?: Date;
     userUpdate?: Users;
-    statusJob?: [
+    statusJob?: 
         {
             id: number;
             code: String;
             description: String;
             isDelete: boolean;
         }
-    ]
     views?: number;
     isDelete?: boolean;
 

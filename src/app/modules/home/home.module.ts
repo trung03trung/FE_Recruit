@@ -28,7 +28,7 @@ const routes: Routes = [{
   component: HomeComponent,
   children: [
     {
-      path: 'statistical',
+      path: '',
       component: StatisticalComponent,
     },
     {

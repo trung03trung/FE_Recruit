@@ -74,4 +74,7 @@ export class DetailJobregisComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(data=>this.getJobRegisterById());
   }
+  openDialogReason(){
+    
+  }
 }

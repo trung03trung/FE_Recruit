@@ -21,6 +21,7 @@ import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-upda
 import { DialogRejectComponent } from './detail-job/dialog-reject/dialog-reject.component';
 import { JobsRegisterComponent } from './jobs-register/jobs-register.component';
 import { DetailJobregisComponent } from './jobs-register/detail-jobregis/detail-jobregis.component';
+import { DialogreasonComponent } from './jobs-register/detail-jobregis/dialogreason/dialogreason.component';
 
 const routes: Routes = [{
   path: '',
@@ -82,6 +83,7 @@ const routes: Routes = [{
     DialogRejectComponent,
     JobsRegisterComponent,
     DetailJobregisComponent,
+    DialogreasonComponent,
   ],
   imports: [
     CommonModule,

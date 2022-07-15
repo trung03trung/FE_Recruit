@@ -12,8 +12,8 @@ import {
   Validators,
   FormBuilder,
 } from "@angular/forms";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
+// import { jsPDF } from "jspdf";
+// import autoTable from "jspdf-autotable";
 import { Toaster } from "ngx-toast-notifications";
 
 @Component({
@@ -143,33 +143,33 @@ export class JobComponent implements OnInit {
   // }
 
   public downloadPDF(job): void {
-    const doc = new jsPDF();
+    // const doc = new jsPDF();
     // doc.addFileToVFS("Amiri-Regular.ttf", AmiriRegular);
     // doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
 
     // doc.setFont("Amiri");
-    autoTable(doc, {
-      styles: { font: "Times-Roman, utf-8" },
-      head: [
-        [
-          "Tên công việc",
-          "Vị trí công việc",
-          "Mức lương đề xuất",
-          "Hạn nộp hồ sơ",
-          "Trạng thái",
-        ],
-      ],
-      body: [
-        [
-          job.name,
-          job.jobPosition.code,
-          job.salaryMax,
-          job.dueDate,
-          job.statusJob.code,
-        ],
-      ],
-    });
-    doc.save("thongtinungtuyen.pdf");
+    // autoTable(doc, {
+    //   styles: { font: "Times-Roman, utf-8" },
+    //   head: [
+    //     [
+    //       "Tên công việc",
+    //       "Vị trí công việc",
+    //       "Mức lương đề xuất",
+    //       "Hạn nộp hồ sơ",
+    //       "Trạng thái",
+    //     ],
+    //   ],
+    //   body: [
+    //     [
+    //       job.name,
+    //       job.jobPosition.code,
+    //       job.salaryMax,
+    //       job.dueDate,
+    //       job.statusJob.code,
+    //     ],
+    //   ],
+    // });
+    // doc.save("thongtinungtuyen.pdf");
   }
 
   changePageSize(e) {

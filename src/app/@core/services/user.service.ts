@@ -32,9 +32,6 @@ export class UserService {
     return this.http.get<Users[]>(this.getUserURL);
   }
 
-  getAllUserJe(seachUser: any): Observable<any> {
-    return this.http.post<any>(this.getUserJeURL, seachUser);
-  }
   getAllUserJeForm(seachUser: any): Observable<any> {
     return this.http.post<any>(this.getUserJeURL, seachUser);
   }
@@ -55,7 +52,7 @@ export class UserService {
     return this.http.put<any>(this.changthepass, form);
   }
 
-  deactivateUser(user: Users): Observable<Users> {
-    return this.http.put<Users>(this.deactivateUserUrl,user);
+  deactivateUser(user: any): Observable<any> {
+    return this.http.put<any>(this.deactivateUserUrl,user);
   }
 }

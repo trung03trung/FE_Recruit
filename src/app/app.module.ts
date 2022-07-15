@@ -30,8 +30,8 @@ import { MatCardModule } from "@angular/material/card";
 import { StatisticalComponent } from "./modules/home/statistical/statistical.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { ToastNotificationsModule } from "ngx-toast-notifications";
-import { RecruitmentPublicComponent } from "./modules/recruitmentPublic/recruitmentPublic.component";
 import { MatIconModule } from '@angular/material/icon'
+import { DetaileJobPComponent } from "./modules/recruitmentPublic/detalJob/detailJob.component";
 
 const configToast: any = {
   timeOut: 3000,
@@ -47,7 +47,7 @@ const configToast: any = {
     SignupComponent,
     ActiveAccountComponent,
     StatisticalComponent,
-    RecruitmentPublicComponent,
+    DetaileJobPComponent,
   ],
   imports: [
     BrowserModule,

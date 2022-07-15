@@ -26,6 +26,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Thông tin công ty và liên hệ',
     icon: 'info-outline',
-    link: '/home/product',
+    link: '/home',
   },
 ];

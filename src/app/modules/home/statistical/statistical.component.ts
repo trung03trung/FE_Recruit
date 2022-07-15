@@ -18,36 +18,37 @@ import { jobS } from "./data";
 })
 export class StatisticalComponent implements OnInit {
   monthchosse = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  total_view_job = "";
-  success_recruited_applicant = "";
-  total_apply = "";
-  waiting_for_interview = "";
-  interviewing = "";
-  all_job = "";
+  total_view_job = 0;
+  success_recruited_applicant = 0;
+  total_apply = 0;
+  waiting_for_interview = 0;
+  interviewing = 0;
+  all_job = 0;
+  startDate = '01012020';
+  endDate = '12122022';
+  month = 1;
+
   statisticalObj: Statistical = new Statistical();
   data: number[] = new Array();
+  datapip: number[] = new Array();
   jobSa: String[] = new Array();
-  timeForm: TimeForm = new TimeForm();
   statisList: Statistical[];
 
-  ppRegFaile = "6";
+  ppRegFaile = 2;
   jobFaile = "4";
-  profileY = "2";
-  profileN = "3";
   seachData: FormGroup;
   liveCharrt: any;
+  jobs: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private statisticalService: StatisticalService
-  ) {
-    Object.assign(this, { jobS });
-  }
+  ) {}
+
   ngOnInit(): void {
     this.initForm();
     this.chart();
     this.getAllUserJe();
-    //console.log(this.liveCharrt.data);
   }
 
   initForm() {
@@ -58,18 +59,56 @@ export class StatisticalComponent implements OnInit {
     });
   }
 
-  getAllUserJe() {
-    //console.log(this.seachData.value);
+  selectedStartDate(event: any) {
+    const s = event.target.value;
+    const sx = s.split('-');
+    this.seachData.value.datestart = sx[2] + sx[1] + sx[0];
+    console.log(this.seachData.value.datestart);
+  }
 
+  selectedEndDate(event: any) {
+    const s = event.target.value;
+    const sx = s.split('-');
+    this.seachData.value.dateend = sx[2] + sx[1] + sx[0];
+    console.log(this.seachData.value.dateend)
+    this.getAllUserJe();
+  }
+
+  getAllUserJe() {
     this.statisticalService.getStatistical(this.seachData.value).subscribe(
       (res) => {
         this.statisticalObj = res[0];
+        console.log(this.statisticalObj);
+        
+
+        this.total_apply = this.statisticalObj.total_apply;
+        this.success_recruited_applicant = this.statisticalObj.success_recruited_applicant;
+        this.jobs = [
+          {
+            name: "Ứng tuyển",
+            value: this.total_apply,
+          },
+          {
+            name: "Tuyển thành công",
+            value: this.success_recruited_applicant,
+          },
+          {
+            name: "Từ chối",
+            value: this.ppRegFaile,
+          },
+        ];
         (this.data[0] = 5),
           (this.data[1] = 10),
           (this.data[2] = 11),
           (this.data[3] = 15),
-          (this.data[4] = 21);
-        //console.log(this.data);
+          (this.data[4] = 12);
+          (this.data[5] = 5),
+          (this.data[6] = 10),
+          (this.data[7] = 11),
+          (this.data[8] = 15),
+          (this.data[9] = 21);
+          (this.data[10] = 15),
+          (this.data[11] = 21);
       },
       (err) => {
         console.log("error while fetching data.");
@@ -88,7 +127,6 @@ export class StatisticalComponent implements OnInit {
 
   canvas: any;
   ctx: any;
-  // @ViewChild("mychart") mychart: any;
   chart() {
     this.canvas = document.getElementById("myChart");
     this.ctx = this.canvas.getContext("2d");
@@ -98,14 +136,14 @@ export class StatisticalComponent implements OnInit {
       data: {
         datasets: [
           {
-            label: "Số thành viên cần tuyển",
+            label: "Số ứng viên tuyển thành công",
             data: this.data,
             borderColor: "#007ee7",
             fill: true,
           },
           {
-            label: "Số ứng viên tuyển thành công",
-            data: [0, 10, 20, 30, 40, 50, 60],
+            label: "Số thành viên cần tuyển",
+            data: [0, 12, 11, 21, 20,12,21, 30, 55,57,59,60],
             borderColor: "#FEB139",
             fill: true,
           },
@@ -115,7 +153,6 @@ export class StatisticalComponent implements OnInit {
     });
   }
 
-  jobS: any[];
   jobSalesMulti: any[];
   view: any[] = [600, 300];
   showLegend: boolean = true;
@@ -124,16 +161,7 @@ export class StatisticalComponent implements OnInit {
   isDoughnut: boolean = true;
   legendPosition: string = "below";
   colorScheme = {
-    domain: [
-      "#704FC4",
-      "#4B852C",
-      "#B67A3D",
-      "#CA4E79",
-      "#FFF80A",
-      "#293462",
-      "#7A86B6",
-      "377D71",
-    ],
+    domain: ["#704FC4", "#4B852C", "#B67A3D"],
   };
   onActivate(data): void {
     console.log("Activate", JSON.parse(JSON.stringify(data)));

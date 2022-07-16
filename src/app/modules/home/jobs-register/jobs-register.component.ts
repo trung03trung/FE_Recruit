@@ -11,7 +11,7 @@ import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class JobsRegisterComponent implements OnInit {
   pageNo = 0;
-  pageSize = 1;
+  pageSize = 2;
   totalPage = 0;
   totalJob = 0;
   listJobsRegister: any;

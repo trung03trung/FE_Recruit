@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators ,FormBuilder} from "@angular/forms";
 import { Users } from "../../../../@core/models/user";
 import { JobService } from "../../../../@core/services/job.service";
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatRadioButton } from "@angular/material/radio";
 import { Toaster } from "ngx-toast-notifications";
 import { Router } from "@angular/router";
 
@@ -68,7 +69,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       this.disableClick = 'disableClick';
     }
   }
-  initForm() {
+  initForm(){
     this.formJob = this.fb.group({
       name:["",[Validators.required,Validators.maxLength(150)]],
       jobPositionId:["",Validators.required],

@@ -21,8 +21,11 @@
                                 <button *ngIf="statusJobRegister?.code==='Ứng viên bị từ chối'||statusJobRegister?.code==='Ứng viên đã hủy ứng'" (click)="openDialogReason()"  type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xem lý do
                                 </button>
-                                <button    class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="openDialogInterview()" *ngIf="statusJobRegister?.code==='Chờ phỏng vấn'"    class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Đặt lịch phỏng vấn
+                                </button>
+                                <button *ngIf="statusJobRegister?.code==='Đang phỏng vấn'"   type="button" class="btn btn-outline-warning mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                    Tuyển thành công
                                 </button>
                         </div>
                   

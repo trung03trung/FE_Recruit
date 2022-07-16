@@ -71,5 +71,9 @@ const httpOptions = {
     public rejectJob(id:Number,code:string,reason:String):Observable<any>{
       return this.http.post(`${this.baseUrl}profile-reject/${id}?code=${code}&reason=${reason}`,"",httpOptions);
     }
+
+    public sendEmailInterview(data:any):Observable<any>{
+      return this.http.post(`${this.baseUrl}job-register/interview`,data,httpOptions);
+    }
   }
   

@@ -58,7 +58,7 @@ export class DetailJobregisComponent implements OnInit {
     });
   }
 
-  statusAccept(status:string){
+  statusChange(status:string){
     this.jobRegisterService.changeStatus(this.id,status).subscribe(data=>{
       if(data.status=='OK'){
         this.getJobRegisterById();

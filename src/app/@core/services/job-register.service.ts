@@ -75,5 +75,10 @@ const httpOptions = {
     public sendEmailInterview(data:any):Observable<any>{
       return this.http.post(`${this.baseUrl}job-register/interview`,data,httpOptions);
     }
+
+    public searchJobRegister(data:any):Observable<any>{
+      return this.http.post(`${this.baseUrl}job-register/search`,data,httpOptions);
+    }
+  
   }
   

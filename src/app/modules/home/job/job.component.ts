@@ -228,4 +228,10 @@ export class JobComponent implements OnInit {
       duration: 3000,
     });
   }
+  openNewTab(id){
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/job/public/detail/'+id])
+    );
+    window.open(url, '_blank');
+  }
 }

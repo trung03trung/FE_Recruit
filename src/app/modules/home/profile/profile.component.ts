@@ -1,5 +1,5 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Component, DoCheck, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { AfterContentInit, Component, DoCheck, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PrimeNGConfig } from "primeng/api";
 import { SessionService } from "../../../@core/services/session.service";
@@ -11,7 +11,7 @@ import { ProfileService } from "./profile.service";
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit,AfterContentInit {
   [x: string]: any;
   formProfile: FormGroup;
   user: User;
@@ -27,14 +27,19 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private primengConfig: PrimeNGConfig,
     private httpClient:HttpClient
-  ) {}
+  ) { }
+
+  ngAfterContentInit(): void {
+    
+  }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+    // this.getByUserName();
+    
     this.getByUserName();
     this.initForm();
     console.log(this.user);
-    
   }
 
   initForm() {
@@ -61,7 +66,13 @@ export class ProfileComponent implements OnInit {
       console.log(res)
       this.user=res;
       console.log(this.user)
+      this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
+      this.postResponse = data;
+        console.log(data);
+        this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
+    })
     });
+    
   }
 
   onSelect(file: File) {
@@ -101,25 +112,17 @@ export class ProfileComponent implements OnInit {
       .subscribe((response) => {
         if (response.status === 200) {
           this.postResponse = response;
-          this.successResponse = this.postResponse.body.message;
+          this.successResponse = this.postResponse.body.message; 
+          this.getByUserName();
         } else {
           this.successResponse = "Image not uploaded due to some error!";
         }
       });
-      this.getByUserName();
-    this.viewImage();
+     
   }
 
   viewImage() {
     console.log(this.user.avatarName)
-    // this.httpClient
-    //   .get("http://localhost:9090/api/public/image/" + this.user.avatarName)
-    //   .subscribe((res) => {
-    //     this.postResponse = res;
-    //     console.log(res);
-    //     this.dbImage = "data:image/jpeg;base64," + this.postResponse.image;
-        
-    //   });
     this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
       this.postResponse = data;
         console.log(data);
@@ -137,8 +140,5 @@ export class ProfileComponent implements OnInit {
     });
     this.imageUploadAction();
     
-  }
-  view(){
-    this.viewImage();
   }
 }

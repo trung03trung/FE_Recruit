@@ -4,7 +4,7 @@
       <div class="col-lg-8">
         <div class="">
           <h2 class="mb-4" style="text-align: center">Apply For The Job</h2>
-          <form>
+          <form [formGroup]="profileP">
             <div class="row g-3">
               <div class="col-12 col-sm-6">
                 <input
@@ -14,31 +14,78 @@
                 />
               </div>
               <div class="col-12 col-sm-6">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Email"
-                />
+                <input type="email" class="form-control" placeholder="Email" />
               </div>
               <div class="col-12 col-sm-6">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Nơi ở hiện tại?"
+                  formControlName="media_type"
+                  placeholder="Phương tiện"
                 />
+
+                <div
+                  class="alert-danger"
+                  *ngIf="
+                    profileP.controls.media_type.errors?.required &&
+                    profileP.touched
+                  "
+                >
+                  Không thể bỏ trống mục phương tiện.
+                </div>
+                <div
+                  class="alert-danger"
+                  *ngIf="
+                    profileP.controls.media_type.errors?.maxlength &&
+                    profileP.touched
+                  "
+                >
+                  Không vượt quá 20 ký tự
+                </div>
               </div>
               <div class="col-12 col-sm-6">
                 <input type="file" class="form-control bg-white" />
+                <!-- <div
+                  class="alert-danger"
+                  *ngIf="
+                  profileP.controls.code.errors?.required &&
+                  profileP.touched
+                  "
+                >
+                  Không thể bỏ trống mục pdf.
+                </div> -->
               </div>
               <div class="col-12">
                 <textarea
                   class="form-control"
                   rows="5"
+                  formControlName="code"
                   placeholder="Viết giới thiệu ngắn gọn về bản thân (điểm mạnh, điểm yếu) và nêu rõ mong muốn, lý do làm việc tại công ty này. Đây là cách gây ấn tượng với nhà tuyển dụng nếu bạn có chưa có kinh nghiệm làm việc (hoặc CV không tốt)."
                 ></textarea>
+                <div
+                  class="alert-danger"
+                  *ngIf="
+                    profileP.controls.code.errors?.required && profileP.touched
+                  "
+                >
+                  Không thể bỏ trống mục giới thiệu.
+                </div>
+                <div
+                  class="alert-danger"
+                  *ngIf="
+                    profileP.controls.code.errors?.maxlength && profileP.touched
+                  "
+                >
+                  Không vượt quá 50 ký tự
+                </div>
               </div>
               <div class="col-12">
-                <button class="btn btn-primary w-100" type="submit">
+                <button
+                  [disabled]="!this.profileP.valid"
+                  (click)="registerJob()"
+                  class="btn btn-primary w-100"
+                  type="submit"
+                >
                   Apply Now
                 </button>
               </div>

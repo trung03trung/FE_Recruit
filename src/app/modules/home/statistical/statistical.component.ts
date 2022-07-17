@@ -73,7 +73,6 @@ export class StatisticalComponent implements OnInit {
     } else {
       this.seachData.value.datestart = this.setdateS;
     }
-
     const s = event.target.value;
     const sx = s.split("-");
     this.seachData.value.dateend = sx[2] + sx[1] + sx[0];

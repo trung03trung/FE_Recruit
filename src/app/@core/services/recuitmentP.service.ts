@@ -13,7 +13,7 @@ export class RecruitmentService {
   constructor(private http: HttpClient) {  
     this.getjob ="http://localhost:9090/api/public/get-all-job-publick";
     this.getDetailJob ="http://localhost:9090/api/public/job/";
-    this.registerJobUrl ="";
+    this.registerJobUrl ="http://localhost:9090/api/public/register-job-public";
   }
 
   getAllJob(): Observable<any> {

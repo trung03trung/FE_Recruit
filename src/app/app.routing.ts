@@ -50,7 +50,7 @@ export const routes: Routes = [
     component: ProfileUserPComponent,
   },
   {
-    path:'job/detail/:id',
+    path:'public-job/detail/:id',
     component: DetaileJobPComponent,
   },
   {
@@ -63,7 +63,7 @@ export const routes: Routes = [
     import("./modules/recruitmentPublic/recruitmentPublic.module").then((m) => m.RecruitmentPublicModule),
   },
   {
-    path: 'job/apply/:id',
+    path: 'public-job/apply/:id',
     component: PopupApply ,
   },
 ];

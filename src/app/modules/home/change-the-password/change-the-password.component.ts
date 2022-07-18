@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { Toaster } from "ngx-toast-notifications";
 import { UserService } from "../../../@core/services/user.service";
+import { UserPublicService } from "../../../@core/services/userPublic.service";
 
 @Component({
   selector: "ngx-change-password",
@@ -14,12 +15,14 @@ import { UserService } from "../../../@core/services/user.service";
   styleUrls: ["./change-the-password.component.scss"],
 })
 export class ChangethePasswordComponent implements OnInit {
+  [x: string]: any;
   changeThePassw: FormGroup;
   saveNewPass: FormGroup;
   message = "";
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private userPublicService: UserPublicService,
     private toaster: Toaster
   ) {}
 
@@ -68,8 +71,11 @@ export class ChangethePasswordComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        this.showToaster("Mật khẩu hiện tại sai", "danger");;
       }
     );
+  }
+  clearForm(){
+    this.changeThePassw.reset();
   }
 }

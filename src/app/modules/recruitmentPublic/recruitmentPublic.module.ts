@@ -15,10 +15,10 @@ const routes: Routes = [{
   path: '',
   component: RecruitmentPublicComponent,
   children: [
-    {
-      path: 'profile-public',
-      component: ProfileUserPComponent,
-    },
+    // {
+    //   path: 'profile-public',
+    //   component: ProfileUserPComponent,
+    // },
   ],
 }];
 

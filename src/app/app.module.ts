@@ -32,6 +32,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { ToastNotificationsModule } from "ngx-toast-notifications";
 import { MatIconModule } from '@angular/material/icon'
 import { DetaileJobPComponent } from "./modules/recruitmentPublic/detalJob/detailJob.component";
+import { PopupApply } from "./modules/recruitmentPublic/popupApply/popupApply.component";
 
 const configToast: any = {
   timeOut: 3000,
@@ -48,6 +49,7 @@ const configToast: any = {
     ActiveAccountComponent,
     StatisticalComponent,
     DetaileJobPComponent,
+    PopupApply,
   ],
   imports: [
     BrowserModule,

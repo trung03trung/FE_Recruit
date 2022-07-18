@@ -1,9 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Users } from "../models/user";
 import { environment } from '../../../environments/environment';
 import { SeachUser } from "../models/seachUser";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  }),
+};
 
 @Injectable({
   providedIn: "root",
@@ -15,44 +22,38 @@ export class UserService {
   updateUserUrl: string;
   changthepass: string;
   deactivateUserUrl: string;
-  saveNewPassW: string;
   private readonly baseUrl = `${environment.apiUrl}auth/`;
   
   constructor(private http: HttpClient) {
-    this.addUserURL = "http://localhost:9090/api/public/addUserJe";
-    this.getUserURL = "http://localhost:9090/api/public/user";
-    this.deactivateUserUrl = "http://localhost:9090/api/public/deactivateUser";
-    this.getUserJeURL ="http://localhost:9090/api/public/userSeach";
-    this.updateUserUrl="http://localhost:9090/api/public/updateUser";
-    this.changthepass ="http://localhost:9090/api/public/changeThePassWord";
-    this.saveNewPassW ="";
+    this.addUserURL = "http://localhost:9090/api/admin/addUserJe";
+    this.getUserURL = "http://localhost:9090/api/admin/user";
+    this.deactivateUserUrl = "http://localhost:9090/api/admin/deactivateUser";
+    this.getUserJeURL ="http://localhost:9090/api/admin/userSeach";
+    this.updateUserUrl="http://localhost:9090/api/admin/updateUser";
+    this.changthepass ="http://localhost:9090/api/admin/changeThePassWord";
   }
 
   getAllUser(): Observable<Users[]> {
-    return this.http.get<Users[]>(this.getUserURL);
+    return this.http.get<Users[]>(this.getUserURL,httpOptions);
   }
 
   getAllUserJeForm(seachUser: any): Observable<any> {
-    return this.http.post<any>(this.getUserJeURL, seachUser);
+    return this.http.post<any>(this.getUserJeURL, seachUser,httpOptions);
   }
 
   addUser(user: Users): Observable<any> {
-    return this.http.post<any>(this.addUserURL, user);
+    return this.http.post<any>(this.addUserURL, user,httpOptions);
   }
 
   updateUser(user: Users): Observable<Users> {
-    return this.http.put<Users>(this.updateUserUrl, user);
-  }
-
-  saveNewPassWord(form: any): Observable<any> {
-    return this.http.put<any>(this.saveNewPassW, form);
+    return this.http.put<Users>(this.updateUserUrl, user,httpOptions);
   }
 
   changeThePassword(form: any): Observable<any> {
-    return this.http.put<any>(this.changthepass, form);
+    return this.http.put<any>(this.changthepass, form,httpOptions);
   }
 
   deactivateUser(user: any): Observable<any> {
-    return this.http.put<any>(this.deactivateUserUrl,user);
+    return this.http.put<any>(this.deactivateUserUrl,user,httpOptions);
   }
 }

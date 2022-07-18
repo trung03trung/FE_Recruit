@@ -4,8 +4,8 @@
     <input
       type="Date"
       class="date"
-      id="todate"
-      (change)="selectedStartDate($event)"
+      id="startDate"
+      (change)="dateS($event)"
       formControlName="datestart"
       name="psw-repeat"
       required
@@ -14,29 +14,40 @@
     <input
       type="Date"
       class="date"
-      id="fromdate"
-      (change)="selectedEndDate($event)"
+      id="endDate"
+      (change)="dateE($event)"
       formControlName="dateend"
       name="psw-repeat"
       required
     />
   </div>
   <div class="fix-column">
-    <div  class="fix-card">
-      <mat-card>Tổng số việc đã đăng tuyển: {{ statisticalObj.all_job }}</mat-card>
-      <mat-card>Tổng số ứng viên ứng tuyển: {{ statisticalObj.total_apply }} </mat-card>
-      <mat-card>Tổng số lượt xem job: {{ statisticalObj.total_view_job }}</mat-card>
+    <div class="fix-card">
       <mat-card
-        >Tổng số hồ sơ chờ phỏng vấn: {{ statisticalObj.waiting_for_interview }}</mat-card
+        >Tổng số việc đã đăng tuyển: {{ statisticalObj.all_job }}</mat-card
+      >
+      <mat-card
+        >Tổng số ứng viên ứng tuyển: {{ statisticalObj.total_apply }}
+      </mat-card>
+      <mat-card
+        >Tổng số lượt xem job: {{ statisticalObj.total_view_job }}</mat-card
+      >
+      <mat-card
+        >Tổng số hồ sơ chờ phỏng vấn:
+        {{ statisticalObj.waiting_for_interview }}</mat-card
       >
     </div>
 
     <div class="fix-card">
-      <mat-card>Tổng số hồ sơ đang phỏng vấn : {{ statisticalObj.interviewing }}</mat-card>
       <mat-card
-        >Tổng số ứng viên đã tuyển: {{ statisticalObj.success_recruited_applicant }}</mat-card
+        >Tổng số hồ sơ đang phỏng vấn :
+        {{ statisticalObj.interviewing }}</mat-card
       >
-      <mat-card>Tổng số ứng viên đã từ chối: {{ ppRegFaile }}</mat-card>
+      <mat-card
+        >Tổng số ứng viên đã tuyển:
+        {{ statisticalObj.success_recruited_applicant }}</mat-card
+      >
+      <mat-card>Tổng số ứng viên đã từ chối: {{ false_applicant }}</mat-card>
       <mat-card>Tổng số job chưa hoàn thiện : {{ jobFaile }}</mat-card>
     </div>
   </div>
@@ -49,20 +60,16 @@
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Tháng
+          Năm
         </button>
         <ul class="dropdown-menu">
           <li *ngFor="let s of monthchosse">
-            <a
-              class="dropdown-item"
-              >{{ s }}</a
-            >
+            <a (click)="selectMonth(n)" class="dropdown-item">{{ s }}</a>
           </li>
         </ul>
       </div>
       <canvas id="myChart" width="100%" height="58%" #mychart></canvas>
     </div>
-    
 
     <div class="col-md-5">
       <table>

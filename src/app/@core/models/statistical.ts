@@ -5,5 +5,6 @@ export class Statistical {
     interviewing: number;
     total_apply: number;
     success_recruited_applicant: number;
+    false_applicant :number;
   }
   

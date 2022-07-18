@@ -35,7 +35,7 @@ export class ProfileUserPComponent implements OnInit {
       phoneNumber: ['', Validators.required],
       birthDay: ['', Validators.required],
       homeTown: ['', Validators.required],
-      gender: ['Nam', Validators.required],
+      gender: ['', Validators.required],
     });
   }
 

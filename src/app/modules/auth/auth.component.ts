@@ -92,11 +92,11 @@ export class AuthComponent implements OnInit, DoCheck {
             const userinfo = JSON.parse(localStorage.getItem('auth-user'));
             // lấy ra auth để router
             const role = userinfo.auth;
-            console.log('login wwith ' + role);
+           // console.log('login wwith ' + role);
             if (role === 'ROLE_ADMIN' || role === 'ROLE_JE') {
               // router admin
               this.router.navigate(['/home/']);
-            } else {
+            }else {
               // router public
               this.router.navigate(['/list-je']);
             }

@@ -32,7 +32,6 @@ export class ListjeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.getAllUserJe();
     this.initForm();
     this.seach();
   }
@@ -157,9 +156,11 @@ export class ListjeComponent implements OnInit {
     this.userObj.email = this.userDetail.value.email;
     this.userObj.phoneNumber = this.userDetail.value.phoneNumber;
     this.userObj.userName = this.userDetail.value.userName;
-    this.userService.updateUser(this.userObj).subscribe(
+    this.userService.updateUser(this.userDetail.value).subscribe(
       (res) => {
         this.showToaster("Update thành công", "success");
+        this.userDetail.reset();
+        //this.seach();
       },
       (error) => {
         console.log(error);
@@ -175,12 +176,10 @@ export class ListjeComponent implements OnInit {
     this.userService.deactivateUser(this.userObj).subscribe((data) => {
       this.seach();
       if(data.activate){
-          this.showToaster("Successfull.", "success");
+          this.showToaster("Deactivate User Successfull.", "success");
       }else{
         this.showToaster("Successfull.", "success");
       }
-      
-     
     },(error: HttpErrorResponse)=>{
       this.showToaster(error.message, "danger");
     });

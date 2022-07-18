@@ -7,6 +7,8 @@ import { MatRadioButton } from "@angular/material/radio";
 import { Toaster } from "ngx-toast-notifications";
 import { Router } from "@angular/router";
 
+
+
 @Component({
   selector: "ngx-diaglog-form",
   templateUrl: "./diaglog-form.component.html",
@@ -33,7 +35,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
     dueDate: new FormControl(""),
     skills: new FormControl(""),
     description: new FormControl(""),
-    interest: new FormControl(""),
+    interrest: new FormControl(""),
     salaryMin: new FormControl(""),
     salaryMax: new FormControl(""),
     userContactId: new FormControl(""),
@@ -58,7 +60,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       this.workingForm = data.workingForms;
       this.rank = data.ranks;
       this.userContact = data.users;
-      
+      console.log(data);
     });
     this.initForm();
   }
@@ -86,7 +88,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       salaryMax:["",[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
       userContactId:["",Validators.required],
       jobRequirement:["",Validators.required],
-      interest: ["", Validators.required],
+      interrest: ["", Validators.required],
       startDate:["",Validators.required],
       userCreate:[this.userCreateName],
     });

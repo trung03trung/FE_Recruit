@@ -3,6 +3,7 @@ import { JobService } from "../../../@core/services/job.service";
 import { Router } from "@angular/router";
 import { JobRegisterService } from "../../../@core/services/job-register.service";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dialog-interveiw.component";
 
 @Component({
   selector: "ngx-jobs-register",
@@ -26,7 +27,8 @@ export class JobsRegisterComponent implements OnInit {
   name='';
   constructor(
     private jobRegisterService: JobRegisterService,
-    private router: Router
+    private router: Router,
+    private dialog:MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -134,7 +136,10 @@ export class JobsRegisterComponent implements OnInit {
       this.isSearch = true;
     });
   }
-
-
+  openDialogInterview(jobRegister){
+    const dialogRef=this.dialog.open(DialogInterveiwComponent,{
+      data:jobRegister});
+  }
+  
 
 }

@@ -11,7 +11,7 @@ import { ProfileService } from "./profile.service";
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
 })
-export class ProfileComponent implements OnInit,AfterContentInit {
+export class ProfileComponent implements OnInit {
   [x: string]: any;
   formProfile: FormGroup;
   user: User;
@@ -29,9 +29,6 @@ export class ProfileComponent implements OnInit,AfterContentInit {
     private httpClient:HttpClient
   ) { }
 
-  ngAfterContentInit(): void {
-    
-  }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;

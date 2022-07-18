@@ -134,4 +134,11 @@ export class DetailJobComponent implements OnInit {
         }
     });
   }
+
+  openNewTab(){
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/public/job/detail/'+this.id])
+    );
+    window.open(url, '_blank');
+  }
 }

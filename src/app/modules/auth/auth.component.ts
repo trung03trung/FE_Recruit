@@ -98,7 +98,7 @@ export class AuthComponent implements OnInit, DoCheck {
               this.router.navigate(['/home/']);
             } else {
               // router public
-              this.router.navigate(['/listje']);
+              this.router.navigate(['/list-je']);
             }
           }
         },

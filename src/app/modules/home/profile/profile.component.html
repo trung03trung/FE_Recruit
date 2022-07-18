@@ -12,9 +12,10 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="row">
-                    <label (click)="view()" class="label col-3 col-form-label ">Họ và Tên</label>
+                    <label class="label col-3 col-form-label ">Họ và Tên</label>
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="name">
+                        <mat-error *ngIf="formProfile.controls.name.errors?.required && formJob.get('name').touched">Không được để trống</mat-error>
                     </div>
                 </div>
             </div>
@@ -23,6 +24,7 @@
                     <label class="labeol-3 col cl-form-label">Email</label>
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="email">
+                        <mat-error *ngIf="formProfile.controls.email.errors?.required && formJob.get('email').touched">Không được để trống</mat-error>
                     </div>
                 </div>
 
@@ -34,6 +36,7 @@
                     <label class="label col-3 col-form-label">Số điện thoại</label>
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="phoneNumber">
+                        <mat-error *ngIf="formProfile.controls.phoneNumber.errors?.required && formJob.get('phoneNumber').touched">Không được để trống</mat-error>
                     </div>
                 </div>
 
@@ -43,9 +46,9 @@
                     <label class="label col-3 col-form-label">Ngày sinh</label>
                     <div class="col-9">
                         <input type="date" pInputText class="form-control" formControlName="birthDay">
+                        <mat-error *ngIf="formProfile.controls.birthDay.errors?.required && formJob.get('birthDay').touched">Không được để trống</mat-error>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="form-row">
@@ -53,10 +56,10 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Quê quán</label>
                     <div class="col-9">
-                        <input type="text" pInputText class="form-control" formControlName="homeTown">
+                        <input type="text" pInputText class="form-control" formControlName="homeTown">\
+                        <mat-error *ngIf="formProfile.controls.homeTown.errors?.required && formJob.get('homeTown').touched">Không được để trống</mat-error>
                     </div>
                 </div>
-
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -72,6 +75,6 @@
 
             </div>
         </div>
-        <button class="{{disableClick}}" class="btn btn-success mt-3 text-center" type="button" (click)="onSubmit()">Cập nhật</button>
+        <button class="{{disableClick}}" class="btn btn-success mt-3 text-center" type="button" (click)="onSubmit()" [disabled]="!formProfile.valid">Cập nhật</button>
     </form>
 </p-card>

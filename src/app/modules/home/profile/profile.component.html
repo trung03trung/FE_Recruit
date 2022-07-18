@@ -25,6 +25,7 @@
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="email">
                         <mat-error *ngIf="formProfile.controls.email.errors?.required && formJob.get('email').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formProfile.controls.email.errors?.email && formJob.get('email').touched">Nhập sai định dạng email</mat-error>
                     </div>
                 </div>
 
@@ -35,8 +36,10 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Số điện thoại</label>
                     <div class="col-9">
+                        
                         <input type="text" pInputText class="form-control" formControlName="phoneNumber">
-                        <mat-error *ngIf="formProfile.controls.phoneNumber.errors?.required && formJob.get('phoneNumber').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formProfile.controls.email.errors?.required && formJob.get('email').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formProfile.controls.email.errors?.pattern && formJob.get('email').touched">Nhập sai định dạng</mat-error>
                     </div>
                 </div>
 

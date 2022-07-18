@@ -12,7 +12,7 @@ import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dia
 })
 export class JobsRegisterComponent implements OnInit {
   pageNo = 0;
-  pageSize = 2;
+  pageSize = 5;
   totalPage = 0;
   totalJob = 0;
   listJobsRegister: any;

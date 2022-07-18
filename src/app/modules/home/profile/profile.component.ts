@@ -5,6 +5,7 @@ import { PrimeNGConfig } from "primeng/api";
 import { SessionService } from "../../../@core/services/session.service";
 import { User } from "./profile.model";
 import { ProfileService } from "./profile.service";
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: "ngx-profile",
@@ -44,8 +45,8 @@ export class ProfileComponent implements OnInit {
       id: [""],
       avatarName:[""],
       name: ["", Validators.required],
-      email: ["", Validators.required],
-      phoneNumber: ["", Validators.required],
+      email: ["", [Validators.required,Validators.email]],
+      phoneNumber: ["",[Validators.required,Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})\\b')]],
       birthDay: ["", Validators.required],
       homeTown: ["", Validators.required],
       gender: ["Nam", Validators.required],
@@ -92,7 +93,7 @@ export class ProfileComponent implements OnInit {
       name: user.name,
       email: user.email,
       phoneNumber: user.phoneNumber,
-      birthDay: user.birthDay,
+      birthDay: formatDate(user.birthDay,'yyyy-MM-dd','en'),
       homeTown: user.homeTown,
       gender: user.gender,
     });

@@ -26,6 +26,7 @@ import { DialogInterveiwComponent } from './jobs-register/detail-jobregis/dialog
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 
+
 const routes: Routes = [{
   path: '',
   component: HomeComponent,

@@ -4,6 +4,8 @@ import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Toaster } from 'ngx-toast-notifications';
 import { JobRegisterService } from '../../../../@core/services/job-register.service';
 import { DialogRejectComponent } from '../../detail-job/dialog-reject/dialog-reject.component';
+import { DialogreasonComponent } from './dialogreason/dialogreason.component';
+import { DialogInterveiwComponent } from './dialog-interveiw/dialog-interveiw.component';
 
 @Component({
   selector: 'ngx-detail-jobregis',
@@ -56,7 +58,7 @@ export class DetailJobregisComponent implements OnInit {
     });
   }
 
-  statusAccept(status:string){
+  statusChange(status:string){
     this.jobRegisterService.changeStatus(this.id,status).subscribe(data=>{
       if(data.status=='OK'){
         this.getJobRegisterById();
@@ -74,4 +76,14 @@ export class DetailJobregisComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(data=>this.getJobRegisterById());
   }
+  openDialogReason(){
+    const dialogRef=this.dialog.open(DialogreasonComponent,{
+      data:this.jobRegister,
+    });
+  }
+  openDialogInterview(){
+    const dialogRef=this.dialog.open(DialogInterveiwComponent,{
+      data:this.jobRegister});
+  }
+
 }

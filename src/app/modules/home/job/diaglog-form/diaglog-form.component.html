@@ -1,5 +1,8 @@
-<h1>Thêm mới tin tuyển dụng</h1>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<h1>Thêm mới tin tuyển dụng</h1>
     <form class="" [formGroup]="formJob">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -116,7 +119,7 @@
                     <div class="col-8">
                         <select class="form-control" formControlName="userContactId">
                             <option value="">Chọn người liên hệ</option>
-                            <option *ngFor="let uc of userContact;let l=last;"  [ngValue]="uc.id">{{uc.userName}}</option>
+                            <option *ngFor="let uc of userContact"  [ngValue]="uc.id">{{uc.userName}}</option>
                         </select>
                         <mat-error *ngIf="formJob.controls.userContactId.errors?.required && formJob.get('userContactId').touched">Không được để trống</mat-error>
                     </div>
@@ -187,7 +190,6 @@
             </div>
         </div>
         <div class="form-group mb-3"> 
-        
                 <div class="row">
                     <label class="label col-sm-2 col-form-label">Mô tả công việc</label>
                     <div class="col-sm-10">

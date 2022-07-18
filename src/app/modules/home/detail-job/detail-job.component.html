@@ -13,7 +13,7 @@
                                 <button (click)="openDialog()"  type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Cập nhật
                                 </button>
-                                <button  type="button" class="btn btn btn-outline-primary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="openNewTab()"  type="button" class="btn btn btn-outline-primary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Xem trước
                                 </button>
                                 <button (click)="statusAccept()" *ngIf="role==='ROLE_ADMIN' &&statusJob.code==='Chờ xét duyệt'" type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">

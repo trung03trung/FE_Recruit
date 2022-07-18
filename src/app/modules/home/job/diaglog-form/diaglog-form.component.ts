@@ -22,6 +22,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
   statusJob;
   userContact: Users;
   userCreateName;
+  currentDate=new Date();
   disableClick = "disableClick";
   formJob = new FormGroup({
     name: new FormControl(""),

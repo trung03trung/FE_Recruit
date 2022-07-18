@@ -48,7 +48,8 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Ngày sinh</label>
                     <div class="col-9">
-                        <input type="date" pInputText class="form-control" formControlName="birthDay">
+                        <!-- <input type="date" pInputText class="form-control" formControlName="birthDay"> -->
+                        <p-calendar formControlName="birthDay" [touchUI]="true" [showIcon]="true" [maxDate]="currentDate" ></p-calendar>
                         <mat-error *ngIf="formProfile.controls.birthDay.errors?.required && formJob.get('birthDay').touched">Không được để trống</mat-error>
                     </div>
                 </div>

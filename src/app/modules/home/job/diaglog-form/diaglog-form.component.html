@@ -107,7 +107,8 @@
                 <div class="row">
                     <label class="label col-4 col-form-label">Hạn nộp hồ sơ</label>
                     <div class="col-8">
-                        <input type="date" pInputText class="form-control" formControlName="dueDate">
+                        <!-- <input type="date" pInputText class="form-control" formControlName="dueDate"> -->
+                        <p-calendar formControlName="dueDate" [touchUI]="true" [showIcon]="true" [minDate]="currentDate" ></p-calendar>
                         <mat-error *ngIf="formJob.controls.dueDate.errors?.required && formJob.get('dueDate').touched">Không được để trống</mat-error>
                     </div>
                 </div>
@@ -140,7 +141,8 @@
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Ngày bắt đầu</label>
                     <div class="col-8">
-                        <input type="date" pInputText class="form-control" formControlName="startDate">
+                        <!-- <input type="date" pInputText class="form-control" formControlName="startDate"> -->
+                        <p-calendar formControlName="startDate" [touchUI]="true" [showIcon]="true" [minDate]="currentDate" ></p-calendar>
                         <mat-error *ngIf="formJob.controls.startDate.errors?.required && formJob.get('startDate').touched">Không được để trống</mat-error>
                     </div>
                 </div>

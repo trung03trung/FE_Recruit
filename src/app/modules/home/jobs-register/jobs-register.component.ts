@@ -105,7 +105,7 @@ export class JobsRegisterComponent implements OnInit {
     }
 
   }
-  sortByDueDate() {
+  onSortBy(field:string){
     if (!this.isClick) {
       this.sortDir = "desc";
       this.isClick = true;
@@ -113,12 +113,19 @@ export class JobsRegisterComponent implements OnInit {
       this.sortDir = "asc";
       this.isClick = false;
     }
-    this.sortBy = "dateRegister";
-    this.jobRegisterService
-      .getAllJobRegister(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
-      .subscribe((data) => {
-        this.getData(data);
-      });
+    this.sortSearchBy = field;
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobRegisterService.searchJobRegister(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
+    });
   }
 
   onChangeEvent(event: any) {

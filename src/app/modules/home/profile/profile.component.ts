@@ -1,12 +1,20 @@
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { AfterContentInit, Component, DoCheck, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import {  Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PrimeNGConfig } from "primeng/api";
 import { SessionService } from "../../../@core/services/session.service";
 import { User } from "./profile.model";
 import { ProfileService } from "./profile.service";
 import { formatDate } from '@angular/common';
+import { Toaster } from "ngx-toast-notifications";
 
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  }),
+}
 @Component({
   selector: "ngx-profile",
   templateUrl: "./profile.component.html",
@@ -22,12 +30,15 @@ export class ProfileComponent implements OnInit {
   filetoUpload:any;
   dbImage: any;
   filea:File;
+  isChange=false;
+  currentDate= new Date();
   constructor(
     private sessionService: SessionService,
     private profileService: ProfileService,
     private fb: FormBuilder,
     private primengConfig: PrimeNGConfig,
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private toaster:Toaster
   ) { }
 
 
@@ -74,6 +85,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSelect(file: File) {
+    this.isChange=true;
     this.labelImport.nativeElement.innerText = file[0].name;
     this.fileToUpload = file[0];
     this.filea=file[0];
@@ -89,11 +101,11 @@ export class ProfileComponent implements OnInit {
   updateForm(user: User): void {
     this.formProfile.patchValue({
       id: user.id,
-      avatarName:[],
+      avatarName:user.avatarName,
       name: user.name,
       email: user.email,
       phoneNumber: user.phoneNumber,
-      birthDay: formatDate(user.birthDay,'yyyy-MM-dd','en'),
+      birthDay: formatDate(user.birthDay,'MM/dd/yyyy','en'),
       homeTown: user.homeTown,
       gender: user.gender,
     });
@@ -128,15 +140,28 @@ export class ProfileComponent implements OnInit {
     })
   }
   onSubmit(){
+    if(this.isChange){
     this.formProfile.patchValue({
       avatarName:this.filea.name
-    })
+    });
+  }
     this.profileService.updateProfile(this.formProfile.value).subscribe(data=>{
       if(data!=null){
-        alert('Success');
+        this.showToaster("Cập nhật thành công","success")
       }
     });
-    this.imageUploadAction();
+    if(this.isChange) {
+      this.imageUploadAction();
+    }
     
+  }
+  showToaster(message: string,typea:any) {
+    const type = typea;
+    this.toaster.open({
+      text: message,
+      caption: 'Thành công',
+      type: type,
+      duration: 3000
+    });
   }
 }

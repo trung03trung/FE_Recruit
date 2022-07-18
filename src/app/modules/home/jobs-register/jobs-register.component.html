@@ -19,10 +19,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tên ứng viên <i></i></th>
-                            <th>Vị trí ứng tuyển</th>
-                            <th>Thời gian nộp hồ sơ <i (click)="sortByDueDate()"  class="fa fa-sort"></i></th>
-                            <th>Trạng thái </th>
+                            <th>Tên ứng viên <i (click)="onSortBy('U.user_name')"  class="fa fa-sort"></i></th>
+                            <th>Vị trí ứng tuyển <i (click)="onSortBy('J.name')"  class="fa fa-sort"></i></th>
+                            <th>Thời gian nộp hồ sơ <i (click)="onSortBy('JR.date_register')"  class="fa fa-sort"></i></th>
+                            <th>Trạng thái <i (click)="onSortBy('S.code')"  class="fa fa-sort"></i></th>
                             <th>Actions</th>
                         </tr>
                     </thead>

@@ -72,11 +72,12 @@ const configToast: any = {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    ToastrModule.forRoot(configToast),
+    //ToastrModule.forRoot(configToast),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastNotificationsModule,
     MatIconModule,
+    ToastrModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [

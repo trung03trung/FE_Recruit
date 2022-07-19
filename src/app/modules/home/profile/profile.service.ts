@@ -15,4 +15,10 @@ export class ProfileService {
   getProfile(username: any):Observable<any>{
     return this.http.get<any>(this.profileAPI + username)
   }
+  updateProfile(user: any):Observable<any>{
+    return this.http.put(`${environment.apiUrl}public/user/update`,user);
+  }
+  viewImage(name:string):Observable<any>{
+    return this.http.get(`${environment.apiUrl}public/image/`+name);
+  }
 }

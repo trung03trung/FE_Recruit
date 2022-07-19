@@ -22,6 +22,11 @@ import { DialogRejectComponent } from './detail-job/dialog-reject/dialog-reject.
 import { JobsRegisterComponent } from './jobs-register/jobs-register.component';
 import { DetailJobregisComponent } from './jobs-register/detail-jobregis/detail-jobregis.component';
 import { CompanyComponent } from './company/company.component';
+import { DialogreasonComponent } from './jobs-register/detail-jobregis/dialogreason/dialogreason.component';
+import { DialogInterveiwComponent } from './jobs-register/detail-jobregis/dialog-interveiw/dialog-interveiw.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+
 
 const routes: Routes = [{
   path: '',
@@ -67,6 +72,10 @@ const routes: Routes = [{
       path:'company',
       component: CompanyComponent
     },
+    {
+      path: 'job/update',
+      component: DiaglogUpdateComponent,
+    },
   ],
 }];
 
@@ -83,7 +92,9 @@ const routes: Routes = [{
     DialogRejectComponent,
     JobsRegisterComponent,
     DetailJobregisComponent,
-    CompanyComponent
+    CompanyComponent,
+    DialogreasonComponent,
+    DialogInterveiwComponent,
   ],
   imports: [
     CommonModule,
@@ -96,6 +107,8 @@ const routes: Routes = [{
     MatDialogModule,
     ToastrModule.forRoot(),
     MaterialModule,
+    MatDatepickerModule,
+    MatInputModule,
   ],
 })
 export class HomeModule {}

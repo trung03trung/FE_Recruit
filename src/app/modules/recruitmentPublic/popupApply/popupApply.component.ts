@@ -27,7 +27,8 @@ export class PopupApply implements OnInit {
   constructor(
     private recruitmentService: RecruitmentService,
     private formBuilder: FormBuilder,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private toaster: Toaster
   ) {}
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
@@ -39,8 +40,14 @@ export class PopupApply implements OnInit {
   initForm() {
     this.profileP = this.formBuilder.group({
       pdf: new FormControl("1", [Validators.required]),
-      code: new FormControl("", [Validators.required,Validators.maxLength(50)]),
-      media_type: new FormControl("", [Validators.required, Validators.maxLength(20)])
+      code: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      media_type: new FormControl("", [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
     });
   }
   registerJob() {
@@ -57,36 +64,39 @@ export class PopupApply implements OnInit {
       ) {
         this.checkloggin = true;
         this.jobRegPObj.userName = this.userName;
-        //console.log(this.userName);
-        //console.log(this.role);
       }
     }
-    if (this.jobId || this.checkloggin) {
+    if (this.jobId != null && this.checkloggin == true) {
       this.jobRegPObj.jobId = this.jobId;
       this.jobRegPObj.code = this.profileP.value.code;
       this.jobRegPObj.pdf = this.profileP.value.pdf;
       this.jobRegPObj.media_type = this.profileP.value.media_type;
-      console.log(this.profileP.value);
-      console.log(this.jobRegPObj);
 
-      this.recruitmentService.registerJob(this.jobRegPObj).subscribe((data) => {
-        //console.log(data);
-        if (
-          data == null ||
-          data.status == "NO_CONTENT" ||
-          data.status == "NOT_FOUND" ||
-          data.status == "500"
-        ) {
-          this.showToaster("Mời bạn đăng nhập trước khi apply", "danger");
+      this.recruitmentService.registerJob(this.jobRegPObj).subscribe(
+        (data) => {
+          console.log(data);
+          if (data.statusCode == "OK") {
+            this.showToaster(
+              "Apple thành công, chúng tôi sẽ liên hệ sớm nhất.",
+              "success"
+            );
+            this.profileP.reset();
+          } else {
+            this.showToaster(
+              "Apple không thành công thành công, chúng tôi sẽ liên hệ sớm nhất.",
+              "danger"
+            );
+          }
+        },
+        (error) => {
+          console.log(error);
+          if (error.status == "500") {
+            this.showToaster("Mỗi một job chỉ được apply 1 lần.", "danger");
+          }
         }
-        if (data.status == "OK") {
-          this.showToaster("Apple thành công, chúng tôi sẽ liên hệ sớm nhất.", "success");
-          this.userDetail.reset();
-        }
-      });
-      
+      );
     } else {
-      alert("LỖi");
+      this.showToaster("Đăng nhập trước khi apply.", "danger");
     }
   }
   showToaster(message: string, typea: any) {

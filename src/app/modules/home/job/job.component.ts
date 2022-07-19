@@ -4,8 +4,9 @@ import { catchError } from "rxjs/operators";
 import { job } from "../../../@core/models/job";
 import { JobService } from "../../../@core/services/job.service";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
-// import Roboto from '@/assets/fonts/Roboto-Regular-normal.js'
-// import RobotoBold from '@/assets/fonts/Roboto-Bold-bold.js'
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable';
+
 import {
   FormControl,
   FormGroup,
@@ -143,33 +144,30 @@ export class JobComponent implements OnInit {
   // }
 
   public downloadPDF(job): void {
-    // const doc = new jsPDF();
-    // doc.addFileToVFS("Amiri-Regular.ttf", AmiriRegular);
-    // doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+    const doc = new jsPDF();
 
-    // doc.setFont("Amiri");
-    // autoTable(doc, {
-    //   styles: { font: "Times-Roman, utf-8" },
-    //   head: [
-    //     [
-    //       "Tên công việc",
-    //       "Vị trí công việc",
-    //       "Mức lương đề xuất",
-    //       "Hạn nộp hồ sơ",
-    //       "Trạng thái",
-    //     ],
-    //   ],
-    //   body: [
-    //     [
-    //       job.name,
-    //       job.jobPosition.code,
-    //       job.salaryMax,
-    //       job.dueDate,
-    //       job.statusJob.code,
-    //     ],
-    //   ],
-    // });
-    // doc.save("thongtinungtuyen.pdf");
+    autoTable(doc, {
+      styles: { font: "Times-Roman, utf-8" },
+      head: [
+        [
+          "Tên công việc",
+          "Vị trí công việc",
+          "Mức lương đề xuất",
+          "Hạn nộp hồ sơ",
+          "Trạng thái",
+        ],
+      ],
+      body: [
+        [
+          job.name,
+          job.jobPosition.code,
+          job.salaryMax,
+          job.dueDate,
+          job.statusJob.code,
+        ],
+      ],
+    });
+    doc.save("thongtinungtuyen.pdf");
   }
 
   changePageSize(e) {
@@ -227,5 +225,11 @@ export class JobComponent implements OnInit {
       type: type,
       duration: 3000,
     });
+  }
+  openNewTab(id){
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/public/job/detail/'+id])
+    );
+    window.open(url, '_blank');
   }
 }

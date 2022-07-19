@@ -56,11 +56,29 @@ const httpOptions = {
     public tranferData(job:job){
       this.job=job;
     }
-    public getJobById(id:any):Observable<any>{
-      return this.http.get(`${this.baseUrl}job/${id}`,httpOptions).pipe(catchError(this.handleError));
+    public getJobRegisterById(id:any):Observable<any>{
+      return this.http.get(`${this.baseUrl}job-register/${id}`,httpOptions);
     }
-    public getFieldSelect():Observable<any>{
-      return this.http.get(`${this.baseUrl}select`,httpOptions);
+
+    public getProfileByJobRegister(id:any):Observable<any>{
+      return this.http.get(`${this.baseUrl}job-register/profile/${id}`,httpOptions);
     }
+
+    public changeStatus(id:Number,code:string):Observable<any>{
+      return this.http.post(`${this.baseUrl}job-register/${id}?code=${code}`,"",httpOptions);
+    }
+
+    public rejectJob(id:Number,code:string,reason:String):Observable<any>{
+      return this.http.post(`${this.baseUrl}profile-reject/${id}?code=${code}&reason=${reason}`,"",httpOptions);
+    }
+
+    public sendEmailInterview(data:any):Observable<any>{
+      return this.http.post(`${this.baseUrl}job-register/interview`,data,httpOptions);
+    }
+
+    public searchJobRegister(data:any):Observable<any>{
+      return this.http.post(`${this.baseUrl}job-register/search`,data,httpOptions);
+    }
+  
   }
   

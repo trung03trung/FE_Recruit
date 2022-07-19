@@ -45,10 +45,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     // this.getByUserName();
-    
     this.getByUserName();
     this.initForm();
-    console.log(this.user);
   }
 
   initForm() {
@@ -72,13 +70,12 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.getProfile(name).subscribe((res) => {
       this.updateForm(res);
-      console.log(res)
       this.user=res;
       console.log(this.user)
       this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
       this.postResponse = data;
-        console.log(data);
         this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
+        this.profileService.tranferData(this.postResponse.image);
     })
     });
     
@@ -124,6 +121,7 @@ export class ProfileComponent implements OnInit {
           this.postResponse = response;
           this.successResponse = this.postResponse.body.message; 
           this.getByUserName();
+          this.profileService.tranferData(this.postResponse.image);
         } else {
           this.successResponse = "Image not uploaded due to some error!";
         }
@@ -135,16 +133,20 @@ export class ProfileComponent implements OnInit {
     console.log(this.user.avatarName)
     this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
       this.postResponse = data;
-        console.log(data);
         this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
     })
   }
   onSubmit(){
     if(this.isChange){
+      this.formProfile.patchValue({
+        avatarName:this.filea.name
+      });
+    }
+    const date=new Date(this.formProfile.controls.birthDay.value);
     this.formProfile.patchValue({
-      avatarName:this.filea.name
+      birthDay:date
     });
-  }
+    console.log(this.formProfile.value);
     this.profileService.updateProfile(this.formProfile.value).subscribe(data=>{
       if(data!=null){
         this.showToaster("Cập nhật thành công","success")

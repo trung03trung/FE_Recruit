@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { JobRegisterService } from "../../../@core/services/job-register.service";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dialog-interveiw.component";
+import { DialogreasonComponent } from "./detail-jobregis/dialogreason/dialogreason.component";
 
 @Component({
   selector: "ngx-jobs-register",
@@ -32,6 +33,13 @@ export class JobsRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.jobRegisterService
+      .getAllJobRegister(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
+      .subscribe((data) => {
+        this.getData(data);
+      });
+  }
+  getDataAPI(){
     this.jobRegisterService
       .getAllJobRegister(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
       .subscribe((data) => {
@@ -146,7 +154,12 @@ export class JobsRegisterComponent implements OnInit {
   openDialogInterview(jobRegister){
     const dialogRef=this.dialog.open(DialogInterveiwComponent,{
       data:jobRegister});
+      dialogRef.afterClosed().subscribe(data=>this.getDataAPI());
   }
-  
+  openDialogReason(job){
+    const dialogRef=this.dialog.open(DialogreasonComponent,{
+      data:job,
+    });
+  }
 
 }

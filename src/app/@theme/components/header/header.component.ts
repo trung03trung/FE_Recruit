@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { SessionService } from '../../../@core/services/session.service';
 import { Router } from '@angular/router';
 import { LocalService } from '../../../@core/services/local.service';
+import { ProfileService } from '../../../modules/home/profile/profile.service';
 
 @Component({
   selector: 'ngx-header',
@@ -47,6 +48,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [ { title: 'Thông tin cá nhân' },{ title: 'Đổi mật khẩu' }, { title: 'Đăng xuất'   } ];
 
+  postResponse;
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
@@ -55,6 +58,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private sessionService: SessionService,
               private localService: LocalService,
               private router: Router,
+              private profileService:ProfileService
               ) {
   }
 
@@ -92,6 +96,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+      this.getByUserName();
+      
   }
 
   ngOnDestroy() {
@@ -102,7 +108,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   changeTheme(themeName: string) {
     this.themeService.changeTheme(themeName);
   }
-
+  getByUserName() {
+    const userinfo = JSON.parse(localStorage.getItem("auth-user"));
+    const name = userinfo.sub;
+    this.profileService.getProfile(name).subscribe((res) => {
+      this.user=res;
+      console.log(this.user)
+      this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
+      this.postResponse = data;
+        this.profileService.picture= this.postResponse.image;
+    })
+    });
+  }
+  
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();

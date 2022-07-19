@@ -13,7 +13,7 @@ import html2canvas from 'html2canvas';
 })
 export class ExportPdfComponent implements OnInit {
   id:any; 
-  @Input() job:job;
+  job:any
   jobPosition;
   workingForm;
   academicLevel;
@@ -29,16 +29,8 @@ export class ExportPdfComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    const a = JSON.parse(localStorage.getItem("auth-user"));
-    this.jobPosition=this.job.jobPosition;
-    this.workingForm=this.job.workingForm;
-    this.academicLevel=this.job.academicLevel;
-    this.statusJob=this.job.statusJob;
-    this.rank=this.job.rank;
-    this.userContact=this.job.userContact;
-    // this.geJobById();
+    this.geJobById();
     console.log(this.job);
-    this.openPDF();
   }
   geJobById(){
     this.jobService.getJobById(this.id).subscribe(data=>{

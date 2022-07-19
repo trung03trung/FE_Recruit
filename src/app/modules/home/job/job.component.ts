@@ -153,16 +153,15 @@ export class JobComponent implements OnInit {
     });
   }
 
-   downloadPDF(job) {
-    // console.log(id);
-    // const url = this.router.serializeUrl(
-    //   this.router.createUrlTree(['/home/job-pdf/export/'+id])
+   downloadPDF(id) {
+    console.log(id);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/home/job-pdf/export/'+id])
    
-    // );  
+    );  
      
-    // window.open(url, '_blank');
-    this.jobChild=job
-    this.pdf=true;
+    window.open(url, '_blank');
+    
   }
 
   changePageSize(e) {
@@ -207,6 +206,11 @@ export class JobComponent implements OnInit {
     this.jobService.changeStatus(id, "Đang tuyển").subscribe((data) => {
       if (data != null) {
         this.showToaster("Đang tuyển tin tuyển dụng thành công", "success");
+        this.jobService
+        .getAllJob(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
+        .subscribe((data) => {
+          this.getData(data);
+        });
       } else {
         this.showToaster("Đang tuyển tin tuyển dụng thất bại", "danger");
       }

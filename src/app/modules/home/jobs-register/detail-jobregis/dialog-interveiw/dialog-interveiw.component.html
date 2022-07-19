@@ -6,26 +6,26 @@
                 <div class="row">
                     <label class="label col-4 col-form-label ">Ngày hẹn phỏng vấn</label>
                     <div class="col-8">
-                        <input type="date" pInputText class="form-control" formControlName="dateInterview">
-                        <p-calendar  formControlName="dateInterview" [showTime]="true" [showIcon]="true" [minDate]="currentDate" inputId="time"></p-calendar>
+                        <p-calendar  formControlName="dateInterview" [showIcon]="true" [minDate]="currentDate" inputId="time"></p-calendar>
                         <mat-error *ngIf="formInterview.controls.dateInterview.errors?.required && formInterview.get('dateInterview').touched">Không được để trống</mat-error>
                     </div>
                 </div>
             </div>
         </div> -->
         <div class="form-row mb-3">
-          <div class="form-group col-md-10">
+          <div class="form-group col-md-15">
               <div class="row">
-                  <label class="label col-4 col-form-label ">Ngày hẹn phỏng vấn</label>
+                  <label (click)="validateDate()" class="label col-4 col-form-label ">Ngày hẹn phỏng vấn</label>
                   <div class="col-8">
                       <input type="date" pInputText class="form-control" formControlName="dateInterview">
                       <mat-error *ngIf="formInterview.controls.dateInterview.errors?.required && formInterview.get('dateInterview').touched">Không được để trống</mat-error>
+                      <mat-error *ngIf="validateDate() && formInterview.get('dateInterview').touched">Ngày phỏng vấn phải lớn hơn ngày hiện tại</mat-error>
                   </div>
               </div>
           </div>
       </div>
       <div class="form-row mb-3">
-        <div class="form-group col-md-10">
+        <div class="form-group col-md-12">
             <div class="row">
                 <label class="label col-4 col-form-label ">Giờ hẹn phỏng vấn</label>
                 <div class="col-8">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <label >Hình thức phỏng vấn:</label>
             <mat-radio-group aria-label="Select an option" formControlName="methodInterview" >
               <mat-radio-button  value="Offline" style="margin-right: 5px;" (change) ="closeCombobox()">Offline</mat-radio-button>
@@ -50,7 +50,7 @@
             </mat-radio-group>
           </div>
         <div class="card-footer">
-            <button   class="btn btn-success mr-3" (click)="sheduleInterview()" [disabled]="!this.formInterview.valid" type="button"><span class="{{loading}}"></span>Xác nhận</button>
+            <button   class="btn btn-success mr-3" (click)="sheduleInterview()" [disabled]="!this.formInterview.valid||validateDate()" type="button"><span class="{{loading}}"></span>Xác nhận</button>
             <button class="btn btn-primary" (click)="onNoclick()"  type="button">Đóng</button>
         </div>
  </form>

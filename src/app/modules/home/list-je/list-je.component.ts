@@ -92,6 +92,8 @@ export class ListJeComponent implements OnInit {
       this.userDetail.value.sortT = "DESC";
       this.userDetail.value.sortColum = "id";
     }
+    console.log(this.userDetail.value);
+    
     this.userService.getAllUserJeForm(this.userDetail.value).subscribe(
       (data) => {
         this.userList = data;

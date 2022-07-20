@@ -63,7 +63,11 @@
           <a class="nav-link text-black" href="">Công ty</a>
         </li>
         <div class="nav-item dropdown">
-          <a style="padding-right: 40px" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+          <a
+            style="padding-right: 40px"
+            href="#"
+            class="nav-link text-black dropdown-toggle"
+            data-bs-toggle="dropdown"
             >Công cụ</a
           >
           <div class="dropdown-menu rounded-0 m-0">
@@ -76,12 +80,41 @@
           </div>
         </div>
         <li class="nav-item">
-          <a *ngIf="checkloggin" class="nav-link text-black" href="/profile-public">Thông tin cá nhân</a>
-          <a *ngIf="!checkloggin" class="nav-link text-black" href="/auth">Đăng nhập</a>
+          <!-- <a
+            *ngIf="checkloggin"
+            class="nav-link text-black"
+            href="/profile-public"
+            >Thông tin cá nhân</a
+          > -->
+          <a *ngIf="!checkloggin" class="nav-link text-black" href="/auth"
+            >Đăng nhập</a
+          >
         </li>
+        <div *ngIf="checkloggin" class="nav-item dropdown">
+          <a
+            
+            href="#"
+            class="nav-link text-black dropdown-toggle"
+            data-bs-toggle="dropdown"
+            style="font-size: 20px;"
+            >{{this.userName}}</a
+          >
+          <div class="dropdown-menu howve rounded-0 m-0">
+            <a href="/profile-public" class="dropdown-item"
+              >Thông tin cá nhân </a
+            >
+            <a href="/change-the-password-public" class="dropdown-item"
+              >Đổi mật khẩu</a
+            >
+            <a (click)="logout()" href="/" class="dropdown-item"
+            >Đăng xuât</a
+          >
+          </div>
+        </div>
         <li class="nav-item">
-          <a  *ngIf="checkloggin"  class="nav-link text-black" (click)="logout()" href="/" >Đăng xuất</a>
-          <a *ngIf="!checkloggin" class="nav-link text-black" href="/signup">Đăng ký</a>
+          <a *ngIf="!checkloggin" class="nav-link text-black" href="/signup"
+            >Đăng ký</a
+          >
         </li>
       </ul>
     </div>
@@ -140,17 +173,17 @@
         <div class="row g-4">
           <div class="col-sm-12 col-md-8 d-flex align-items-center">
             <img
-            [routerLink]="['/public-job/detail', job?.id]"
+              [routerLink]="['/public-job/detail', job?.id]"
               class="flex-shrink-0 img-fluid border rounded"
               src="https://itsol.vn/wp-content/uploads/2019/09/connections.jpg"
               alt=""
               style="width: 80px; height: 80px"
             />
             <div class="text-start ps-4">
-              <h4 class="mb-3"  [routerLink]="['/public-job/detail', job?.id]"  >
+              <h4 class="mb-3" [routerLink]="['/public-job/detail', job?.id]">
                 {{ job.name }}
               </h4>
-              <h5 class="mb-3"  [routerLink]="['/public-job/detail', job?.id]" >
+              <h5 class="mb-3" [routerLink]="['/public-job/detail', job?.id]">
                 {{ job.description }}
               </h5>
               <span class="text-truncate me-3"
@@ -174,7 +207,11 @@
               <a class="btn btn-light btn-square me-3" href=""
                 ><i class="far fa-heart text-primary"></i
               ></a>
-              <a class="btn btn-outline-success" [routerLink]="['/public-job/apply', job?.id]">Apply Now</a>
+              <a
+                class="btn btn-outline-success"
+                [routerLink]="['/public-job/apply', job?.id]"
+                >Apply Now</a
+              >
             </div>
             <small class="text-truncate"
               ><i class="far fa-calendar-alt text-primary me-2"></i>Date Line:

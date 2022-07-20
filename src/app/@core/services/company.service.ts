@@ -16,15 +16,15 @@ export class CompanyService {
   UrlUpdateCompany : string;
 
   constructor(private http: HttpClient) {
-    this.UrlCompany = "http://localhost:9090/api/public/company/";
-    this.UrlUpdateCompany = "http://localhost:9090/api/public/update-company";
+    this.UrlCompany = "http://localhost:9090/api/admin/company/";
+    this.UrlUpdateCompany = "http://localhost:9090/api/admin/update-company";
   }
 
-  getCompanyById(company: any): Observable<any> {
-    return this.http.get<any>(this.UrlCompany+company);
+  getCompanyById(companyId: number): Observable<Company> {
+    return this.http.get<Company>(this.UrlCompany+companyId,httpOptions);
   }
 
   updateCompany(company: any): Observable<any> {
-    return this.http.put<any>(this.UrlUpdateCompany, company);
+    return this.http.put<any>(this.UrlUpdateCompany, company,httpOptions);
   }
 }

@@ -12,16 +12,16 @@
               id="inputFirstname"
               placeholder="Name"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.name.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 20 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.name.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 20 ký tự
+            </mat-error>
           </div>
           <div class="col-sm-6">
             <label for="inputLastname">Email</label>
@@ -90,8 +90,8 @@
             <mat-error
               class="alert-danger"
               *ngIf="
-              companyDetail.controls.description.errors?.required &&
-              companyDetail.touched
+                companyDetail.controls.description.errors?.required &&
+                companyDetail.touched
               "
             >
               Không được để trống
@@ -99,8 +99,8 @@
             <mat-error
               class="alert-danger"
               *ngIf="
-              companyDetail.controls.description.errors?.minlength &&
-              companyDetail.touched
+                companyDetail.controls.description.errors?.minlength &&
+                companyDetail.touched
               "
             >
               Ký tự trên 10 ký tự
@@ -108,8 +108,8 @@
             <mat-error
               class="alert-danger"
               *ngIf="
-              companyDetail.controls.description.errors?.maxlength &&
-              companyDetail.touched
+                companyDetail.controls.description.errors?.maxlength &&
+                companyDetail.touched
               "
             >
               Ký tự không quá 2000 ký tự
@@ -136,25 +136,25 @@
               formControlName="avatar"
               placeholder="Avatar"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.avatar.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.avatar.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.avatar.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.avatar.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
           <div class="col-sm-3">
             <label for="inputState">Tax Code</label>
@@ -165,25 +165,25 @@
               formControlName="taxCode"
               placeholder="Tax Code"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.taxCode.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxCode.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.taxCode.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxCode.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
           <div class="col-sm-3">
             <label for="inputPostalCode">Tax Place</label>
@@ -194,25 +194,25 @@
               id="inputPostalCode"
               placeholder="Postal Code"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.taxPlace.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxPlace.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.taxPlace.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxPlace.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
         </div>
         <div class="form-group row">
@@ -225,25 +225,25 @@
               id="inputCity"
               placeholder="Head Office"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.headOffice.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.headOffice.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.headOffice.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.headOffice.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
           <div class="col-sm-6">
             <label for="inputCity">Number Staff</label>
@@ -254,25 +254,25 @@
               formControlName="numberStaff"
               placeholder="Number Staff"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.numberStaff.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.numberStaff.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.numberStaff.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.numberStaff.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
         </div>
         <div class="form-group row">
@@ -285,25 +285,25 @@
               formControlName="backdropImg"
               placeholder="Backdrop Img"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.backdropImg.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.backdropImg.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.backdropImg.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.backdropImg.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
           <!-- <div class="col-sm-6">
             <label for="inputContactNumber">Backdrop Img</label>
@@ -323,25 +323,25 @@
               formControlName="linkWeb"
               placeholder="Website"
             />
-            <br/>
+            <br />
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.linkWeb.errors?.required &&
-            companyDetail.touched
-            "
-          >
-            Không được để trống
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.linkWeb.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
             <mat-error
-            class="alert-danger"
-            *ngIf="
-            companyDetail.controls.linkWeb.errors?.maxlength &&
-            companyDetail.touched
-            "
-          >
-            Ký tự không quá 100 ký tự
-          </mat-error>
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.linkWeb.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
           </div>
         </div>
         <button

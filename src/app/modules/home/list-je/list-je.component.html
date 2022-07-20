@@ -63,7 +63,6 @@
           <th (click)="sort('name')" scope="col">
             NAME <i class="fa fa-sort"></i>
           </th>
-          <!-- <th scope="col">PASSWORD</th> -->
           <th (click)="sort('email')" scope="col">
             EMAIL <i class="fa fa-sort"></i>
           </th>
@@ -334,19 +333,6 @@
                   Mật khẩu không trùng khớp
                 </div>
               </div>
-              <!-- <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
-                  Active</label
-                >
-                <input
-                  type="text"
-                  formControlName="active"
-                  class="form-control"
-                  id="active"
-                  aria-describedby="emailHelp"
-                />
-              </div> -->
-
               <div class="modal-footer">
                 <button
                   type="button"
@@ -545,53 +531,6 @@
                 Tài khoản không quá 20 ký tự
               </mat-error>
             </div>
-            <!-- <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >Password
-              </label>
-              <input
-                type="password"
-                formControlName="password"
-                class="form-control"
-                id="password"
-                name="password"
-                aria-describedby="emailHelp"
-              />
-              <br />
-              <div
-                class="alert-danger"
-                *ngIf="
-                  !userDetail.get('password').valid &&
-                  userDetail.get('password').touched
-                "
-              >
-                Vui lòng nhập mật khẩu có 8 - 16 kí tự và có ít nhất 1 chữ và 1
-                kí tự đặc biệt
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">
-                Confirm password
-              </label>
-              <input
-                type="password"
-                formControlName="confirmPassword"
-                class="form-control"
-                id="confirmPassword"
-                aria-describedby="emailHelp"
-              />
-              <br />
-              <div
-                class="alert-danger"
-                *ngIf="
-                  userDetail.controls.password.value !==
-                    userDetail.controls.confirmPassword.value &&
-                  userDetail.get('confirmPassword').touched
-                "
-              >
-                Mật khẩu không trùng khớp
-              </div>
-            </div> -->
             <div class="modal-footer">
               <button
                 type="button"

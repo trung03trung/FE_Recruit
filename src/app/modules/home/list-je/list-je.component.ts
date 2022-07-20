@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 import { Users } from "../../../@core/models/user";
 import { SeachUser } from "../../../@core/models/seachUser";
 import { UserService } from "../../../@core/services/user.service";
@@ -12,17 +12,17 @@ import { Toaster } from "ngx-toast-notifications";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
-  selector: "ngx-listje",
-  templateUrl: "./listje.component.html",
-  styleUrls: ["./listje.component.scss"],
+  selector: "ngx-list-je",
+  templateUrl: "./list-je.component.html",
+  styleUrls: ["./list-je.component.scss"],
 })
-export class ListjeComponent implements OnInit {
+export class ListJeComponent implements OnInit {
   userDetail!: FormGroup;
   seachU: SeachUser = new SeachUser();
   userObj: Users = new Users();
   userList: Users[];
   message = "";
-  pageNumber = [1, 2, 3];
+  pageNumber = [1, 2, 3, 4];
   click = false;
 
   constructor(
@@ -65,36 +65,36 @@ export class ListjeComponent implements OnInit {
           "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$"
         ),
       ]),
-      pageNumber: 1,
-      pageSize: 6,
-      sortT: "ASC",
-      sortColum: "id",
+      pageNumber: new FormControl('1', [Validators.required]),
+      pageSize: new FormControl('6', [Validators.required]),
+      sortT: new FormControl('ASC', [Validators.required]),
+      sortColum: new FormControl('id', [Validators.required]),
     });
   }
 
-
-  sort(sortColum: string){
-      this.userDetail.value.sortColum = sortColum;
-      if(this.click){
-        this.userDetail.value.sortT = "ASC"
-        this.click = false;
-      }
-      else{
-        this.userDetail.value.sortT = "DESC"
-        this.click = true;
-      }
-      this.seach();
+  sort(sortColum: string) {
+    this.userDetail.value.sortColum = sortColum;
+    if (this.click) {
+      this.userDetail.value.sortT = 'ASC';
+      this.click = false;
+    } else {
+      this.userDetail.value.sortT = "DESC";
+      this.click = true;
+    }
+    this.seach();
   }
 
   seach() {
-    if(this.userDetail.value.sortT==null || this.userDetail.value.sortColum ==null){
-      this.userDetail.value.sortT = "DESC"
-      this.userDetail.value.sortColum  ="id"
+    if (
+      this.userDetail.value.sortT == null ||
+      this.userDetail.value.sortColum == null
+    ) {
+      this.userDetail.value.sortT = "DESC";
+      this.userDetail.value.sortColum = "id";
     }
     this.userService.getAllUserJeForm(this.userDetail.value).subscribe(
-      (res) => {
-        this.userList = res;
-        //console.log(res);
+      (data) => {
+        this.userList = data;
       },
       (err) => {
         console.log("error while fetching data.");
@@ -106,8 +106,7 @@ export class ListjeComponent implements OnInit {
   }
 
   setPage(n: number) {
-    this.userDetail.value.pageNumber = n,
-    this.seach();
+    (this.userDetail.value.pageNumber = n), this.seach();
   }
 
   editUser(user: Users) {
@@ -125,19 +124,19 @@ export class ListjeComponent implements OnInit {
     this.userObj.userName = this.userDetail.value.userName;
     this.userObj.password = this.userDetail.value.password;
     console.log(this.userObj);
-    
+
     this.userService.addUser(this.userObj).subscribe(
       (res) => {
         console.log(res);
         if (
           res == null ||
-          res.status == "NO_CONTENT" ||
-          res.status == "NOT_FOUND" ||
-          res.status == "500"
+          res.status === "NO_CONTENT" ||
+          res.status === "NOT_FOUND" ||
+          res.status === "500"
         ) {
           this.showToaster("Tài khoản hoặc email đã sử dụng", "danger");
         }
-        if (res.status == "OK") {
+        if (res.status === "OK") {
           this.showToaster("Đăng ký tài khoản thành công", "success");
           this.userDetail.reset();
         }
@@ -160,11 +159,10 @@ export class ListjeComponent implements OnInit {
       (res) => {
         this.showToaster("Update thành công", "success");
         this.userDetail.reset();
-        //this.seach();
       },
       (error) => {
         console.log(error);
-        if (error.status == "500") {
+        if (error.status === "500") {
           this.showToaster("Tài khoản hoặc số email đã sử dụng.", "danger");
         }
       }
@@ -173,16 +171,19 @@ export class ListjeComponent implements OnInit {
 
   onChangeActive(id: number) {
     this.userObj.id = id;
-    this.userService.deactivateUser(this.userObj).subscribe((data) => {
-      this.seach();
-      if(data.activate){
+    this.userService.deactivateUser(this.userObj).subscribe(
+      (data) => {
+        this.seach();
+        if (data.activate) {
           this.showToaster("Deactivate User Successfull.", "success");
-      }else{
-        this.showToaster("Successfull.", "success");
+        } else {
+          this.showToaster("Successfull.", "success");
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.showToaster(error.message, "danger");
       }
-    },(error: HttpErrorResponse)=>{
-      this.showToaster(error.message, "danger");
-    });
+    );
   }
 
   showToaster(message: string, typea: any) {
@@ -190,7 +191,7 @@ export class ListjeComponent implements OnInit {
     this.toaster.open({
       text: message,
       caption: "Status",
-      type: type,
+      type,
       duration: 3000,
     });
   }

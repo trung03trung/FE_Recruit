@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { JobRegisterPublic } from "../models/jobRegisterPublic";
 
 @Injectable({
   providedIn: "root",
@@ -21,10 +22,10 @@ export class RecruitmentService {
   }
 
   getDetailJobById(id:number): Observable<any> {
-    return this.http.get<any>(this.getDetailJob+ id);
+    return this.http.get<any>(this.getDetailJob+id);
   }
 
-  registerJob(rjob: any): Observable<any> {
+  registerJob(rjob: JobRegisterPublic): Observable<any> {
     return this.http.post<any>(this.registerJobUrl,rjob);
   }
 }

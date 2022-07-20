@@ -14,7 +14,7 @@ import { DiaglogFormComponent } from './job/diaglog-form/diaglog-form.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
-import { ListjeComponent } from './listje/listje.component';
+import { ListJeComponent } from './list-je/list-je.component';
 import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
 import{StatisticalComponent} from '../../modules/home/statistical/statistical.component';
 import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-update.component';
@@ -50,7 +50,7 @@ const routes: Routes = [{
     },
     {
       path: 'list-je',
-      component: ListjeComponent,
+      component: ListJeComponent,
     },
     {
       path: 'change-the-password',
@@ -87,7 +87,7 @@ const routes: Routes = [{
     DetailJobComponent,
     DiaglogFormComponent,
     ChangethePasswordComponent,
-    ListjeComponent,
+    ListJeComponent,
     DiaglogUpdateComponent,
     DialogRejectComponent,
     JobsRegisterComponent,

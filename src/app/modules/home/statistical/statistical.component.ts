@@ -9,7 +9,6 @@ import {
 
 import { Chart } from "chart.js";
 import { Statistical } from "../../../@core/models/statistical";
-import { TimeForm } from "../../../@core/models/timeForm";
 import { StatisticalService } from "../../../@core/services/statistical.service";
 
 @Component({
@@ -99,16 +98,19 @@ export class StatisticalComponent implements OnInit {
     this.statisticalService.getStatistical(this.seachData.value).subscribe(
       (res) => {
         this.statisticalObj = res[0];
+        console.log(this.statisticalObj);
+        
         this.total_apply = this.statisticalObj.total_apply;
         this.success_recruited_applicant =
           this.statisticalObj.success_recruited_applicant;
+          this.false_applicant = this.statisticalObj.false_applicant
         this.jobs = [
           {
             name: "Ứng tuyển",
             value: this.total_apply,
           },
           {
-            name: "Tuyển thành công",
+            name: "Đã tuyển",
             value: this.success_recruited_applicant,
           },
           {
@@ -117,7 +119,7 @@ export class StatisticalComponent implements OnInit {
           },
         ];
 
-        (this.data[0] = 5),
+          (this.data[0] = 5),
           (this.data[1] = 10),
           (this.data[2] = 11),
           (this.data[3] = 15),
@@ -185,7 +187,4 @@ export class StatisticalComponent implements OnInit {
   onSelect(data): void {
     console.log("Item clicked", JSON.parse(JSON.stringify(data)));
   }
-}
-function currentDate(currentDate: any, arg1: string, arg2: string) {
-  throw new Error("Function not implemented.");
 }

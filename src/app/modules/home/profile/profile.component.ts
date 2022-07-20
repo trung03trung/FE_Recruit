@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import {  Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators,FormControl } from "@angular/forms";
 import { PrimeNGConfig } from "primeng/api";
 import { SessionService } from "../../../@core/services/session.service";
 import { User } from "./profile.model";
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.primengConfig.ripple = true;
+    
     // this.getByUserName();
     this.getByUserName();
     this.initForm();
@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit {
   initForm() {
     this.formProfile = this.fb.group({
       id: [""],
+      file:[""],
       avatarName:[""],
       name: ["", Validators.required],
       email: ["", [Validators.required,Validators.email]],

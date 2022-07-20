@@ -8,7 +8,7 @@
                 
                         <div class="col-sm-6">
                             <div class="search-box">
-                                <i class="material-icons">&#xE8B6;</i>
+                                <i class="material-icons" (change)="onChangeEvent($event)" style="cursor: pointer;">&#xE8B6;</i>
                                 <input type="text" (change)="onChangeEvent($event)"  class="form-control" placeholder="Tên,vị trí,trạng thái&hellip;">
                             </div>
                         </div>

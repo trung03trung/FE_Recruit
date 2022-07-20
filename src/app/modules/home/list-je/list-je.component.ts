@@ -103,6 +103,7 @@ export class ListJeComponent implements OnInit {
       }
     );
   }
+  
   toFormAddUser() {
     console.log(this.userDetail);
   }

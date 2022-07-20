@@ -4,7 +4,7 @@
         <input type="hidden" pInputText class="form-control" formControlName="id">
         <div class="container">
             <img  [src]="dbImage" alt="Avatar"
-                style="width:200px; border-radius: 50%;  margin: 0 auto; margin-bottom: 20px;margin-left: 40%;">
+                style="width:200px; height: 200px; border-radius: 50%;  margin: 0 auto; margin-bottom: 20px;margin-left: 40%;">
                 <input type="file"  accept="image/*" class="mt-5 custom-file-input" style="color: black;" id="importFile" (change)="onSelect($event.target.files)">
                 <label  #labelImport for="importFile" style="color: black;"><i class="fas fa-image"></i> Choose file</label>
                 <input type="hidden" name="fileHidden" formControlName="avatarName"/> 

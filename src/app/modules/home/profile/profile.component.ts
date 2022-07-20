@@ -66,12 +66,11 @@ export class ProfileComponent implements OnInit {
   getByUserName() {
     const userinfo = JSON.parse(localStorage.getItem("auth-user"));
     const name = userinfo.sub;
-    console.log(name);
+  
 
     this.profileService.getProfile(name).subscribe((res) => {
       this.updateForm(res);
       this.user=res;
-      console.log(this.user)
       this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
       this.postResponse = data;
         this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
@@ -130,7 +129,6 @@ export class ProfileComponent implements OnInit {
   }
 
   viewImage() {
-    console.log(this.user.avatarName)
     this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
       this.postResponse = data;
         this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
@@ -146,7 +144,6 @@ export class ProfileComponent implements OnInit {
     this.formProfile.patchValue({
       birthDay:date
     });
-    console.log(this.formProfile.value);
     this.profileService.updateProfile(this.formProfile.value).subscribe(data=>{
       if(data!=null){
         this.showToaster("Cập nhật thành công","success")

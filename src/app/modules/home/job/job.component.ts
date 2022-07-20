@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { catchError } from "rxjs/operators";
 import { job } from "../../../@core/models/job";
 import { JobService } from "../../../@core/services/job.service";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import jsPDF from "jspdf";
-import autoTable from 'jspdf-autotable';
+
 
 import {
   FormControl,
@@ -13,9 +12,9 @@ import {
   Validators,
   FormBuilder,
 } from "@angular/forms";
-// import { jsPDF } from "jspdf";
-// import autoTable from "jspdf-autotable";
+
 import { Toaster } from "ngx-toast-notifications";
+import { table } from "console";
 
 @Component({
   selector: "ngx-job",
@@ -32,12 +31,14 @@ export class JobComponent implements OnInit {
   totalPageNum: Number[] = [];
   index: Number[] = [];
   sortBy = "dueDate";
-  sortSearchBy = "due_date";
+  sortSearchBy = "J.due_date";
   sortDir = "asc";
   isClick = false;
   statusJob;
   name = "";
   isSearch = false;
+  jobChild;
+  pdf=false;
   constructor(
     private jobService: JobService,
     private router: Router,
@@ -115,12 +116,19 @@ export class JobComponent implements OnInit {
       this.sortDir = "asc";
       this.isClick = false;
     }
-    this.sortBy = "name";
-    this.jobService
-      .getAllJob(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
-      .subscribe((data) => {
-        this.getData(data);
-      });
+    this.sortSearchBy = "J.name";
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobService.searchJob(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
+    });
   }
   sortByDueDate() {
     if (!this.isClick) {
@@ -130,44 +138,30 @@ export class JobComponent implements OnInit {
       this.sortDir = "asc";
       this.isClick = false;
     }
-    this.sortBy = "dueDate";
-    this.jobService
-      .getAllJob(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
-      .subscribe((data) => {
-        this.getData(data);
-      });
-  }
-  // exportPDF(id){
-  //   this.jobService.exportPDF(id).subscribe((data =>{
-  //       console.log(data);
-  //   }));
-  // }
-
-  public downloadPDF(job): void {
-    const doc = new jsPDF();
-
-    autoTable(doc, {
-      styles: { font: "Times-Roman, utf-8" },
-      head: [
-        [
-          "Tên công việc",
-          "Vị trí công việc",
-          "Mức lương đề xuất",
-          "Hạn nộp hồ sơ",
-          "Trạng thái",
-        ],
-      ],
-      body: [
-        [
-          job.name,
-          job.jobPosition.code,
-          job.salaryMax,
-          job.dueDate,
-          job.statusJob.code,
-        ],
-      ],
+    this.sortSearchBy = "J.due_date";
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobService.searchJob(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
     });
-    doc.save("thongtinungtuyen.pdf");
+  }
+
+   downloadPDF(id) {
+    console.log(id);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/home/job-pdf/export/'+id])
+   
+    );  
+     
+    window.open(url, '_blank');
+    
   }
 
   changePageSize(e) {
@@ -212,6 +206,11 @@ export class JobComponent implements OnInit {
     this.jobService.changeStatus(id, "Đang tuyển").subscribe((data) => {
       if (data != null) {
         this.showToaster("Đang tuyển tin tuyển dụng thành công", "success");
+        this.jobService
+        .getAllJob(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
+        .subscribe((data) => {
+          this.getData(data);
+        });
       } else {
         this.showToaster("Đang tuyển tin tuyển dụng thất bại", "danger");
       }
@@ -228,8 +227,74 @@ export class JobComponent implements OnInit {
   }
   openNewTab(id){
     const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/public/job/detail/'+id])
+      this.router.createUrlTree(['/public-job/detail/'+id])
     );
     window.open(url, '_blank');
+  }
+  sortByJobPosition(){
+    if (!this.isClick) {
+      this.sortDir = "desc";
+      this.isClick = true;
+    } else {
+      this.sortDir = "asc";
+      this.isClick = false;
+    }
+    this.sortSearchBy = "JB.code";
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobService.searchJob(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
+    });
+  }
+  sortBySalary(){
+    if (!this.isClick) {
+      this.sortDir = "desc";
+      this.isClick = true;
+    } else {
+      this.sortDir = "asc";
+      this.isClick = false;
+    }
+    this.sortSearchBy = "J.salary_max";
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobService.searchJob(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
+    });
+  }
+  sortByStatus(){
+    if (!this.isClick) {
+      this.sortDir = "desc";
+      this.isClick = true;
+    } else {
+      this.sortDir = "asc";
+      this.isClick = false;
+    }
+    this.sortSearchBy = "S.code";
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobService.searchJob(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
+    });
   }
 }

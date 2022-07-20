@@ -25,6 +25,7 @@
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="email">
                         <mat-error *ngIf="formProfile.controls.email.errors?.required && formJob.get('email').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formProfile.controls.email.errors?.email && formJob.get('email').touched">Nhập sai định dạng email</mat-error>
                     </div>
                 </div>
 
@@ -35,8 +36,10 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Số điện thoại</label>
                     <div class="col-9">
+                        
                         <input type="text" pInputText class="form-control" formControlName="phoneNumber">
-                        <mat-error *ngIf="formProfile.controls.phoneNumber.errors?.required && formJob.get('phoneNumber').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formProfile.controls.email.errors?.required && formJob.get('email').touched">Không được để trống</mat-error>
+                        <mat-error *ngIf="formProfile.controls.email.errors?.pattern && formJob.get('email').touched">Nhập sai định dạng</mat-error>
                     </div>
                 </div>
 
@@ -45,7 +48,8 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Ngày sinh</label>
                     <div class="col-9">
-                        <input type="date" pInputText class="form-control" formControlName="birthDay">
+                        <!-- <input type="date" pInputText class="form-control" formControlName="birthDay"> -->
+                        <p-calendar formControlName="birthDay" [touchUI]="true" [showIcon]="true" [maxDate]="currentDate" ></p-calendar>
                         <mat-error *ngIf="formProfile.controls.birthDay.errors?.required && formJob.get('birthDay').touched">Không được để trống</mat-error>
                     </div>
                 </div>
@@ -56,7 +60,7 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Quê quán</label>
                     <div class="col-9">
-                        <input type="text" pInputText class="form-control" formControlName="homeTown">\
+                        <input type="text" pInputText class="form-control" formControlName="homeTown">
                         <mat-error *ngIf="formProfile.controls.homeTown.errors?.required && formJob.get('homeTown').touched">Không được để trống</mat-error>
                     </div>
                 </div>

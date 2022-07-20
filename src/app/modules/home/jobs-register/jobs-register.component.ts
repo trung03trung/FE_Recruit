@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { JobRegisterService } from "../../../@core/services/job-register.service";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dialog-interveiw.component";
+import { DialogreasonComponent } from "./detail-jobregis/dialogreason/dialogreason.component";
 
 @Component({
   selector: "ngx-jobs-register",
@@ -12,7 +13,7 @@ import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dia
 })
 export class JobsRegisterComponent implements OnInit {
   pageNo = 0;
-  pageSize = 2;
+  pageSize = 5;
   totalPage = 0;
   totalJob = 0;
   listJobsRegister: any;
@@ -32,6 +33,13 @@ export class JobsRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.jobRegisterService
+      .getAllJobRegister(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
+      .subscribe((data) => {
+        this.getData(data);
+      });
+  }
+  getDataAPI(){
     this.jobRegisterService
       .getAllJobRegister(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
       .subscribe((data) => {
@@ -105,7 +113,7 @@ export class JobsRegisterComponent implements OnInit {
     }
 
   }
-  sortByDueDate() {
+  onSortBy(field:string){
     if (!this.isClick) {
       this.sortDir = "desc";
       this.isClick = true;
@@ -113,12 +121,19 @@ export class JobsRegisterComponent implements OnInit {
       this.sortDir = "asc";
       this.isClick = false;
     }
-    this.sortBy = "dateRegister";
-    this.jobRegisterService
-      .getAllJobRegister(this.pageNo, this.pageSize, this.sortBy, this.sortDir)
-      .subscribe((data) => {
-        this.getData(data);
-      });
+    this.sortSearchBy = field;
+    const data = {
+      name: this.name,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobRegisterService.searchJobRegister(data).subscribe((data) => {
+      this.getData(data);
+      this.isSearch = true;
+    });
   }
 
   onChangeEvent(event: any) {
@@ -139,7 +154,12 @@ export class JobsRegisterComponent implements OnInit {
   openDialogInterview(jobRegister){
     const dialogRef=this.dialog.open(DialogInterveiwComponent,{
       data:jobRegister});
+      dialogRef.afterClosed().subscribe(data=>this.getDataAPI());
   }
-  
+  openDialogReason(job){
+    const dialogRef=this.dialog.open(DialogreasonComponent,{
+      data:job,
+    });
+  }
 
 }

@@ -14,16 +14,18 @@ import { DiaglogFormComponent } from './job/diaglog-form/diaglog-form.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
-import { ListjeComponent } from './listje/listje.component';
+import { ListJeComponent } from './list-je/list-je.component';
 import { ChangethePasswordComponent } from './change-the-password/change-the-password.component';
 import{StatisticalComponent} from '../../modules/home/statistical/statistical.component';
 import { DiaglogUpdateComponent } from './detail-job/diaglog-update/diaglog-update.component';
 import { DialogRejectComponent } from './detail-job/dialog-reject/dialog-reject.component';
 import { JobsRegisterComponent } from './jobs-register/jobs-register.component';
 import { DetailJobregisComponent } from './jobs-register/detail-jobregis/detail-jobregis.component';
+import { CompanyComponent } from './company/company.component';
 import { DialogreasonComponent } from './jobs-register/detail-jobregis/dialogreason/dialogreason.component';
 import { DialogInterveiwComponent } from './jobs-register/detail-jobregis/dialog-interveiw/dialog-interveiw.component';
 import { ExportPdfComponent } from './job/export-pdf/export-pdf.component';
+
 
 
 
@@ -49,7 +51,7 @@ const routes: Routes = [{
     },
     {
       path: 'list-je',
-      component: ListjeComponent,
+      component: ListJeComponent,
     },
     {
       path: 'change-the-password',
@@ -66,6 +68,10 @@ const routes: Routes = [{
     {
       path:'job-register/detail/:id',
       component:DetailJobregisComponent
+    },
+    {
+      path:'company',
+      component: CompanyComponent
     },
     {
       path: 'job/update',
@@ -86,11 +92,12 @@ const routes: Routes = [{
     DetailJobComponent,
     DiaglogFormComponent,
     ChangethePasswordComponent,
-    ListjeComponent,
+    ListJeComponent,
     DiaglogUpdateComponent,
     DialogRejectComponent,
     JobsRegisterComponent,
     DetailJobregisComponent,
+    CompanyComponent,
     DialogreasonComponent,
     DialogInterveiwComponent,
     ExportPdfComponent,

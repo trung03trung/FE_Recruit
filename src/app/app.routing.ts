@@ -1,13 +1,12 @@
 import {SignupComponent} from "./modules/signup/signup.component";
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import {ActiveAccountComponent} from "./modules/signup/active-account/active-account.component";
 import { ExtraOptions, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "./@core/guards/auth.guard";
-import { ProfileUserPComponent } from "./modules/recruitmentPublic/profileUserP/profileUserP.component";
-import { DetaileJobPComponent } from "./modules/recruitmentPublic/detalJob/detailJob.component";
-import { RecruitmentPublicComponent } from "./modules/recruitmentPublic/recruitmentPublic.component";
-import { PopupApply } from "./modules/recruitmentPublic/popupApply/popupApply.component";
+import { ProfileUserPublicComponent } from "./modules/recruitmentPublic/profile-user-public/profile-user-public.component";
+import { DetaileJobPComponent } from "./modules/recruitmentPublic/detal-job-public/detail-job-public.component";
+import { PopupApply } from "./modules/recruitmentPublic/popup-apply/popup-apply.component";
+import { ChangeThePasswordPublicComponent } from "./modules/recruitmentPublic/change-the-password-public/change-the-password-public.component";
 
 
 export const routes: Routes = [
@@ -17,7 +16,6 @@ export const routes: Routes = [
     loadChildren: () =>
       import("./modules/home/home.module").then((m) => m.HomeModule),
   },
-  //xóa itsol
   {
     path: "auth",
     loadChildren: () =>
@@ -47,10 +45,10 @@ export const routes: Routes = [
   },
   {
     path: 'profile-public',
-    component: ProfileUserPComponent,
+    component: ProfileUserPublicComponent,
   },
   {
-    path:'job/detail/:id',
+    path:'public-job/detail/:id',
     component: DetaileJobPComponent,
   },
   {
@@ -60,11 +58,15 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-    import("./modules/recruitmentPublic/recruitmentPublic.module").then((m) => m.RecruitmentPublicModule),
+    import("./modules/recruitmentPublic/recruitment-public.module").then((m) => m.RecruitmentPublicModule),
   },
   {
-    path: 'job/apply/:id',
+    path: 'public-job/apply/:id',
     component: PopupApply ,
+  },
+  {
+    path: 'change-the-password-public',
+    component: ChangeThePasswordPublicComponent ,
   },
 ];
 

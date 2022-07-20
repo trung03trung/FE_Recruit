@@ -12,7 +12,6 @@ import { SeachUser } from "../models/seachUser";
 export class UserPublicService {
   updateUserUrl: string;
   changthepass: string;
-  private readonly baseUrl = `${environment.apiUrl}auth/`;
   
   constructor(private http: HttpClient) {
     this.updateUserUrl="http://localhost:9090/api/public/updateUser";

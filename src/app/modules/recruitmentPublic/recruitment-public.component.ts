@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import {FormGroup } from "@angular/forms";
 import { job } from "../../@core/models/job";
-import { RecruitmentService } from "../../@core/services/recuitmentP.service";
-import { TokenService } from "../../@core/services/token.service";
-
+import { RecruitmentService } from "../../@core/services/recuitment-public.service";
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 @Component({
   selector: "ngx-recruitment-public",
-  templateUrl: "./recruitmentPublic.component.html",
-  styleUrls: ["./recruitmentPublic.component.scss"],
+  templateUrl: "./recruitment-public.component.html",
+  styleUrls: ["./recruitment-public.component.scss"],
 })
+
 export class RecruitmentPublicComponent implements OnInit {
   [x: string]: any;
   jobDetail: FormGroup;
@@ -16,16 +16,17 @@ export class RecruitmentPublicComponent implements OnInit {
   jobList: job[];
   pageNumber = [1, 2, 3];
   checkloggin = false;
+  userName = '';
+  
+  userMenu = [ { title: 'Thông tin cá nhân' },{ title: 'Đổi mật khẩu' }, { title: 'Đăng xuất'   } ];
   constructor(
-    private formBuilder: FormBuilder,
     private recuitmentse: RecruitmentService,
-    private tokenService :TokenService,
   ) {}
 
   ngOnInit(): void {
     this.checkuser();
     this.initForm();
-    this.getAllJobPublic() 
+    this.getAllJobPublic()
   }
   initForm() {}
 
@@ -33,10 +34,9 @@ export class RecruitmentPublicComponent implements OnInit {
     this.recuitmentse.getAllJob().subscribe(
       (data) => {
         this.jobList = data;
-        //console.log(data);
       },
       (err) => {
-        console.log("error while fetching data.");
+        console.log("error while fetching data."+err);
       }
     );
   }
@@ -48,8 +48,10 @@ export class RecruitmentPublicComponent implements OnInit {
     }
     else{
       const role = userinfo.auth;
+      const sub = userinfo.sub;
       if(role === 'ROLE_ADMIN' || role === 'ROLE_JE' ||role === 'ROLE_USER'){
         this.checkloggin = true;
+        this.userName = sub;
       }
     }
   }

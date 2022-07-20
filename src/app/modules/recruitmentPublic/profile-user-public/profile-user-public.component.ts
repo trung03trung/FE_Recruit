@@ -6,11 +6,11 @@ import { User } from "../../home/profile/profile.model";
 import { ProfileService } from "../../home/profile/profile.service";
 
 @Component({
-  selector: "ngx-profileUserP",
-  templateUrl: "./profileUserP.component.html",
-  styleUrls: ["./profileUserP.component.scss"],
+  selector: "ngx-profile-user-public",
+  templateUrl: "./profile-user-public.component.html",
+  styleUrls: ["./profile-user-public.component.scss"],
 })
-export class ProfileUserPComponent implements OnInit {
+export class ProfileUserPublicComponent implements OnInit {
   [x: string]: any;
   formProfile: FormGroup;
   user: User;
@@ -43,7 +43,7 @@ export class ProfileUserPComponent implements OnInit {
     const userinfo = JSON.parse(localStorage.getItem('auth-user'));
     const name = userinfo.sub;
     console.log(name);
-    
+
     this.profileService.getProfile(name).subscribe(
       (res)=>{
         this.updateForm(res);

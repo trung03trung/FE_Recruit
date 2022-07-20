@@ -1,0 +1,357 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <form [formGroup]="companyDetail">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="inputFirstname">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              id="inputFirstname"
+              placeholder="Name"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.name.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 20 ký tự
+            </mat-error>
+          </div>
+          <div class="col-sm-6">
+            <label for="inputLastname">Email</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              id="inputLastname"
+              placeholder="Email"
+            />
+            <br />
+            <div
+              class="alert-danger"
+              *ngIf="
+                !companyDetail.get('email').valid &&
+                companyDetail.get('email').touched
+              "
+            >
+              Vui lòng nhập một địa chỉ email hợp lệ
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="inputFirstname">Hotline</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputFirstname"
+              formControlName="hotLine"
+              placeholder="Hotline"
+            />
+            <br />
+            <div
+              class="alert-danger"
+              *ngIf="
+                !companyDetail.get('hotLine').valid &&
+                companyDetail.get('hotLine').touched
+              "
+            >
+              Sai định dạng
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="inputLastname">Date Incoporation</label>
+            <input
+              type="date"
+              class="form-control"
+              id="inputLastname"
+              formControlName="dateIncoporation"
+              placeholder="Last name"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="inputAddressLine1">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="description"
+              id="inputAddressLine1"
+              placeholder="Description"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.description.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.description.errors?.minlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự trên 10 ký tự
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.description.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 2000 ký tự
+            </mat-error>
+          </div>
+          <div class="col-sm-6">
+            <label for="inputAddressLine2">Tax Date</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="taxDate"
+              id="inputAddressLine2"
+              placeholder="Tax Date"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="inputCity">Avatar</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputCity"
+              formControlName="avatar"
+              placeholder="Avatar"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.avatar.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.avatar.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+          <div class="col-sm-3">
+            <label for="inputState">Tax Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputState"
+              formControlName="taxCode"
+              placeholder="Tax Code"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxCode.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxCode.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+          <div class="col-sm-3">
+            <label for="inputPostalCode">Tax Place</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="taxPlace"
+              id="inputPostalCode"
+              placeholder="Postal Code"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxPlace.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.taxPlace.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="inputCity">Head Office</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="headOffice"
+              id="inputCity"
+              placeholder="Head Office"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.headOffice.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.headOffice.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+          <div class="col-sm-6">
+            <label for="inputCity">Number Staff</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputCity"
+              formControlName="numberStaff"
+              placeholder="Number Staff"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.numberStaff.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.numberStaff.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="inputWebsite">Backdrop Img</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputWebsite"
+              formControlName="backdropImg"
+              placeholder="Backdrop Img"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.backdropImg.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.backdropImg.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+          <!-- <div class="col-sm-6">
+            <label for="inputContactNumber">Backdrop Img</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputContactNumber"
+              placeholder="Backdrop Img"
+            />
+          </div> -->
+          <div class="col-sm-6">
+            <label for="inputWebsite">Website</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputWebsite"
+              formControlName="linkWeb"
+              placeholder="Website"
+            />
+            <br />
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.linkWeb.errors?.required &&
+                companyDetail.touched
+              "
+            >
+              Không được để trống
+            </mat-error>
+            <mat-error
+              class="alert-danger"
+              *ngIf="
+                companyDetail.controls.linkWeb.errors?.maxlength &&
+                companyDetail.touched
+              "
+            >
+              Ký tự không quá 100 ký tự
+            </mat-error>
+          </div>
+        </div>
+        <button
+          (click)="updateCompany()"
+          type="button"
+          class="btn btn-success px-4 float-right"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

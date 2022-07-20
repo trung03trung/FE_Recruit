@@ -31,9 +31,10 @@ import { StatisticalComponent } from "./modules/home/statistical/statistical.com
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { ToastNotificationsModule } from "ngx-toast-notifications";
 import { MatIconModule } from '@angular/material/icon'
-import { DetaileJobPComponent } from "./modules/recruitmentPublic/detalJob/detailJob.component";
-import { PopupApply } from "./modules/recruitmentPublic/popupApply/popupApply.component";
-
+import { DetaileJobPComponent } from "./modules/recruitmentPublic/detal-job-public/detail-job-public.component";
+import { PopupApply } from "./modules/recruitmentPublic/popup-apply/popup-apply.component";
+import { NbLayoutModule, NbSidebarService } from '@nebular/theme';
+import { ChangeThePasswordPublicComponent } from "./modules/recruitmentPublic/change-the-password-public/change-the-password-public.component";
 const configToast: any = {
   timeOut: 3000,
   positionClass: "toast-top-right",
@@ -50,6 +51,7 @@ const configToast: any = {
     StatisticalComponent,
     DetaileJobPComponent,
     PopupApply,
+    ChangeThePasswordPublicComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,11 +74,11 @@ const configToast: any = {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    ToastrModule.forRoot(configToast),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastNotificationsModule,
     MatIconModule,
+    ToastrModule.forRoot(),  
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -9,15 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
-import { RecruitmentPublicComponent } from './recruitmentPublic.component';
-import { ProfileUserPComponent } from './profileUserP/profileUserP.component';
+import { RecruitmentPublicComponent } from './recruitment-public.component';
+import { ProfileUserPublicComponent } from './profile-user-public/profile-user-public.component';
+
 const routes: Routes = [{
   path: '',
   component: RecruitmentPublicComponent,
   children: [
     // {
     //   path: 'profile-public',
-    //   component: ProfileUserPComponent,
+    //   component: ProfileUserPublicComponent,
     // },
   ],
 }];
@@ -25,7 +26,7 @@ const routes: Routes = [{
 @NgModule({
   declarations: [
     RecruitmentPublicComponent,
-    ProfileUserPComponent
+    ProfileUserPublicComponent
   ],
   imports: [
     CommonModule,

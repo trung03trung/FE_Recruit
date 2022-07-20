@@ -6,21 +6,21 @@ import {
   Validators,
 } from '@angular/forms';
 import { Toaster } from 'ngx-toast-notifications';
-import { UserService } from '../../../@core/services/user.service';
+import { UserPublicService } from '../../../@core/services/user-public.service';
 
 @Component({
   selector: 'ngx-change-password',
-  templateUrl: './change-the-password.component.html',
-  styleUrls: ['./change-the-password.component.scss'],
+  templateUrl: './change-the-password-public.component.html',
+  styleUrls: ['./change-the-password-public.component.scss'],
 })
-export class ChangethePasswordComponent implements OnInit {
+export class ChangeThePasswordPublicComponent implements OnInit {
   [x: string]: any;
   changeThePassw: FormGroup;
   saveNewPass: FormGroup;
   message = '';
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private userPublicService: UserPublicService,
     private toaster: Toaster
   ) {}
 
@@ -58,7 +58,7 @@ export class ChangethePasswordComponent implements OnInit {
     const userinfo = JSON.parse(localStorage.getItem('auth-user'));
     const user = userinfo.sub;
     this.changeThePassw.value.userName = user;
-    this.userService.changeThePassword(this.changeThePassw.value).subscribe(
+    this.userPublicService.changeThePassword(this.changeThePassw.value).subscribe(
       (data) => {
         if (data.body.status == 'BAD_REQUEST') {
           this.showToaster('Mật khẩu hiện tại sai', 'danger');

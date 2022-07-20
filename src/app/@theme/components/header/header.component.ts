@@ -113,7 +113,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const name = userinfo.sub;
     this.profileService.getProfile(name).subscribe((res) => {
       this.user=res;
-      console.log(this.user)
       this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
       this.postResponse = data;
         this.profileService.picture= this.postResponse.image;

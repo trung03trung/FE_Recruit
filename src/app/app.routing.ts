@@ -21,6 +21,13 @@ export const routes: Routes = [
     loadChildren: () =>
       import("./modules/auth/auth.module").then((m) => m.AuthModule),
   },
+  // { path: '',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full',
+  // },
+  // { path: '**',
+  //   redirectTo: 'home',
+  // },
   {
     path: "forgot-password",
     loadChildren: () =>

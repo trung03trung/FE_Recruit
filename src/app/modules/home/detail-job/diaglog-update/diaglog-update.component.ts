@@ -24,6 +24,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
   disableClick = "disableClick";
   dueDateFormat='';
   data=this.jobService.data;
+  currentDate=new Date();
   formJob = new FormGroup({
     id:new FormControl(this.data.name),
     name: new FormControl(this.data.name),
@@ -65,8 +66,8 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       this.userContact = data.users;
     });
     this.initForm();
-    this.formJob.controls.startDate.setValue(formatDate(this.data.startDate,'yyyy-MM-dd','en'));
-    this.formJob.controls.dueDate.setValue(formatDate(this.data.dueDate,'yyyy-MM-dd','en'));
+    this.formJob.controls.startDate.setValue(formatDate(this.data.startDate,'MM/dd/yyyy','en'));
+    this.formJob.controls.dueDate.setValue(formatDate(this.data.dueDate,'MM/dd/yyyy','en'));
   }
   ngDoCheck(): void {
     if (this.formJob.valid) {

@@ -15,6 +15,8 @@ export class DialogInterveiwComponent implements OnInit {
   licensed = "none";
   method;
   loading = "";
+  currentDate=new Date().getTime();
+  date:Date;
   formInterview=new FormGroup({
     id: new FormControl(""),
     dateInterview: new FormControl(""),
@@ -49,9 +51,11 @@ export class DialogInterveiwComponent implements OnInit {
   
   openCombobox() {
     this.licensed = "block";
+    this.formInterview.controls.mediaType.setValue("Skype");
   }
   closeCombobox() {
     this.licensed = "none";
+    this.formInterview.controls.mediaType.setValue("");
   }
   onNoclick(){
     this.dialogRef.close();
@@ -82,5 +86,13 @@ export class DialogInterveiwComponent implements OnInit {
       type: type,
       duration: 3000
     });
+  }
+  validateDate(){
+    this.date=this.formInterview.controls.dateInterview.value;
+    const datetmp=new Date(this.date)
+    if(datetmp.getTime()<this.currentDate)
+        return true;
+    else
+        return false;
   }
 }

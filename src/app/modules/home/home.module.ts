@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -24,8 +24,9 @@ import { DetailJobregisComponent } from './jobs-register/detail-jobregis/detail-
 import { CompanyComponent } from './company/company.component';
 import { DialogreasonComponent } from './jobs-register/detail-jobregis/dialogreason/dialogreason.component';
 import { DialogInterveiwComponent } from './jobs-register/detail-jobregis/dialog-interveiw/dialog-interveiw.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
+import { ExportPdfComponent } from './job/export-pdf/export-pdf.component';
+
+
 
 
 const routes: Routes = [{
@@ -76,6 +77,10 @@ const routes: Routes = [{
       path: 'job/update',
       component: DiaglogUpdateComponent,
     },
+    {
+      path: 'job-pdf/export/:id',
+      component: ExportPdfComponent,
+    },
   ],
 }];
 
@@ -95,6 +100,7 @@ const routes: Routes = [{
     CompanyComponent,
     DialogreasonComponent,
     DialogInterveiwComponent,
+    ExportPdfComponent,
   ],
   imports: [
     CommonModule,
@@ -107,8 +113,6 @@ const routes: Routes = [{
     MatDialogModule,
     ToastrModule.forRoot(),
     MaterialModule,
-    MatDatepickerModule,
-    MatInputModule,
   ],
 })
 export class HomeModule {}

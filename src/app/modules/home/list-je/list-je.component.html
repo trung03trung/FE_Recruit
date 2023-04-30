@@ -1,9 +1,8 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div>
     <form [formGroup]="userDetail">
       <div class="dropdown">
         <div class="">
-          <!-- seach -->
           <div class="input-group rounded row mb-2">
             <button
               class="btn btn-outline-success btnadduser col-2"
@@ -129,423 +128,375 @@
           </a>
         </li>
       </ul>
-    </nav>
-    <!-- Add Users modal -->
-    <div
-      class="modal fade"
-      id="addUser"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <form [formGroup]="userDetail">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLabel">Add New User</h2>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Họ và tên
-                </label>
-                <input
-                  type="text"
-                  formControlName="name"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  aria-describedby="emailHelp"
-                />
-                <br />
-                <mat-error
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.name.errors?.required &&
-                    userDetail.touched
-                  "
-                >
-                  Không được để trống họ và tên
-                </mat-error>
-                <mat-error
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.name.errors?.minlength &&
-                    userDetail.touched
-                  "
-                >
-                  Họ và tên phải trên 5 ký tự
-                </mat-error>
-                <mat-error
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.name.errors?.maxlength &&
-                    userDetail.touched
-                  "
-                >
-                  Họ và tên không quá 20 ký tự
-                </mat-error>
-              </div>
+    </nav> -->
 
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Email
-                </label>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  aria-describedby="emailHelp"
-                />
-                <br />
-                <div *ngIf="message == 'NO_CONTENT'" class="alert-danger">
-                  Email đã tồn tại
-                </div>
-                <div
-                  class="alert-danger"
-                  *ngIf="
-                    !userDetail.get('email').valid &&
-                    userDetail.get('email').touched
-                  "
-                >
-                  Email không hợp lệ
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Phone
-                </label>
-                <input
-                  type="text"
-                  formControlName="phoneNumber"
-                  class="form-control"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  aria-describedby="emailHelp"
-                />
-                <br />
-                <div
-                  class="alert-danger"
-                  *ngIf="
-                    !userDetail.get('phoneNumber').valid &&
-                    userDetail.get('phoneNumber').touched
-                  "
-                >
-                  Số điện thoại không hợp lệ
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >User name
-                </label>
-                <input
-                  type="text"
-                  formControlName="userName"
-                  class="form-control"
-                  id="userName"
-                  name="userName"
-                  aria-describedby="emailHelp"
-                />
-                <br />
-                <div *ngIf="message == 'NOT_FOUND'" class="alert-danger">
-                  Tài khoản đã tồn tại
-                </div>
-                <mat-error
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.userName.errors?.required &&
-                    userDetail.touched
-                  "
-                >
-                  Không được để trống tài khoản
-                </mat-error>
-                <mat-error
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.userName.errors?.minlength &&
-                    userDetail.touched
-                  "
-                >
-                  Tài khoản phải trên 5 ký tự
-                </mat-error>
-                <mat-error
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.userName.errors?.maxlength &&
-                    userDetail.touched
-                  "
-                >
-                  Tài khoản không quá 20 ký tự
-                </mat-error>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Password
-                </label>
-                <input
-                  type="password"
-                  formControlName="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  aria-describedby="emailHelp"
-                />
-                <br />
-                <div
-                  class="alert-danger"
-                  *ngIf="
-                    !userDetail.get('password').valid &&
-                    userDetail.get('password').touched
-                  "
-                >
-                  Vui lòng nhập mật khẩu có 8 - 16 kí tự và có ít nhất 1 chữ và
-                  1 kí tự đặc biệt
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
-                  Confirm password
-                </label>
-                <input
-                  type="password"
-                  formControlName="confirmPassword"
-                  class="form-control"
-                  id="confirmPassword"
-                  aria-describedby="emailHelp"
-                />
-                <br />
-                <div
-                  class="alert-danger"
-                  *ngIf="
-                    userDetail.controls.password.value !==
-                      userDetail.controls.confirmPassword.value &&
-                    userDetail.get('confirmPassword').touched
-                  "
-                >
-                  Mật khẩu không trùng khớp
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  (click)="addUser()"
-                >
-                  Add User
-                </button>
-              </div>
+<div class="table-wrapper">
+  <h2 id="page-heading">
+    <span>Quản lý user</span>
+
+    <button id="jh-create-entity" type="button" data-bs-toggle="modal" data-bs-target="#addUser"
+      class="btn btn-primary float-right jh-create-entity create-area">
+      <i class="fas fa-plus-circle  text-light"></i>
+      <span>
+        Thêm mới User
+      </span>
+    </button>
+  </h2>
+
+
+  <div class="border-top">
+    <div class="container">
+      <form class="ng-pristine ng-valid ng-touched" [formGroup]="userDetail">
+        <div class="card-body row pt-3">
+          <div class="form-group col-sm-3 row p-0 m-0 pt-3">
+            <div class="col-sm-3 pl-0 pt-2 text-sm-left"><label>Username</label></div>
+            <div class="col-sm-9 pr-0"><input type="text" formControlName="userName" placeholder="Thông tin tìm kiếm"
+                class="form-control ng-pristine ng-valid ng-touched" ng-reflect-name="code"></div>
+          </div>
+          <div class="form-group col-sm-3 row p-0 m-0 pt-3" style="padding-right: 120px;">
+            <div class="col-sm-3 pl-0 pt-2 text-sm-right"><label>Họ tên</label></div>
+            <div class="col-sm-9 pr-0">
+              <!--                            <input type="text" formControlName="name" placeholder="Nhập tên điều kiện" class="form-control ng-pristine ng-valid ng-touched">-->
+              <input type="text" class="form-control" formControlName="name" list="types"
+                placeholder="Thông tin tìm kiếm" />
+              <datalist id="types">
+                <!-- <option *ngFor="let productType of productTypes">{{productType.productName}}</option> -->
+              </datalist>
             </div>
+          </div>
+          <div class="form-group col-sm-3 row p-0 ml-3 pt-3">
+            <div class="col-sm-3 pl-0 pt-2"><label>Trạng thái</label></div>
+            <div class="col-sm-9 pr-0">
+              <select formControlName="status" class="form-control ng-pristine ng-valid ng-touched">
+                <option value="" selected="selected">Tất cả</option>
+                <option value="ACTIVE">Đẫ kích hoạt</option>
+                <option value="INACTIVE">Chưa kích hoạt</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-sm-2 p-0 m-0 pt-3 text-right">
+            <button class="btn btn-group" (click)="seach()" style="background-color:  #ea0606;color:white;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16 "
+                class="bi bi-search font-weight-bold" style="margin-top: 4%; margin-right: 4px;">
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                </path>
+              </svg>
+              Tìm kiếm
+            </button>
           </div>
         </div>
       </form>
     </div>
   </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" aria-describedby="page-heading">
+      <thead class="text-center">
+        <tr>
+          <th scope="col"><span>STT</span> </th>
+          <th scope="col"><span>Username</span> </th>
+          <th scope="col"><span>Họ tên</span> </th>
+          <th scope="col"><span>Email</span> </th>
+          <th scope="col"><span>Số điện thoại</span> </th>
+          <th scope="col"><span>Trạng thái</span> </th>
+          <th scope="col"><span>Thao tác</span></th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngIf="userList.length==0">
+          <td class="text-center" colspan="11">Không tìm thấy bản ghi thoả mãn điều kiện</td>
+        </tr>
+        <tr *ngFor="let user of userList;let i=index;">
+          <td>{{ i+1 }}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phoneNumber}} </td>
+          <td>
+            <p *ngIf="user.activate">Đã kích hoạt</p>
+            <p *ngIf="!user.activate">Chưa Kích hoạt</p>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" (click)="editUser(user)"
+                data-bs-target="#editUser" style="margin-right: 4px">
+                Edit
+              </button>
+
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                (click)="onChangeActive(user.id)">
+                <div *ngIf="user.activate">Deactivate</div>
+                <div *ngIf="!user.activate">Activate</div>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="clearfix">
+    <div class="hint-text">Hiển thị <b><select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table"
+          class="form-control-sm">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select></b> mục</div>
+    <!-- <ul class="pagination" *ngFor="let page of totalPageNum">
+              <li *ngIf="page==pageNo" class="page-item active" ><a class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
+              <li *ngIf="page!=pageNo" class="page-item" ><a routerLink="/home/job/detail"  class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
+          </ul> -->
+  </div>
+
+
+
+  <!-- Add Users modal -->
+  <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form [formGroup]="userDetail">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">Add New User</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Họ và tên
+              </label>
+              <input type="text" formControlName="name" class="form-control" id="name" name="name"
+                aria-describedby="emailHelp" />
+              <br />
+              <mat-error class="alert-danger" *ngIf="
+                    userDetail.controls.name.errors?.required &&
+                    userDetail.touched
+                  ">
+                Không được để trống họ và tên
+              </mat-error>
+              <mat-error class="alert-danger" *ngIf="
+                    userDetail.controls.name.errors?.minlength &&
+                    userDetail.touched
+                  ">
+                Họ và tên phải trên 5 ký tự
+              </mat-error>
+              <mat-error class="alert-danger" *ngIf="
+                    userDetail.controls.name.errors?.maxlength &&
+                    userDetail.touched
+                  ">
+                Họ và tên không quá 20 ký tự
+              </mat-error>
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email
+              </label>
+              <input type="email" formControlName="email" class="form-control" id="email" name="email"
+                aria-describedby="emailHelp" />
+              <br />
+              <div *ngIf="message == 'NO_CONTENT'" class="alert-danger">
+                Email đã tồn tại
+              </div>
+              <div class="alert-danger" *ngIf="
+                    !userDetail.get('email').valid &&
+                    userDetail.get('email').touched
+                  ">
+                Email không hợp lệ
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Phone
+              </label>
+              <input type="text" formControlName="phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber"
+                aria-describedby="emailHelp" />
+              <br />
+              <div class="alert-danger" *ngIf="
+                    !userDetail.get('phoneNumber').valid &&
+                    userDetail.get('phoneNumber').touched
+                  ">
+                Số điện thoại không hợp lệ
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">User name
+              </label>
+              <input type="text" formControlName="userName" class="form-control" id="userName" name="userName"
+                aria-describedby="emailHelp" />
+              <br />
+              <div *ngIf="message == 'NOT_FOUND'" class="alert-danger">
+                Tài khoản đã tồn tại
+              </div>
+              <mat-error class="alert-danger" *ngIf="
+                    userDetail.controls.userName.errors?.required &&
+                    userDetail.touched
+                  ">
+                Không được để trống tài khoản
+              </mat-error>
+              <mat-error class="alert-danger" *ngIf="
+                    userDetail.controls.userName.errors?.minlength &&
+                    userDetail.touched
+                  ">
+                Tài khoản phải trên 5 ký tự
+              </mat-error>
+              <mat-error class="alert-danger" *ngIf="
+                    userDetail.controls.userName.errors?.maxlength &&
+                    userDetail.touched
+                  ">
+                Tài khoản không quá 20 ký tự
+              </mat-error>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Password
+              </label>
+              <input type="password" formControlName="password" class="form-control" id="password" name="password"
+                aria-describedby="emailHelp" />
+              <br />
+              <div class="alert-danger" *ngIf="
+                    !userDetail.get('password').valid &&
+                    userDetail.get('password').touched
+                  ">
+                Vui lòng nhập mật khẩu có 8 - 16 kí tự và có ít nhất 1 chữ và
+                1 kí tự đặc biệt
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">
+                Confirm password
+              </label>
+              <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword"
+                aria-describedby="emailHelp" />
+              <br />
+              <div class="alert-danger" *ngIf="
+                    userDetail.controls.password.value !==
+                      userDetail.controls.confirmPassword.value &&
+                    userDetail.get('confirmPassword').touched
+                  ">
+                Mật khẩu không trùng khớp
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addUser()">
+                Add User
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
 
   <!-- Edit User modal -->
-  <div
-    class="modal fade"
-    id="editUser"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Edit User Details</h2>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form [formGroup]="userDetail">
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >ID (không thể thay đổi)
+              <label for="exampleInputEmail1" class="form-label">ID (không thể thay đổi)
               </label>
-              <input
-                type="id"
-                formControlName="id"
-                class="form-control"
-                id="id"
-                name="id"
-                aria-describedby="emailHelp"
-              />
+              <input type="id" formControlName="id" class="form-control" id="id" name="id"
+                aria-describedby="emailHelp" />
               <br />
-              <div
-                *ngIf="
+              <div *ngIf="
                   userDetail.controls.password.value !==
                   userDetail.controls.password.value
-                "
-              >
+                ">
                 ID không thể thay đổi
               </div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >Họ và tên
+              <label for="exampleInputEmail1" class="form-label">Họ và tên
               </label>
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                id="name"
-                name="name"
-                aria-describedby="emailHelp"
-              />
+              <input type="text" formControlName="name" class="form-control" id="name" name="name"
+                aria-describedby="emailHelp" />
               <br />
-              <mat-error
-                class="alert-danger"
-                *ngIf="
+              <mat-error class="alert-danger" *ngIf="
                   userDetail.controls.name.errors?.required &&
                   userDetail.touched
-                "
-              >
+                ">
                 Không được để trống họ và tên
               </mat-error>
-              <mat-error
-                class="alert-danger"
-                *ngIf="
+              <mat-error class="alert-danger" *ngIf="
                   userDetail.controls.name.errors?.minlength &&
                   userDetail.touched
-                "
-              >
+                ">
                 Họ và tên phải trên 5 ký tự
               </mat-error>
-              <mat-error
-                class="alert-danger"
-                *ngIf="
+              <mat-error class="alert-danger" *ngIf="
                   userDetail.controls.name.errors?.maxlength &&
                   userDetail.touched
-                "
-              >
+                ">
                 Họ và tên không quá 20 ký tự
               </mat-error>
             </div>
 
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email </label>
-              <input
-                type="email"
-                formControlName="email"
-                class="form-control"
-                id="email"
-                name="email"
-                aria-describedby="emailHelp"
-              />
+              <input type="email" formControlName="email" class="form-control" id="email" name="email"
+                aria-describedby="emailHelp" />
               <br />
               <div *ngIf="message == 'NO_CONTENT'" class="alert-danger">
                 Email đã tồn tại
               </div>
-              <div
-                class="alert-danger"
-                *ngIf="
+              <div class="alert-danger" *ngIf="
                   !userDetail.get('email').valid &&
                   userDetail.get('email').touched
-                "
-              >
+                ">
                 Email không hợp lệ
               </div>
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Phone </label>
-              <input
-                type="text"
-                formControlName="phoneNumber"
-                class="form-control"
-                id="phoneNumber"
-                name="phoneNumber"
-                aria-describedby="emailHelp"
-              />
+              <input type="text" formControlName="phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber"
+                aria-describedby="emailHelp" />
               <br />
-              <div
-                class="alert-danger"
-                *ngIf="
+              <div class="alert-danger" *ngIf="
                   !userDetail.get('phoneNumber').valid &&
                   userDetail.get('phoneNumber').touched
-                "
-              >
+                ">
                 Số điện thoại không hợp lệ
               </div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >User name
+              <label for="exampleInputEmail1" class="form-label">User name
               </label>
-              <input
-                type="text"
-                formControlName="userName"
-                class="form-control"
-                id="userName"
-                name="userName"
-                aria-describedby="emailHelp"
-              />
+              <input type="text" formControlName="userName" class="form-control" id="userName" name="userName"
+                aria-describedby="emailHelp" />
               <br />
               <div *ngIf="message == 'NOT_FOUND'" class="alert-danger">
                 Tài khoản đã tồn tại
               </div>
-              <mat-error
-                class="alert-danger"
-                *ngIf="
+              <mat-error class="alert-danger" *ngIf="
                   userDetail.controls.userName.errors?.required &&
                   userDetail.touched
-                "
-              >
+                ">
                 Không được để trống tài khoản
               </mat-error>
-              <mat-error
-                class="alert-danger"
-                *ngIf="
+              <mat-error class="alert-danger" *ngIf="
                   userDetail.controls.userName.errors?.minlength &&
                   userDetail.touched
-                "
-              >
+                ">
                 Tài khoản phải trên 5 ký tự
               </mat-error>
-              <mat-error
-                class="alert-danger"
-                *ngIf="
+              <mat-error class="alert-danger" *ngIf="
                   userDetail.controls.userName.errors?.maxlength &&
                   userDetail.touched
-                "
-              >
+                ">
                 Tài khoản không quá 20 ký tự
               </mat-error>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close
               </button>
-              <button
-                type="button"
-                id="GFG_Button"
-                class="btn btn-outline-success"
-                (click)="updateUser()"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" id="GFG_Button" class="btn btn-outline-success" (click)="updateUser()"
+                data-bs-dismiss="modal">
                 Update
               </button>
               <!-- enter button -->

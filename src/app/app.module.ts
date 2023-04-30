@@ -35,6 +35,7 @@ import { DetaileJobPComponent } from "./modules/recruitmentPublic/detal-job-publ
 import { PopupApply } from "./modules/recruitmentPublic/popup-apply/popup-apply.component";
 import { NbLayoutModule, NbSidebarService } from '@nebular/theme';
 import { ChangeThePasswordPublicComponent } from "./modules/recruitmentPublic/change-the-password-public/change-the-password-public.component";
+import { NgApexchartsModule } from "ng-apexcharts";
 const configToast: any = {
   timeOut: 3000,
   positionClass: "toast-top-right",
@@ -79,6 +80,7 @@ const configToast: any = {
     ToastNotificationsModule,
     MatIconModule,
     ToastrModule.forRoot(),  
+    NgApexchartsModule,
   ],
   bootstrap: [AppComponent],
   providers: [

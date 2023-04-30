@@ -1,4 +1,4 @@
-<h1>Cập nhật</h1>
+<!-- <h1>Cập nhật</h1>
     <form class="pb-5" [formGroup]="formJob">
         <input type="hidden"  formControlName="id">
         <div class="form-row mb-3">
@@ -99,7 +99,6 @@
                 <div class="row">
                     <label class="label col-4 col-form-label">Hạn nộp hồ sơ</label>
                     <div class="col-8">
-                        <!-- <input type="date" pInputText class="form-control" formControlName="dueDate"> -->
                         <p-calendar formControlName="dueDate" [touchUI]="true" [showIcon]="true" [minDate]="currentDate" ></p-calendar>
                         <mat-error *ngIf="formJob.controls.dueDate.errors?.required && formJob.get('dueDate').touched">Không được để trống</mat-error>
                     </div>
@@ -131,7 +130,6 @@
                 <div class="row">
                     <label class="label col-sm-4 col-form-label">Ngày bắt đầu</label>
                     <div class="col-8">
-                        <!-- <input type="date" pInputText class="form-control" formControlName="startDate" > -->
                         <p-calendar formControlName="startDate" [touchUI]="true" [showIcon]="true" [minDate]="currentDate" ></p-calendar>
                         <mat-error *ngIf="formJob.controls.startDate.errors?.required && formJob.get('startDate').touched">Không được để trống</mat-error>
                     </div>
@@ -195,6 +193,163 @@
             <button class="btn btn-primary"(click)="onClose()" type="button">Đóng</button>
         </div>
  </form>
-   
-
-
+ -->    
+ <div class="modal-content">
+    <div>
+        <div class="row justify-content-center" style="margin-left: 0px;margin-right: 0px;">
+            <div class="col-12 mb-4" style="height: auto;">
+                <form [formGroup]="formJob">
+                    <div class="modal-header">
+                        <h2 class="ml-4">Cập nhật</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                >&times;</button>
+                    </div>
+                    <div class="row border-top pt-5 pl-3">
+                        <div class="form-group col-sm-6 pb-0 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Tên công việc </label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="255"  formControlName="name" id="field_code" class="form-control" placeholder="Nhập tên" >
+                                <small *ngIf="formJob.controls.name.errors?.required && formJob.get('name').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 ml-3 pb-0 row">
+                            <label for="field_unit" class="form-control-label col-sm-3">Vị trí </label>
+                            <div class="col-sm-9">
+                                <select formControlName="jobPositionId" id="field_unit" class="form-control"  [(ngModel)]="data.jobPosition.id">
+                                    <option value="">Chọn vị trí</option>
+                                    <option *ngFor="let jp of jobPosition" [ngValue]="jp.id">{{jp.code}}</option>
+                                </select>
+                                <small *ngIf="formJob.controls.jobPositionId.errors?.required && formJob.get('jobPositionId').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3  pb-0 row">
+                            <label for="field_frequency" class="form-control-label col-sm-3">Năm kinh nghiệm </label>
+                            <div class="col-sm-9">
+                                <input type="number" formControlName="numberExperience"  class="form-control ng-pristine ng-valid" placeholder="Nhập năm kinh nghiệm">
+                                <small *ngIf="formJob.controls.numberExperience.errors?.required && formJob.get('numberExperience').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 ml-3 mt-3  pb-0 row">
+                            <label for="field_unit" class="form-control-label col-sm-3">Hình thức làm việc</label>
+                            <div class="col-sm-9">
+                                <select formControlName="workingFormId" id="field_unit" class="form-control" [(ngModel)]="data.workingForm.id">
+                                    <option value="">Chọn hình thức</option>
+                                    <option *ngFor="let wf of workingForm"  [ngValue]="wf.id">{{wf.code}}</option>
+                                </select>
+                                <small *ngIf="formJob.controls.workingFormId.errors?.required && formJob.get('workingFormId').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 pb-0 mt-3  row">
+                            <label for="field_code" class="form-control-label col-sm-3">Địa chỉ </label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="255" formControlName="addressWork" id="field_code" class="form-control" placeholder="Nhập địa chỉ" >
+                                <small *ngIf="formJob.controls.addressWork.errors?.required && formJob.get('addressWork').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 ml-3 mt-3 pb-0 row">
+                            <label for="field_unit" class="form-control-label col-sm-3">Trình độ học vấn</label>
+                            <div class="col-sm-9">
+                                <select formControlName="academicLevelId" id="field_unit" class="form-control" [(ngModel)]="data.academicLevel.id">
+                                    <option value="">Chọn trình độ</option>
+                                    <option *ngFor="let al of academicLevel; let l = last" [ngValue]="al.id" >{{al.code}}</option>
+                                </select>
+                                <small *ngIf="formJob.controls.academicLevelId.errors?.required && formJob.get('academicLevelId').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3 pb-0 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Số lượng cần tuyển </label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="255" formControlName="qtyPerson" id="field_code" class="form-control" placeholder="Nhập số lượng" >
+                                <small *ngIf="formJob.controls.qtyPerson.errors?.required && formJob.get('qtyPerson').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 ml-3 mt-3 pb-0 row">
+                            <label for="field_unit" class="form-control-label col-sm-3">Level</label>
+                            <div class="col-sm-9">
+                                <select formControlName="rankId" id="field_unit" class="form-control"  [(ngModel)]="data.rank.id">
+                                    <option value="">Chọn level </option>
+                                    <option *ngFor="let r of rank" [ngValue]="r.id">{{r.code}}</option>
+                                </select>
+                                <small *ngIf="formJob.controls.rankId.errors?.required && formJob.get('rankId').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3 pb-0 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Hạn nộp hồ sơ </label>
+                            <div class="col-sm-9">
+                                <input formControlName="dueDate" type="date" class="form-control" >
+                                <small  *ngIf="formJob.controls.dueDate.errors?.required && formJob.get('dueDate').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 ml-3 mt-3 pb-0 row">
+                            <label for="field_unit" class="form-control-label col-sm-3">Người liên hệ</label>
+                            <div class="col-sm-9">
+                                <select formControlName="userContactId" id="field_unit" class="form-control" [(ngModel)]="data.userContact.id">
+                                    <option value="">Chọn người liên hệ</option>
+                                    <option *ngFor="let uc of userContact"  [ngValue]="uc.id">{{uc.userName}}</option>
+                                </select>
+                                <small *ngIf="formJob.controls.rankId.errors?.required && formJob.get('userContactId').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3 pb-0 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Kĩ năng </label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="255" formControlName="skills" id="field_code" class="form-control" placeholder="Nhập kĩ năng" >
+                                <small *ngIf="formJob.controls.skills.errors?.required && formJob.get('skills').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3 pb-0 ml-3 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Ngày bắt đầu </label>
+                            <div class="col-sm-9">
+                                <input formControlName="startDate" type="date" class="form-control" >
+                                <small  *ngIf="formJob.controls.startDate.errors?.required && formJob.get('startDate').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3 pb-0 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Mức lương tối thiểu </label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="255" formControlName="salaryMin" id="field_code" class="form-control" placeholder="Nhập mức lương" >
+                                <small *ngIf="formJob.controls.salaryMin.errors?.required && formJob.get('salaryMin').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mt-3 ml-3 pb-0 row">
+                            <label for="field_code" class="form-control-label col-sm-3">Mức lương tối đa </label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="255" formControlName="salaryMax"  id="field_code" class="form-control" placeholder="Nhập mức lương" >
+                                <small *ngIf="formJob.controls.salaryMax.errors?.required && formJob.get('salaryMax').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12 pb-0 mt-3 row justify-content-end">
+                            <label for="field_slip" class="form-control-label col-sm-1" style="margin-right: 3.1rem;" >Mô tả công việc </label>
+                            <div class="col-sm-10" style="flex: 0 0 87.83333333%; max-width: 87.83333333%;">
+                                <textarea type="text" maxlength="1000" formControlName="description" id="field_slip" class="form-control area ng-pristine ng-valid" placeholder="Nhập mô tả"></textarea>
+                                <small *ngIf="formJob.controls.description.errors?.required && formJob.get('description').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12 pb-0 mt-3 row justify-content-end">
+                            <label for="field_slip" class="form-control-label col-sm-1" style="margin-right: 3.1rem;" >Yêu cầu công việc </label>
+                            <div class="col-sm-10" style="flex: 0 0 87.83333333%; max-width: 87.83333333%;">
+                                <textarea type="text" maxlength="1000" formControlName="jobRequirement" id="field_slip" class="form-control area ng-pristine ng-valid" placeholder="Nhập yêu cầu"></textarea>
+                                <small *ngIf="formJob.controls.jobRequirement.errors?.required && formJob.get('jobRequirement').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12 pb-0 mt-3 row justify-content-end">
+                            <label for="field_slip" class="form-control-label col-sm-1" style="margin-right: 3.1rem;" >Quyền lợi được hưởng </label>
+                            <div class="col-sm-10" style="flex: 0 0 87.83333333%; max-width: 87.83333333%;">
+                                <textarea type="text" maxlength="1000"  formControlName="interrest" id="field_slip" class="form-control area ng-pristine ng-valid" placeholder="Nhập quyền lợi"></textarea>
+                                <small *ngIf="formJob.controls.interrest.errors?.required && formJob.get('interrest').touched" class="text-danger">Không được để trống</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center pt-2">
+                        <button (click)="onSubmit()"  [disabled]="!this.formJob.valid"  style="background-color: #ea0606; "  type="button" id="update-entity" class="btn btn-primary" >
+                            <i class="fas fa-check-circle text-light"></i>&nbsp;<span>Cập nhật</span>
+                        </button>
+                        <button type="button" routerLink="/home/job" id="cancel-save" class="btn btn-secondary ml-2">
+                            <i icon="times" class="ng-fa-icon" ></i>&nbsp;<span>Hủy</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

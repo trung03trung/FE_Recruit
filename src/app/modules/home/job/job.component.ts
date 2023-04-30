@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { catchError } from "rxjs/operators";
+import { saveAs } from 'file-saver';
 import { job } from "../../../@core/models/job";
 import { JobService } from "../../../@core/services/job.service";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
@@ -44,7 +45,7 @@ export class JobComponent implements OnInit {
     private jobService: JobService,
     private router: Router,
     private dialog: MatDialog,
-    private toaster: Toaster
+    private toaster: Toaster,
   ) {}
 
   ngOnInit(): void {
@@ -107,6 +108,9 @@ export class JobComponent implements OnInit {
   }
   getDetail(job: job) {
     this.router.navigate([`/home/job/detail?id=${job.id}`]);
+  }
+  getDetailJob(id:any){
+    this.router.navigate([`/home/job/detail/${id}`]);
   }
   openFormAdd() {
     console.log(1);
@@ -300,6 +304,20 @@ export class JobComponent implements OnInit {
     this.jobService.searchJob(data).subscribe((data) => {
       this.getData(data);
       this.isSearch = true;
+    });
+  }
+
+  openDialog(job:any){
+    this.jobService.tranferData(job);
+   this.router.navigate(['home/job/update']);
+  };
+  exportExcelFile(): void {
+    this.jobService.exportData().subscribe(response => {
+      // eslint-disable-next-line no-console
+      console.log(response.headers.get('Content-Type'));
+      const blob: any = new Blob([response], { type: 'application/vnd.ms-excel' });
+      const url = window.URL.createObjectURL(blob);
+      saveAs(blob, 'FILE_EXPORT_JOB');
     });
   }
 }

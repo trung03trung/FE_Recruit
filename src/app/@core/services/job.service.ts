@@ -22,6 +22,12 @@ const httpOptionspdf = {
   }),
 };
 
+const httpOptionsFile = new HttpHeaders({
+    'Content-Type': 'application/octet-stream',
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  });
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -85,6 +91,10 @@ export class JobService {
 
   public searchJob(data:any):Observable<any>{
     return this.http.post(`${this.baseUrl}job/search`,data,httpOptions);
+  }
+
+  public exportData():Observable<any>{
+    return this.http.get(`${this.baseUrl}job/export-data`,{headers:httpOptionsFile,observe: 'response' ,responseType: 'blob'});
   }
 
 }

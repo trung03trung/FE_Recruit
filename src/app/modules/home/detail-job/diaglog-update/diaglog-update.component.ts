@@ -5,7 +5,7 @@ import { JobService } from "../../../../@core/services/job.service";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Toaster } from "ngx-toast-notifications";
 import { Router } from "@angular/router";
-import { formatDate } from '@angular/common' 
+import { DatePipe, formatDate } from '@angular/common' 
 
 @Component({
   selector: "ngx-diaglog-update",
@@ -66,8 +66,6 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       this.userContact = data.users;
     });
     this.initForm();
-    this.formJob.controls.startDate.setValue(formatDate(this.data.startDate,'MM/dd/yyyy','en'));
-    this.formJob.controls.dueDate.setValue(formatDate(this.data.dueDate,'MM/dd/yyyy','en'));
   }
   ngDoCheck(): void {
     if (this.formJob.valid) {
@@ -78,8 +76,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
   }
   initForm() {
     
-    let date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(this.data.dueDate)
-    console.log(this.data.dueDate);
+  
     
     this.formJob = this.fb.group({
       id:[this.data.id],
@@ -91,7 +88,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       academicLevelId:["",Validators.required],
       qtyPerson:[this.data.qtyPerson,[Validators.required,Validators.pattern('^[0-9]{1,3}$')]],
       rankId:["",Validators.required],
-      dueDate:["",Validators.required],
+      dueDate:[formatDate(this.data.dueDate, 'yyyy-MM-dd', 'en'),Validators.required],
       skills:[this.data.skills,Validators.required],
       description:[this.data.description,Validators.required],
       salaryMin:[this.data.salaryMin,[Validators.required,Validators.minLength(7),Validators.maxLength(20),Validators.pattern('^[0-9]{7,20}$')]],
@@ -99,7 +96,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       userContactId:["",Validators.required],
       jobRequirement:[this.data.jobRequirement,Validators.required],
       interrest: [this.data.interrest, Validators.required],
-      startDate:["",Validators.required],
+      startDate:[formatDate(this.data.startDate, 'yyyy-MM-dd', 'en'),Validators.required],
       userCreate:[this.userCreateName],
     });
   }

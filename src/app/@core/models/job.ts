@@ -1,3 +1,4 @@
+import { ApexChart, ApexNonAxisChartSeries, ApexResponsive } from "ng-apexcharts";
 import { Users } from "./user";
 import { User } from "./user.model";
 
@@ -59,3 +60,9 @@ export class job{
     isDelete?: boolean;
 
 }
+export type PieChartOptions = {
+    series: ApexNonAxisChartSeries;
+    chart: ApexChart;
+    responsive: ApexResponsive[];
+    labels: any;
+  };

@@ -55,10 +55,7 @@ export class AuthComponent implements OnInit, DoCheck {
         Validators.minLength(5),
         Validators.maxLength(20),
       ]),
-      password: new FormControl("", [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(18),
+      password: new FormControl('', [
         //Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$')
       ]),
     });

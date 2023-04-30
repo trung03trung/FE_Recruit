@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
     <div class="container p-0">
         <div class="table-responsive">
             <div class="table-wrapper">
@@ -8,19 +8,17 @@
                 
                         <div class="col-sm-5">
                             <button  type="button" class="btn btn-primary" (click)="openFormAdd()"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
                                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
                                         </svg>
                                     </span>
-                                <!--end::Svg Icon-->Thêm mới
+                                Thêm mới
                                 </button>
                             <div class="search-box">
                                 <i class="material-icons" (click)="onChangeEvent($event)" style="cursor: pointer;">&#xE8B6;</i>
                                 <input type="text" (change)="onChangeEvent($event)" class="form-control" placeholder="Tên,vị trí,trạng thái&hellip;">
-                                <!-- <button type="submit" class="btn btn-search btn-primary btn-primary-hover"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button> -->
                             </div>
                         </div>
                     </div>
@@ -66,10 +64,8 @@
                             <option value="15">15</option>
                         </select></b> mục</div>
                     <ul class="pagination" *ngFor="let page of totalPageNum">
-                        <!-- <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li> -->
                         <li *ngIf="page==pageNo" class="page-item active" ><a class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
                         <li *ngIf="page!=pageNo" class="page-item" ><a routerLink="/home/job/detail"  class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
-                        <!-- <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li> -->
                     </ul>
                 </div>
             </div>
@@ -79,4 +75,118 @@
 
 
 
+ -->
+ <div class="table-wrapper">
+    <h2 id="page-heading">
+        <span>Tin tuyển dụng</span>
 
+        <button id="jh-create-entity" type="button"  (click)="openFormAdd()" class="btn btn-primary float-right jh-create-entity create-area">
+            <i class="fas fa-plus-circle  text-light"></i>
+            <span>
+            Thêm mới
+            </span>
+        </button>
+        <button  id="jh-import" type="button" (click)="exportExcelFile()"  class="btn btn-outline-dark float-right mr-2 jh-create-entity create-area">
+            <i class="fas fa-upload "></i>
+            <span>
+            Xuất Excel
+            </span>
+        </button>
+    </h2>
+
+
+    <div class="border-top">
+        <div class="container">
+            <form  class="ng-pristine ng-valid ng-touched">
+                <div class="card-body row pt-3">
+                    <div class="form-group col-sm-3 row p-0 m-0 pt-3">
+                        <div class="col-sm-3 pl-0 pt-2 text-sm-left"><label >Tên công việc</label></div>
+                        <div class="col-sm-9 pr-0"><input type="text" formControlName="code" placeholder="Thông tin tìm kiếm"  class="form-control ng-pristine ng-valid ng-touched" ng-reflect-name="code"></div>
+                    </div>
+                    <div class="form-group col-sm-3 row p-0 m-0 pt-3" style="padding-right: 120px;">
+                        <div class="col-sm-3 pl-0 pt-2 text-sm-right"><label >Vị trí</label></div>
+                        <div class="col-sm-9 pr-0">
+<!--                            <input type="text" formControlName="name" placeholder="Nhập tên điều kiện" class="form-control ng-pristine ng-valid ng-touched">-->
+                            <input type="text" class="form-control" formControlName="productType" list="types" placeholder="Thông tin tìm kiếm" />
+                            <datalist id="types">
+                                <!-- <option *ngFor="let productType of productTypes">{{productType.productName}}</option> -->
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3 row p-0 ml-3 pt-3">
+                        <div class="col-sm-3 pl-0 pt-2"><label>Trạng thái</label></div>
+                        <div class="col-sm-9 pr-0">
+                            <select formControlName="status"  class="form-control ng-pristine ng-valid ng-touched">
+                                <option value="" selected="selected">Tất cả</option>
+                                <option value="ACTIVE">Đang hoạt động</option>
+                                <option value="INACTIVE">Dừng hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2 p-0 m-0 pt-3 text-right">
+                        <button class="btn btn-group" (click)="onChangeEvent($event)"  style="background-color:  #ea0606;color:white;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16 " class="bi bi-search font-weight-bold" style="margin-top: 4%; margin-right: 4px;">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                            </svg>
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" aria-describedby="page-heading">
+            <thead class="text-center">
+            <tr>
+                <th scope="col"  ><span >STT</span> </th>
+                <th scope="col"  ><span >Tên công việc</span> </th>
+                <th scope="col" ><span >Vị trí công việc</span> </th>
+                <th scope="col" ><span>Mức lương đề xuất</span> </th>
+                <th scope="col" ><span>Hạn nộp hồ sơ</span> </th>
+                <th scope="col" ><span>Trạng thái</span> </th>
+                <th scope="col" ><span>Thống kê</span></th>
+                <th scope="col"><span>Thao tác</span></th>
+            </tr>
+            </thead>
+            <tbody class="text-center">
+            <tr *ngIf="listJob.length==0">
+                <td class="text-center" colspan="11">Không tìm thấy bản ghi thoả mãn điều kiện</td>
+            </tr>
+            <tr *ngFor="let job of listJob;let i=index;">
+                <td>{{ i+1 }}</td>
+                <td >{{job?.name}}</td>
+                <td>{{job?.jobPosition?.code}}</td>
+                <td>{{job?.salaryMax}}</td>
+                <td>{{job?.dueDate|date:'dd/MM/yyyy'}} </td>
+                <td>{{job?.statusJob?.code}}</td>
+                <td>Lượt ứng viên xem {{job?.views}}</td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" (click)="openDialog(job)" class="btn">
+                            <i class="fa fa-pencil" style="color: #ea0606;" aria-hidden="true"></i>
+                            <span class="d-none d-md-inline"></span>
+                        </button>
+                        <button type="button" (click)="getDetailJob(job?.id)" class="btn">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            <span class="d-none d-md-inline"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="clearfix">
+        <div class="hint-text">Hiển thị <b><select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control-sm" (change)="changePageSize($event)">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select></b> mục</div>
+        <ul class="pagination" *ngFor="let page of totalPageNum">
+            <li *ngIf="page==pageNo" class="page-item active" ><a class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
+            <li *ngIf="page!=pageNo" class="page-item" ><a routerLink="/home/job/detail"  class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
+        </ul>
+    </div>
+</div>

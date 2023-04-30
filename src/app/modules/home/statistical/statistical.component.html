@@ -75,23 +75,31 @@
       <table>
         <tr>
           <td>
-            <ngx-charts-pie-chart
-              [results]="jobs"
-              [view]="view"
-              [scheme]="colorScheme"
-              [gradient]="gradient"
-              [legend]="showLegend"
-              [legendPosition]="legendPosition"
-              [labels]="showLabels"
-              [doughnut]="isDoughnut"
-              (select)="onSelect($event)"
-              (activate)="onActivate($event)"
-              (deactivate)="onDeactivate($event)"
-            >
-            </ngx-charts-pie-chart>
+            <apx-chart
+      [series]="pieChartOptions.series"
+      [chart]="pieChartOptions.chart"
+      [labels]="pieChartOptions.labels"
+      [responsive]="pieChartOptions.responsive"
+  ></apx-chart>
           </td>
         </tr>
       </table>
     </div>
+    <div class="col-md-12 pt-5">
+      <div id="chart">
+        <apx-chart
+          [series]="columnChartOptions.series"
+          [chart]="columnChartOptions.chart"
+          [dataLabels]="columnChartOptions.dataLabels"
+          [plotOptions]="columnChartOptions.plotOptions"
+          [yaxis]="columnChartOptions.yaxis"
+          [legend]="columnChartOptions.legend"
+          [fill]="columnChartOptions.fill"
+          [stroke]="columnChartOptions.stroke"
+          [tooltip]="columnChartOptions.tooltip"
+          [xaxis]="columnChartOptions.xaxis"
+        ></apx-chart>
+      </div>
+  </div>
   </div>
 </form>

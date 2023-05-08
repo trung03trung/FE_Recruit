@@ -36,6 +36,7 @@ import { PopupApply } from "./modules/recruitmentPublic/popup-apply/popup-apply.
 import { NbLayoutModule, NbSidebarService } from '@nebular/theme';
 import { ChangeThePasswordPublicComponent } from "./modules/recruitmentPublic/change-the-password-public/change-the-password-public.component";
 import { NgApexchartsModule } from "ng-apexcharts";
+
 const configToast: any = {
   timeOut: 3000,
   positionClass: "toast-top-right",

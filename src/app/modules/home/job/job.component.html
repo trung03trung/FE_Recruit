@@ -97,17 +97,17 @@
 
     <div class="border-top">
         <div class="container">
-            <form  class="ng-pristine ng-valid ng-touched">
+            <form [formGroup]="formSearch" class="ng-pristine ng-valid ng-touched">
                 <div class="card-body row pt-3">
                     <div class="form-group col-sm-3 row p-0 m-0 pt-3">
                         <div class="col-sm-3 pl-0 pt-2 text-sm-left"><label >Tên công việc</label></div>
-                        <div class="col-sm-9 pr-0"><input type="text" formControlName="code" placeholder="Thông tin tìm kiếm"  class="form-control ng-pristine ng-valid ng-touched" ng-reflect-name="code"></div>
+                        <div class="col-sm-9 pr-0"><input type="text" formControlName="name" placeholder="Thông tin tìm kiếm"  class="form-control ng-pristine ng-valid ng-touched" ng-reflect-name="code"></div>
                     </div>
                     <div class="form-group col-sm-3 row p-0 m-0 pt-3" style="padding-right: 120px;">
                         <div class="col-sm-3 pl-0 pt-2 text-sm-right"><label >Vị trí</label></div>
                         <div class="col-sm-9 pr-0">
 <!--                            <input type="text" formControlName="name" placeholder="Nhập tên điều kiện" class="form-control ng-pristine ng-valid ng-touched">-->
-                            <input type="text" class="form-control" formControlName="productType" list="types" placeholder="Thông tin tìm kiếm" />
+                            <input type="text" class="form-control" formControlName="jobPosition" list="types" placeholder="Thông tin tìm kiếm" />
                             <datalist id="types">
                                 <!-- <option *ngFor="let productType of productTypes">{{productType.productName}}</option> -->
                             </datalist>
@@ -116,15 +116,16 @@
                     <div class="form-group col-sm-3 row p-0 ml-3 pt-3">
                         <div class="col-sm-3 pl-0 pt-2"><label>Trạng thái</label></div>
                         <div class="col-sm-9 pr-0">
-                            <select formControlName="status"  class="form-control ng-pristine ng-valid ng-touched">
-                                <option value="" selected="selected">Tất cả</option>
-                                <option value="ACTIVE">Đang hoạt động</option>
-                                <option value="INACTIVE">Dừng hoạt động</option>
+                            <select formControlName="statusJob"  class="form-control ng-pristine ng-valid ng-touched">
+                                <option value="" [selected]="true" value="">Tất cả</option>
+                                <option value="Đang tuyển">Đang tuyển</option>
+                                <option value="Chưa đăng tuyển">Chưa đăng tuyển</option>
+                                <option value="Chờ xét duyệt">Chờ xét duyệt</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group col-sm-2 p-0 m-0 pt-3 text-right">
-                        <button class="btn btn-group" (click)="onChangeEvent($event)"  style="background-color:  #ea0606;color:white;">
+                        <button class="btn btn-group" (click)="onSubmit()" style="background-color:  #ea0606;color:white;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16 " class="bi bi-search font-weight-bold" style="margin-top: 4%; margin-right: 4px;">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                             </svg>

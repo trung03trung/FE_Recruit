@@ -164,5 +164,8 @@ export class JobsRegisterComponent implements OnInit {
       data:job,
     });
   }
+  getDetailJob(id:any){
+    this.router.navigate([`/home/job-register/detail/${id}`]);
+  }
 
 }

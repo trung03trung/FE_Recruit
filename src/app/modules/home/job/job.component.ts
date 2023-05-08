@@ -41,6 +41,11 @@ export class JobComponent implements OnInit {
   jobChild;
   isChangeSize = false;
   pdf=false;
+  formSearch = new FormGroup({ 
+    name: new FormControl(""),
+  jobPosition: new FormControl(""),
+  statusJob: new FormControl(""),
+  });
   constructor(
     private jobService: JobService,
     private router: Router,
@@ -195,16 +200,17 @@ export class JobComponent implements OnInit {
       });
     }
   }
-  onChangeEvent(event: any) {
+  onSubmit() {
     const data = {
-      name: event.target.value,
+      name: this.formSearch.get('name').value,
+      statusJob: this.formSearch.get('statusJob').value,
+      jobPosition: this.formSearch.get('jobPosition').value,
       pageNo: this.pageNo,
       totalPages: this.totalPage,
       pageSize: this.pageSize,
       sortBy: this.sortSearchBy,
       sortDir: this.sortDir,
     };
-    this.name = event.target.value;
     this.jobService.searchJob(data).subscribe((data) => {
       this.getData(data);
       console.log(this.listJob);
@@ -312,12 +318,9 @@ export class JobComponent implements OnInit {
    this.router.navigate(['home/job/update']);
   };
   exportExcelFile(): void {
-    this.jobService.exportData().subscribe(response => {
-      // eslint-disable-next-line no-console
-      console.log(response.headers.get('Content-Type'));
-      const blob: any = new Blob([response], { type: 'application/vnd.ms-excel' });
-      const url = window.URL.createObjectURL(blob);
-      saveAs(blob, 'FILE_EXPORT_JOB');
+    this.jobService.exportData().subscribe(res => {
+      const fileName = res.headers.get('Content-Disposition').split('=')[1];
+      saveAs(new Blob([res.body]), fileName);
     });
   }
 }

@@ -119,7 +119,6 @@ export class StatisticalComponent implements OnInit {
     this.statisticalService.getStatistical(this.seachData.value).subscribe(
       (res) => {
         this.statisticalObj = res[0];
-        console.log(this.statisticalObj);
         
         this.total_apply = this.statisticalObj.total_apply;
         this.success_recruited_applicant =

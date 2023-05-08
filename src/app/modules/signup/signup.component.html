@@ -10,6 +10,13 @@
       Vui lòng nhập tên người dùng
     </div>
 
+    <label><b>Họ tên</b></label><br>
+    <input type="text" placeholder="Nhập tên người dùng" name="psw-repeat" formControlName="name" required>
+    <br>
+    <div class="alert-danger" *ngIf="!formSignup.get('userName').valid && formSignup.get('userName').touched">
+      Vui lòng nhập tên người dùng
+    </div>
+
     <label><b>Email</b></label><br>
     <input type="text" placeholder="Nhập Email" name="email" formControlName="email" required>
     <br>

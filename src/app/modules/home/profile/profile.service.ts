@@ -10,6 +10,12 @@ const httpOptions = {
    Authorization:'Bearer '+localStorage.getItem('auth-token'),
   }),
 }
+
+const httpOptionFDs = {
+  headers: new HttpHeaders({
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  }),
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +29,7 @@ export class ProfileService {
     return this.http.get<any>(this.profileAPI + username,httpOptions)
   }
   updateProfile(user: any):Observable<any>{
-    return this.http.post(`${environment.apiUrl}admin/user/update`,user,httpOptions);
+    return this.http.post(`${environment.apiUrl}admin/user/update`,user,httpOptionFDs);
   }
   viewImage(name:string):Observable<any>{
     return this.http.get(`${environment.apiUrl}admin/image/`+name,httpOptions);

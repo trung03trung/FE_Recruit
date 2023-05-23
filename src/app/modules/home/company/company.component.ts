@@ -16,9 +16,23 @@ import { CompanyService } from "../../../@core/services/company.service";
 })
 export class CompanyComponent implements OnInit {
   [x: string]: any;
-  companyDetail: FormGroup;
   idCompany = 1;
   companyD: Company = new Company();
+  filetoUpload:any;
+  dbImage: any;
+  filea:File;
+  companyDetail = new FormGroup({
+    name:new FormControl(""),
+    email:new FormControl(""),
+    hotLine:new FormControl(""),
+    dateIncoporation:new FormControl(""),
+    description: new FormControl(""),
+    avatar:new FormControl(""),
+    headOffice:new FormControl(""),
+    numberStaff:new FormControl(""),
+    backdropImg:new FormControl(""),
+    linkWeb:new FormControl(""),
+  });
   constructor(
     private toaster: Toaster,
     private companyService: CompanyService,
@@ -31,16 +45,12 @@ export class CompanyComponent implements OnInit {
   }
   initForm() {
     this.companyDetail = this.formBuilder.group({
-      id: new FormControl(this.idCompany, [Validators.required]),
       name: new FormControl("", [Validators.required,Validators.maxLength(50)]),
       email: new FormControl("", [Validators.required,Validators.email]),
       hotLine: new FormControl("", [Validators.required,Validators.pattern("(84|0[3|5|7|8|9])+([0-9]{8})\\b"),]),
       dateIncoporation: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required,Validators.maxLength(2000),Validators.minLength(20)]),
-      taxDate: new FormControl("", [Validators.required]),
       avatar: new FormControl("", [Validators.required,Validators.maxLength(100)]),
-      taxCode: new FormControl("", [Validators.required,Validators.maxLength(100)]),
-      taxPlace: new FormControl("", [Validators.required,Validators.maxLength(100)]),
       headOffice: new FormControl("", [Validators.required,Validators.maxLength(100)]),
       numberStaff: new FormControl("", [Validators.required,Validators.maxLength(100)]),
       backdropImg: new FormControl("", [Validators.required,Validators.maxLength(100)]),
@@ -48,23 +58,6 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-  infoCompany(company: Company) {
-    this.companyDetail.controls["name"].setValue(company.name);
-    this.companyDetail.controls["email"].setValue(company.email);
-    this.companyDetail.controls["hotLine"].setValue(company.hotLine);
-    this.companyDetail.controls["dateIncoporation"].setValue(
-      company.dateIncoporation
-    );
-    this.companyDetail.controls["description"].setValue(company.description);
-    this.companyDetail.controls["taxDate"].setValue(company.taxDate);
-    this.companyDetail.controls["avatar"].setValue(company.avatar);
-    this.companyDetail.controls["taxCode"].setValue(company.taxCode);
-    this.companyDetail.controls["taxPlace"].setValue(company.taxPlace);
-    this.companyDetail.controls["headOffice"].setValue(company.headOffice);
-    this.companyDetail.controls["numberStaff"].setValue(company.numberStaff);
-    this.companyDetail.controls["backdropImg"].setValue(company.backdropImg);
-    this.companyDetail.controls["linkWeb"].setValue(company.linkWeb);
-  }
 
   getCompany() {
     this.companyService.getCompanyById(this.idCompany).subscribe((data) => {
@@ -74,11 +67,24 @@ export class CompanyComponent implements OnInit {
   }
 
   updateCompany() {
-    this.companyService.updateCompany(this.companyDetail.value).subscribe(
+    const formData=new FormData();
+    var datestr = (new Date(this.companyDetail.controls.dateIncoporation.value)).toUTCString();
+    formData.append("avatar",this.filea,this.filea.name)
+    formData.append("name",this.companyDetail.controls.name.value)
+    formData.append("email",this.companyDetail.controls.email.value)
+    formData.append("hotLine",this.companyDetail.controls.hotLine.value)
+    formData.append("dateIncoporation",datestr)
+    formData.append("description",this.companyDetail.controls.description.value)
+    formData.append("headOffice",this.companyDetail.controls.headOffice.value)
+    formData.append("numberStaff",this.companyDetail.controls.numberStaff.value)
+    formData.append("backdropImg",this.companyDetail.controls.backdropImg.value)
+    formData.append("linkWeb",this.companyDetail.controls.linkWeb.value)
+ 
+    this.companyService.createCompany(formData).subscribe(
       (data) => {
         this.getCompany();
         if (data.statusCode == "OK") {
-          this.showToaster("Thay đổi thành công.", "success");
+          this.showToaster("Thêm mới thành công.", "success");
         }
         if (data.statusCode == "NOT_FOUND") {
           this.showToaster("Thay đổi không thành công.", "danger");
@@ -95,6 +101,19 @@ export class CompanyComponent implements OnInit {
         }
       }
     );
+  }
+  
+  onSelect(file: File) {
+    this.fileToUpload = file[0];
+    this.filea=file[0];
+     console.log(this.filea);
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (event) => {
+      this.dbImage = event.target.result;
+      console.log(this.dbImage)
+    };
+   
   }
 
   showToaster(message: string, typea: any) {

@@ -350,6 +350,16 @@
                                     <small *ngIf="formJob.controls.interrest.errors?.required && formJob.get('interrest').touched" class="text-danger">Không được để trống</small>
                                 </div>
                             </div>
+                            <div class="form-group col-sm-6  mt-3 pb-0 row">
+                                <label for="field_unit" class="form-control-label col-sm-3">Công ty</label>
+                                <div class="col-sm-9">
+                                    <select formControlName="companyId" id="field_unit" class="form-control">
+                                        <option value="">Chọn công ty </option>
+                                        <option *ngFor="let c of companies" [ngValue]="c.id">{{c.name}}</option>
+                                    </select>
+                                    <small *ngIf="formJob.controls.companyId.errors?.required && formJob.get('companyId').touched" class="text-danger">Không được để trống</small>
+                                </div>
+                            </div>
                         </div>
     
                         <div class="text-center pt-2">

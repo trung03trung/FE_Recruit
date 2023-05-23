@@ -7,6 +7,12 @@ const httpOptions = {
    Authorization:'Bearer '+localStorage.getItem('auth-token'),
   }),
 };
+
+const httpOptionsFile = new HttpHeaders({
+  'Content-Type': 'application/json',
+ Authorization:'Bearer '+localStorage.getItem('auth-token'),
+});
+
 @Injectable({
   providedIn: "root",
 })
@@ -23,11 +29,15 @@ export class StatisticalService {
     return this.http.post<any>(this.Urlstatistical,stati,httpOptions);
   }
 
-  public getDataLineChart(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/line-chart`,httpOptions);
+  public getDataLineChart(data): Observable<any> {
+    return this.http.post(`${this.baseUrl}/line-chart`,data,httpOptions);
   }
 
-  public getDataColumnChart(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/column-chart`,httpOptions);
+  public getDataColumnChart(data): Observable<any> {
+    return this.http.post(`${this.baseUrl}/column-chart`,data,httpOptions);
+  }
+
+  public exportData(date):Observable<any>{
+    return this.http.post(`${this.baseUrl}/job/export-dashboard`,date,{headers:httpOptionsFile,observe: 'response' ,responseType: 'blob'});
   }
 }

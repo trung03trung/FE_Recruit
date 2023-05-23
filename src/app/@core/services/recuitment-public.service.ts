@@ -12,13 +12,13 @@ export class RecruitmentService {
   registerJobUrl: string;
   
   constructor(private http: HttpClient) {  
-    this.getjob ="http://localhost:9090/api/public/get-all-job-publick";
+    this.getjob ="http://localhost:9090/api/public/get-job";
     this.getDetailJob ="http://localhost:9090/api/public/job/";
     this.registerJobUrl ="http://localhost:9090/api/public/register-job-public";
   }
 
-  getAllJob(): Observable<any> {
-    return this.http.get<any>(this.getjob);
+  getAllJob(type:string): Observable<any> {
+    return this.http.get<any>(`${this.getjob}?type=${type}`);
   }
 
   getDetailJobById(id:number): Observable<any> {

@@ -3,18 +3,24 @@
     <form [formGroup]="formProfile">
         <input type="hidden" pInputText class="form-control" formControlName="id">
         <div class="container">
-            <div class="justify-content-center">
+            <!-- <div class="justify-content-center">
                 <div class="row">
                     <div class="col">
                         <img  [src]="dbImage" alt="Avatar"
                         style="width:200px; object-fit: cover; height: 200px; border-radius: 50%;  margin: 0 auto; margin-bottom: 20px;margin-left: 40%; cursor: pointer;">
                     </div>
-                </div>
-                <div class="row">
+                    <div class="col">
                         <input type="file"  accept="image/*" class="mt-5 custom-file-input" style="color: black;" id="importFile" (change)="onSelect($event.target.files)">
                         <label  #labelImport for="importFile" style="color: black; cursor: pointer;"><i class="fas fa-image"></i> Cập nhật ảnh đại diện</label>
-                        <input type="hidden" formControlName="avatarName"> 
+                    </div>
                 </div>
+            </div> -->
+            <div class="picture-container">
+                <div class="picture">
+                    <img [src]="dbImage" class="picture-src" id="wizardPicturePreview" title="">
+                    <input type="file"  accept="image/*" id="importFile" (change)="onSelect($event.target.files)" class="">
+                </div>
+                 <h4 class="">Choose Picture</h4>
             </div>
             
         </div>
@@ -56,7 +62,7 @@
                 <div class="row">
                     <label class="label col-3 col-form-label">Ngày sinh</label>
                     <div class="col-9">
-                        <p-calendar formControlName="birthDay" [touchUI]="true" [showIcon]="true" [maxDate]="currentDate" ></p-calendar>
+                        <input formControlName="birthDay" type="date" class="form-control" >
                         <mat-error *ngIf="formProfile.controls.birthDay.errors?.required && formProfile.get('birthDay').touched">Không được để trống</mat-error>
                     </div>
                 </div>

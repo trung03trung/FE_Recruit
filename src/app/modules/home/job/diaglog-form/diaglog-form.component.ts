@@ -22,6 +22,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
   statusJob;
   userContact: Users;
   userCreateName;
+  companies;
   currentDate=new Date();
   disableClick = "disableClick";
   stompClient=null;
@@ -44,6 +45,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
     userCreate: new FormControl("userCreate"),
     jobRequirement: new FormControl(""),
     startDate: new FormControl(""),
+    companyId: new FormControl(""),
     
   });
   constructor(
@@ -62,6 +64,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       this.workingForm = data.workingForms;
       this.rank = data.ranks;
       this.userContact = data.users;
+      this.companies = data.companies;
       console.log(data);
     });
     this.initForm();
@@ -94,6 +97,7 @@ export class DiaglogFormComponent implements OnInit,DoCheck {
       interrest: ["", Validators.required],
       startDate:["",Validators.required],
       userCreate:[this.userCreateName],
+      companyId:["",Validators.required],
     });
   }
   onSubmit() {

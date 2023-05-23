@@ -58,6 +58,12 @@ export class job{
         }
     views?: number;
     isDelete?: boolean;
+    interrest?:String;
+    company?:
+    {
+        avatar: string;
+        description: string;
+    }
 
 }
 export type PieChartOptions = {

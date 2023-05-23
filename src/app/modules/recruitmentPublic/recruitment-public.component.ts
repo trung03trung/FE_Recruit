@@ -3,6 +3,7 @@ import {FormGroup } from "@angular/forms";
 import { job } from "../../@core/models/job";
 import { RecruitmentService } from "../../@core/services/recuitment-public.service";
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { ScriptService } from "../../@core/services/script.service";
 @Component({
   selector: "ngx-recruitment-public",
   templateUrl: "./recruitment-public.component.html",
@@ -13,27 +14,45 @@ export class RecruitmentPublicComponent implements OnInit {
   [x: string]: any;
   jobDetail: FormGroup;
   jobObj: job = new job();
-  jobList: job[];
+  jobList: any;
+  jobNew: any;
   pageNumber = [1, 2, 3];
   checkloggin = false;
   userName = '';
+  base64 = 'data:image/jpeg;base64,'
   
   userMenu = [ { title: 'Thông tin cá nhân' },{ title: 'Đổi mật khẩu' }, { title: 'Đăng xuất'   } ];
   constructor(
     private recuitmentse: RecruitmentService,
+    private script: ScriptService
   ) {}
 
   ngOnInit(): void {
     this.checkuser();
     this.initForm();
-    this.getAllJobPublic()
+    this.getAllJobPublic("FEATURED");
+    this.getAllJobNew("NEWEST");
+    this.script.load('jquery', 'owlcarousel','wow','easing','waypoints','main').then(data => {
+      console.log('script loaded ', data);
+  }).catch(error => console.log(error));
   }
   initForm() {}
 
-  getAllJobPublic() {
-    this.recuitmentse.getAllJob().subscribe(
+  getAllJobPublic(type:string) {
+    this.recuitmentse.getAllJob(type).subscribe(
       (data) => {
         this.jobList = data;
+      },
+      (err) => {
+        console.log("error while fetching data."+err);
+      }
+    );
+  }
+
+  getAllJobNew(type:string) {
+    this.recuitmentse.getAllJob(type).subscribe(
+      (data) => {
+        this.jobNew = data;
       },
       (err) => {
         console.log("error while fetching data."+err);

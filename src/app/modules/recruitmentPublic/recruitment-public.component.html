@@ -1,4 +1,4 @@
-<nav
+<!-- <nav
   class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block"
   id="templatemo_nav_top"
   style="margin-right: 14px"
@@ -32,9 +32,7 @@
     </div>
   </div>
 </nav>
-<!-- Close Top Nav
 
-<-- Header -->
 <nav class="navbar navbar-expand-lg navbar-light shadow">
   <div class="container d-flex justify-content-between align-items-center">
     <a class="navbar-brand" href="/">ITSOL</a>
@@ -80,12 +78,7 @@
           </div>
         </div>
         <li class="nav-item">
-          <!-- <a
-            *ngIf="checkloggin"
-            class="nav-link text-black"
-            href="/profile-public"
-            >Thông tin cá nhân</a
-          > -->
+     
           <a *ngIf="!checkloggin" class="nav-link text-black" href="/auth"
             >Đăng nhập</a
           >
@@ -120,8 +113,7 @@
     </div>
   </div>
 </nav>
-<!-- Close Header -->
-<!-- Search Start -->
+
 <div class="btn-light" style="padding: 20px">
   <div class="container">
     <div class="row g-2">
@@ -158,9 +150,7 @@
     </div>
   </div>
 </div>
-<!-- Search End -->
 
-<!-- Start Featured Product -->
 <section class="bg-light" style="margin-top: -50px !important">
   <div class="container py-5">
     <div class="row hov">
@@ -245,9 +235,7 @@
     </div>
   </div>
 </section>
-<!-- End Featured Product -->
 
-<!-- Modal -->
 <div
   class="modal fade bg-white"
   id="templatemo_search"
@@ -282,7 +270,6 @@
   </div>
 </div>
 
-<!-- Start Footer -->
 <footer class="bg-white" id="tempaltemo_footer">
   <div class="container">
     <div class="row">
@@ -396,4 +383,628 @@
     </div>
   </div>
 </footer>
-<!-- End Footer -->
+ -->
+
+<div style="background-color: #EFFDF5;
+">
+  <div class="container-xxl bg-white p-0">
+
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+      <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+        <h1 class="m-0 text-primary">Job IT</h1>
+      </a>
+      <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ms-auto p-4 p-lg-0">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-mdb-toggle="dropdown">Việc làm IT</a>
+            <ul class="dropdown-menu rounded-0 m-0">
+              <li class="nav-item dropdown">
+                <a class="dropdown-item" data-bs-toggle="dropdown" aria-labelledby="navbarDropdownMenuLink" href="#">
+                  Theo khả năng  &raquo;
+                </a>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item" href="#">Fresher</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Junior</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Middle</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Senior</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Leader</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="dropdown-item" data-bs-toggle="dropdown" aria-labelledby="navbarDropdownMenuLink" href="#">
+                  Theo kỹ năng  &raquo;
+                </a>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item" href="#">JavaScript</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Java</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">PHP</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Python</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">IOS</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Tester</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Project Manager</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Business Analyst</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="dropdown-item" data-bs-toggle="dropdown" aria-labelledby="navbarDropdownMenuLink" href="#">
+                  Theo vị trí  &raquo;
+                </a>
+                <ul class="dropdown-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item" href="#">Hồ Chí Minh</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Hà Nội</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Đà Nẵng</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <a href="about.html" class="nav-item nav-link">Công ty IT</a>
+          <a href="about.html" class="nav-item nav-link">Blog IT</a>
+          <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+        </ul>
+        <a *ngIf="!checkloggin" href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập<i
+            class="fa fa-arrow-right ms-3"></i></a>
+            <div *ngIf="checkloggin" class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-bs-toggle="dropdown">{{this.userName}}</a>
+              <div class="dropdown-menu rounded-0 m-0">
+                <a href="category.html" class="dropdown-item">Thông tin cá nhân</a>
+                <a href="testimonial.html" class="dropdown-item">Đổi mật khẩu</a>
+                <a href="/" class="dropdown-item">Đăng xuất</a>
+              </div>
+            </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+      <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative">
+          <img class="img-fluid" src="/assets/images/carousel-1.jpg" alt="">
+          <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+            style="background: rgba(43, 57, 64, .5);">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-10 col-lg-8">
+                  <h1 class="display-3 text-white animated slideInDown mb-4">Tìm một công việc hoàn toàn phù hợp với
+                    mong muốn của bạn</h1>
+                  <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
+                    sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                  <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                  <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="owl-carousel-item position-relative">
+          <img class="img-fluid" src="/assets/images/carousel-2.jpg" alt="">
+          <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+            style="background: rgba(43, 57, 64, .5);">
+            <div class="container">
+              <div class="row justify-content-start">
+                <div class="col-10 col-lg-8">
+                  <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Startup Job That Fit You</h1>
+                  <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
+                    sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                  <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                  <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- Search Start -->
+    <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+      <div class="container">
+        <div class="row g-2">
+          <div class="col-md-10">
+            <div class="row g-2">
+              <div class="col-md-8">
+                <input type="text" class="form-control border-0" placeholder="Nhập từ khóa tìm kiếm" />
+              </div>
+              <div class="col-md-4">
+                <select class="form-select border-0">
+                  <option selected>Tất cả địa điểm</option>
+                  <option value="1">Hà Nội</option>
+                  <option value="2">Hồ Chí Minh</option>
+                  <option value="3">Đà Nẵng</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-dark border-0 w-100">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Search End -->
+
+
+    <!-- Category Start -->
+    <div class="container-xxl py-5">
+      <div class="container">
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Khám phá theo danh mục</h1>
+        <div class="row g-4">
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+              <h6 class="mb-3">Java</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-headset text-primary mb-4"></i>
+              <h6 class="mb-3">JavaScript</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
+              <h6 class="mb-3">Business Analyst</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
+              <h6 class="mb-3">Project Management</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
+              <h6 class="mb-3">Android</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
+              <h6 class="mb-3">Mobile</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
+              <h6 class="mb-3">Tester</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+            <a class="cat-item rounded p-4" href="">
+              <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
+              <h6 class="mb-3">Data Analyst</h6>
+              <p class="mb-0">123 Vacancy</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Category End -->
+
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+            <div class="row g-0 about-bg rounded overflow-hidden">
+              <div class="col-6 text-start">
+                <img class="img-fluid w-100" src="/assets/images/about-1.jpg">
+              </div>
+              <div class="col-6 text-start">
+                <img class="img-fluid" src="/assets/images/about-2.jpg" style="width: 85%; margin-top: 15%;">
+              </div>
+              <div class="col-6 text-end">
+                <img class="img-fluid" src="/assets/images/about-3.jpg" style="width: 85%;">
+              </div>
+              <div class="col-6 text-end">
+                <img class="img-fluid w-100" src="/assets/images/about-4.jpg">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+            <h1 class="mb-4">Chúng tôi giúp có được công việc tốt nhất và tìm kiếm ứng viên tài năng</h1>
+            <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.
+              Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+            <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
+            <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
+            <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
+            <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Jobs Start -->
+    <div class="container-xxl py-5">
+      <div class="container">
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Danh sách công việc</h1>
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+          <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+            <li class="nav-item">
+              <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                <h6 class="mt-n1 mb-0">Nổi bật</h6>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                <h6 class="mt-n1 mb-0">Mới nhất</h6>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                <h6 class="mt-n1 mb-0">Part Time</h6>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+              <div class="job-item p-4 mb-4 box-hover" *ngFor="let job of jobList">
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img [routerLink]="['/public-job/detail', job?.id]" class="flex-shrink-0 img-fluid border rounded"  src="{{ base64 + job.company.avatar}}" alt=""
+                      style="width: 80px; height: 80px; object-fit: contain; cursor: pointer;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3 link-hover" [routerLink]="['/public-job/detail', job?.id]" >{{job.name}}</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{job.addressWork}}</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{job.workingForm.description}}</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{job.salaryMax}} -
+                        {{job.salaryMin}}</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Ứng tuyển</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hết hạn: {{job.dueDate| date: 'dd/MM/yyyy'}}</small>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+            </div>
+            <div id="tab-2" class="tab-pane fade show p-0">
+              <div class="job-item p-4 mb-4 box-hover"  *ngFor="let job of jobNew" >
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img [routerLink]="['/public-job/detail', job?.id]" class="flex-shrink-0 img-fluid border rounded" src="{{ base64 + job.company.avatar}}" alt=""
+                      style="width: 80px; height: 80px; object-fit: contain;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3 link-hover" [routerLink]="['/public-job/detail', job?.id]">{{job.name}}</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{job.addressWork}}</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{job.workingForm.description}}</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{job.salaryMax}} -
+                        {{job.salaryMin}}</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Ứng tuyển</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Ngày hết hạn: {{job.dueDate| date: 'dd/MM/yyyy'}}</small>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+            </div>
+            <div id="tab-3" class="tab-pane fade show p-0">
+              <div class="job-item p-4 mb-4">
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="/assets/images/com-logo-1.jpg" alt=""
+                      style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3">Software Engineer</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York,
+                        USA</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 -
+                        $456</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Apply Now</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
+                      2045</small>
+                  </div>
+                </div>
+              </div>
+              <div class="job-item p-4 mb-4">
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="/assets/images/com-logo-2.jpg" alt=""
+                      style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3">Marketing Manager</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York,
+                        USA</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 -
+                        $456</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Apply Now</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
+                      2045</small>
+                  </div>
+                </div>
+              </div>
+              <div class="job-item p-4 mb-4">
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="/assets/images/com-logo-3.jpg" alt=""
+                      style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3">Product Designer</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York,
+                        USA</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 -
+                        $456</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Apply Now</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
+                      2045</small>
+                  </div>
+                </div>
+              </div>
+              <div class="job-item p-4 mb-4">
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="/assets/images/com-logo-4.jpg" alt=""
+                      style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3">Creative Director</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York,
+                        USA</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 -
+                        $456</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Apply Now</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
+                      2045</small>
+                  </div>
+                </div>
+              </div>
+              <div class="job-item p-4 mb-4">
+                <div class="row g-4">
+                  <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                    <img class="flex-shrink-0 img-fluid border rounded" src="/assets/images/com-logo-5.jpg" alt=""
+                      style="width: 80px; height: 80px;">
+                    <div class="text-start ps-4">
+                      <h5 class="mb-3">Wordpress Developer</h5>
+                      <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York,
+                        USA</span>
+                      <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
+                      <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 -
+                        $456</span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                    <div class="d-flex mb-3">
+                      <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                      <a class="btn btn-primary" href="">Apply Now</a>
+                    </div>
+                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
+                      2045</small>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jobs End -->
+
+
+    <!-- Testimonial Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+      <div class="container">
+        <h1 class="text-center mb-5">Our Clients Say!!!</h1>
+        <div class="owl-carousel testimonial-carousel">
+          <div class="testimonial-item bg-light rounded p-4">
+            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+            <div class="d-flex align-items-center">
+              <img class="img-fluid flex-shrink-0 rounded" src="/assets/images/testimonial-1.jpg"
+                style="width: 50px; height: 50px;">
+              <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-item bg-light rounded p-4">
+            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+            <div class="d-flex align-items-center">
+              <img class="img-fluid flex-shrink-0 rounded" src="/assets/images/testimonial-2.jpg"
+                style="width: 50px; height: 50px;">
+              <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-item bg-light rounded p-4">
+            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+            <div class="d-flex align-items-center">
+              <img class="img-fluid flex-shrink-0 rounded" src="/assets/images/testimonial-3.jpg"
+                style="width: 50px; height: 50px;">
+              <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-item bg-light rounded p-4">
+            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+            <div class="d-flex align-items-center">
+              <img class="img-fluid flex-shrink-0 rounded" src="/assets/images/testimonial-4.jpg"
+                style="width: 50px; height: 50px;">
+              <div class="ps-3">
+                <h5 class="mb-1">Client Name</h5>
+                <small>Profession</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+      <div class="container py-5">
+        <div class="row g-5">
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-white mb-4">Company</h5>
+            <a class="btn btn-link text-white-50" href="">About Us</a>
+            <a class="btn btn-link text-white-50" href="">Contact Us</a>
+            <a class="btn btn-link text-white-50" href="">Our Services</a>
+            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-white mb-4">Quick Links</h5>
+            <a class="btn btn-link text-white-50" href="">About Us</a>
+            <a class="btn btn-link text-white-50" href="">Contact Us</a>
+            <a class="btn btn-link text-white-50" href="">Our Services</a>
+            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-white mb-4">Contact</h5>
+            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+            <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+            <div class="d-flex pt-2">
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-white mb-4">Newsletter</h5>
+            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+            <div class="position-relative mx-auto" style="max-width: 400px;">
+              <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+              <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+              &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+
+              <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+              Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              <div class="footer-menu">
+                <a href="">Home</a>
+                <a href="">Cookies</a>
+                <a href="">Help</a>
+                <a href="">FQAs</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+  </div>
+</div>
+<!-- JavaScript Libraries -->

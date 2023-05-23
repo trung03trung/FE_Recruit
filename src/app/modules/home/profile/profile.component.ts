@@ -22,7 +22,15 @@ const httpOptions = {
 })
 export class ProfileComponent implements OnInit {
   [x: string]: any;
-  formProfile: FormGroup;
+  formProfile = new FormGroup({
+    id:new FormControl(""),
+    name:new FormControl(""),
+    email:new FormControl(""),
+    phoneNumber:new FormControl(""),
+    birthDay:new FormControl(""),
+    homeTown: new FormControl(""),
+    gender:new FormControl(""),
+  });
   user: User;
   @ViewChild("labelImport")
   labelImport: ElementRef;
@@ -46,20 +54,17 @@ export class ProfileComponent implements OnInit {
     
     // this.getByUserName();
     this.getByUserName();
-    this.initForm();
   }
 
-  initForm() {
+  initForm(user:User) {
     this.formProfile = this.fb.group({
-      id: [""],
-      file:[""],
-      avatarName:[""],
-      name: ["", Validators.required],
-      email: ["", [Validators.required,Validators.email]],
-      phoneNumber: ["",[Validators.required,Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})\\b')]],
-      birthDay: ["", Validators.required],
-      homeTown: ["", Validators.required],
-      gender: ["Nam", Validators.required],
+      id: [user.id],
+      name: [user.name, Validators.required],
+      email: [user.email, [Validators.required,Validators.email]],
+      phoneNumber: [user.phoneNumber,[Validators.required,Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})\\b')]],
+      birthDay: [formatDate(user.birthDay,'yyyy-MM-dd','en'), Validators.required],
+      homeTown: [user.homeTown, Validators.required],
+      gender: [user.gender, Validators.required],
     });
 
   }
@@ -70,20 +75,17 @@ export class ProfileComponent implements OnInit {
   
 
     this.profileService.getProfile(name).subscribe((res) => {
-      this.updateForm(res);
+      console.log(res);
+      this.initForm(res);
       this.user=res;
-      this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
-      this.postResponse = data;
-        this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
-        this.profileService.tranferData(this.postResponse.image);
-    })
+        this.dbImage= "data:image/jpeg;base64," + res.avatarName;
+        this.profileService.tranferData(res.avatarName);
     });
     
   }
 
   onSelect(file: File) {
     this.isChange=true;
-    this.labelImport.nativeElement.innerText = file[0].name;
     this.fileToUpload = file[0];
     this.filea=file[0];
      console.log(this.filea);
@@ -91,68 +93,56 @@ export class ProfileComponent implements OnInit {
     reader.readAsDataURL(file[0]);
     reader.onload = (event) => {
       this.dbImage = event.target.result;
-      console.log(this.dbImage)
     };
    
   }
-  updateForm(user: User): void {
-    this.formProfile.patchValue({
-      id: user.id,
-      avatarName:user.avatarName,
-      name: user.name,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      birthDay: formatDate(user.birthDay,'MM/dd/yyyy','en'),
-      homeTown: user.homeTown,
-      gender: user.gender,
-    });
     
-  }
-  imageUploadAction() {
-    const imageFormData = new FormData();
-    imageFormData.append("image", this.fileToUpload, this.fileToUpload.name);
-    console.log(imageFormData)
-    this.httpClient
-      .post("http://localhost:9090/api/public/upload/image/", imageFormData, {
-        observe: "response",
-      })
-      .subscribe((response) => {
-        if (response.status === 200) {
-          this.postResponse = response;
-          this.successResponse = this.postResponse.body.message; 
-          this.getByUserName();
-          this.profileService.tranferData(this.postResponse.image);
-        } else {
-          this.successResponse = "Image not uploaded due to some error!";
-        }
-      });
-     
-  }
 
-  viewImage() {
-    this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
-      this.postResponse = data;
-        this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
-    })
-  }
+  // imageUploadAction() {
+  //   const imageFormData = new FormData();
+  //   imageFormData.append("image", this.fileToUpload, this.fileToUpload.name);
+  //   console.log(imageFormData)
+  //   this.httpClient
+  //     .post("http://localhost:9090/api/public/upload/image/", imageFormData, {
+  //       observe: "response",
+  //     })
+  //     .subscribe((response) => {
+  //       if (response.status === 200) {
+  //         this.postResponse = response;
+  //         this.successResponse = this.postResponse.body.message; 
+  //         this.getByUserName();
+  //         this.profileService.tranferData(this.postResponse.image);
+  //       } else {
+  //         this.successResponse = "Image not uploaded due to some error!";
+  //       }
+  //     });
+     
+  // }
+
+  // viewImage() {
+  //   this.profileService.viewImage(this.user.avatarName).subscribe(data=>{
+  //     this.postResponse = data;
+  //       this.dbImage= "data:image/jpeg;base64," + this.postResponse.image;
+  //   })
+  // }
   onSubmit(){
-    if(this.isChange){
-      this.formProfile.patchValue({
-        avatarName:this.filea.name
-      });
-    }
-    const date=new Date(this.formProfile.controls.birthDay.value);
-    this.formProfile.patchValue({
-      birthDay:date
-    });
-    this.profileService.updateProfile(this.formProfile.value).subscribe(data=>{
+    const formData=new FormData();
+    var datestr = (new Date(this.formProfile.controls.birthDay.value)).toUTCString();
+    formData.append("id",this.formProfile.controls.id.value)
+    if(this.isChange)
+      formData.append("avatarName",this.filea,this.filea.name)
+    formData.append("name",this.formProfile.controls.name.value)
+    formData.append("email",this.formProfile.controls.email.value)
+    formData.append("phoneNumber",this.formProfile.controls.phoneNumber.value)
+    formData.append("homeTown",this.formProfile.controls.homeTown.value)
+    formData.append("gender",this.formProfile.controls.gender.value)
+    formData.append("birthDay",datestr)
+    this.profileService.updateProfile(formData).subscribe(data=>{
       if(data!=null){
-        this.showToaster("Cập nhật thành công","success")
+        this.showToaster("Cập nhật thành công","success");
+        this.profileService.tranferData(data.avatarName);
       }
     });
-    if(this.isChange) {
-      this.imageUploadAction();
-    }
     
   }
   showToaster(message: string,typea:any) {

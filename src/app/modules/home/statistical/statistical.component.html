@@ -5,7 +5,6 @@
       type="Date"
       class="date"
       id="startDate"
-      (change)="dateS($event)"
       formControlName="datestart"
       name="psw-repeat"
       required
@@ -15,11 +14,21 @@
       type="Date"
       class="date"
       id="endDate"
-      (change)="dateE($event)"
       formControlName="dateend"
       name="psw-repeat"
       required
     />
+    
+      <button class="btn btn-group btn-small ml-3" (click)="onSubmit()"
+          style="background-color:  #ea0606;color:white;">
+          Xác nhận
+      </button>
+      <button  id="jh-import" type="button" (click)="exportExcelFile()"  class="btn btn-outline-dark ml-3 jh-create-entity create-area">
+        <i class="fas fa-upload "></i>
+        <span>
+        Xuất Excel
+        </span>
+    </button>
   </div>
   <div class="fix-column">
     <div class="fix-card">

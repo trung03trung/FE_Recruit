@@ -12,8 +12,7 @@ import { Statistical } from "../../../@core/models/statistical";
 import { StatisticalService } from "../../../@core/services/statistical.service";
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexLegend, ApexPlotOptions, ApexStroke, ApexTooltip, ApexXAxis, ApexYAxis, ChartComponent } from "ng-apexcharts";
 import { PieChartOptions, job } from "../../../@core/models/job";
-import { JobService } from "../../../@core/services/job.service";
-import { Router } from "@angular/router";
+import { saveAs } from 'file-saver';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -44,7 +43,7 @@ export class StatisticalComponent implements OnInit {
   interviewing = 0;
   all_job = 0;
   month = 1;
-  setdateS = "01012022";
+  isDateEnd = false;
   false_applicant = 0;
   jobFaile = "4";
   seachData: FormGroup;
@@ -76,44 +75,13 @@ export class StatisticalComponent implements OnInit {
 
   initForm() {
     this.seachData = this.formBuilder.group({
-      dateend: new FormControl("20072023", [Validators.required]),
-      datestart: new FormControl("01012022", [Validators.required]),
+      dateend: new FormControl("2023-12-30", [Validators.required]),
+      datestart: new FormControl("2022-01-01", [Validators.required]),
       month: new FormControl("1", [Validators.required]),
     });
   }
-  dateS(event: any) {
-    const s = event.target.value;
-    const sx = s.split("-");
-    this.seachData.value.datestart = sx[2] + sx[1] + sx[0];
-    this.setdateS = this.seachData.value.datestart;
-  }
-  dateE(event: any) {
-    if (!this.seachData.value.datestart) {
-      this.seachData.value.datestart = "01012022";
-    } else {
-      this.seachData.value.datestart = this.setdateS;
-    }
-    const s = event.target.value;
-    const sx = s.split("-");
-    this.seachData.value.dateend = sx[2] + sx[1] + sx[0];
-    console.log(this.seachData.value);
+  
 
-    this.getAllUserJe();
-  }
-
-  date() {
-    if ((this.seachData.value.datestart = null)) {
-      this.seachData.value.datestart = "20220101";
-    }
-    if ((this.seachData.value.dateend = null)) {
-      this.seachData.value.dateend = "20231212";
-    }
-    console.log(this.seachData.value);
-
-    this.statisticalService
-      .getStatistical(this.seachData.value)
-      .subscribe((res) => {});
-  }
 
   getAllUserJe() {
     this.statisticalService.getStatistical(this.seachData.value).subscribe(
@@ -166,7 +134,7 @@ export class StatisticalComponent implements OnInit {
   }
 
   getDataLineChart(){
-    this.statisticalService.getDataLineChart().subscribe(
+    this.statisticalService.getDataLineChart(this.seachData.value).subscribe(
       (res) => {
         console.log(res);
         
@@ -198,7 +166,7 @@ export class StatisticalComponent implements OnInit {
   }
 
   getDataColumnChart(){
-    this.statisticalService.getDataColumnChart().subscribe(
+    this.statisticalService.getDataColumnChart(this.seachData.value).subscribe(
       (res) => {
         console.log(res);
         
@@ -251,6 +219,9 @@ export class StatisticalComponent implements OnInit {
       }
     );
   }
+  onSubmit(){
+    this.getAllUserJe();
+  }
   
   selectMonth(month: number) {
     alert(month);
@@ -268,14 +239,12 @@ export class StatisticalComponent implements OnInit {
   colorScheme = {
     domain: ["#704FC4", "#4B852C", "#B67A3D"],
   };
-  onActivate(data): void {
-    console.log("Activate", JSON.parse(JSON.stringify(data)));
-  }
-  onDeactivate(data): void {
-    console.log("Deactivate", JSON.parse(JSON.stringify(data)));
-  }
-  onSelect(data): void {
-    console.log("Item clicked", JSON.parse(JSON.stringify(data)));
+  
+  exportExcelFile(){
+    this.statisticalService.exportData(this.seachData.value).subscribe(res => {
+      const fileName = res.headers.get('Content-Disposition').split('=')[1];
+      saveAs(new Blob([res.body]), fileName);
+    });
   }
  
 }

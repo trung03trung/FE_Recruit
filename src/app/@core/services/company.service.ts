@@ -8,6 +8,12 @@ const httpOptions = {
    Authorization:'Bearer '+localStorage.getItem('auth-token'),
   }),
 };
+
+const httpOptionsFD = {
+  headers: new HttpHeaders({
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  }),
+};
 @Injectable({
   providedIn: "root",
 })
@@ -24,7 +30,7 @@ export class CompanyService {
     return this.http.get<Company>(this.UrlCompany+companyId,httpOptions);
   }
 
-  updateCompany(company: any): Observable<any> {
-    return this.http.put<any>(this.UrlUpdateCompany, company,httpOptions);
+  createCompany(company: any): Observable<any> {
+    return this.http.post<any>(this.UrlCompany, company,httpOptionsFD);
   }
 }

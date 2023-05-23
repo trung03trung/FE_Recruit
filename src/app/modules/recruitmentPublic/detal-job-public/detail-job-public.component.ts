@@ -28,7 +28,7 @@ export class DetaileJobPComponent implements OnInit {
   role: string;
   filetoUpload: any;
   jobRegPObj: JobRegisterPublic = new JobRegisterPublic();
-
+  base64 = 'data:image/jpeg;base64,';
   checkloggin = false;
 
   constructor(
@@ -56,6 +56,7 @@ export class DetaileJobPComponent implements OnInit {
       this.recruitmentService.getDetailJobById(this.jobId).subscribe((data) => {
         this.data = data;
         this.jobObj = data;
+        console.log(data);
       });
     } else {
       alert('LỖi');

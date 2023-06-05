@@ -20,6 +20,11 @@ const httpOptions = {
     }),
   };
   
+  const httpOptionsFile = new HttpHeaders({
+    'Content-Type': 'application/octet-stream',
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  });
+
   @Injectable({
     providedIn: 'root',
   })
@@ -78,6 +83,10 @@ const httpOptions = {
 
     public searchJobRegister(data:any):Observable<any>{
       return this.http.post(`${this.baseUrl}job-register/search`,data,httpOptions);
+    }
+
+    public downloadCv(filename:string):Observable<any>{
+      return this.http.get(`${this.baseUrl}job-register/download-cv/${filename}`,{headers:httpOptionsFile,observe: 'response' ,responseType: 'blob'});
     }
   
   }

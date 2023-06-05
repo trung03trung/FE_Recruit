@@ -18,15 +18,17 @@ import { RecruitmentService } from '../../../@core/services/recuitment-public.se
   styleUrls: ['./detail-job-public.component.scss'],
 })
 export class DetaileJobPComponent implements OnInit {
-  [x: string]: any;
+  fileToUpload:File;
   jobId: any;
   data: any;
   jobObj: job = new job();
   workingForm: any;
-  profileP: FormGroup;
+  formApply= new FormGroup({
+    descriptionYourself:new FormControl(""),
+    cvFile :new FormControl(""),
+  });
   userName: string;
   role: string;
-  filetoUpload: any;
   jobRegPObj: JobRegisterPublic = new JobRegisterPublic();
   base64 = 'data:image/jpeg;base64,';
   checkloggin = false;
@@ -45,10 +47,12 @@ export class DetaileJobPComponent implements OnInit {
 
     this.getJobDetail();
     this.initForm();
+    this.checkuser();
   }
   initForm() {
-    this.profileP = this.formBuilder.group({
-      pdf: new FormControl('1', [Validators.required]),
+    this.formApply = this.formBuilder.group({
+      descriptionYourself:[""],
+      cvFile :[""],
     });
   }
   getJobDetail() {
@@ -65,35 +69,25 @@ export class DetaileJobPComponent implements OnInit {
  
   registerJob() {
     const userinfo = JSON.parse(localStorage.getItem('auth-user'));
-    if (!userinfo) {
-      this.checkloggin = false;
+    if (!userinfo || userinfo === undefined) {
+      this.showToaster(
+        'Bạn cần đăng nhập để ứng tuyển',
+        'danger',
+      );
     } else {
-      this.role = userinfo.auth;
-      this.userName = userinfo.sub;
-      if (
-        this.role === 'ROLE_ADMIN' ||
-        this.role === 'ROLE_JE' ||
-        this.role === 'ROLE_USER'
-      ) {
-        this.checkloggin = true;
-        this.jobRegPObj.userName = this.userName;
-      }
-    }
-    // eslint-disable-next-line eqeqeq
-    if (this.jobId != null && this.checkloggin == true) {
-      this.jobRegPObj.jobId = this.jobId;
-      this.jobRegPObj.pdf = this.profileP.value.pdf;
-      this.recruitmentService.registerJob(this.jobRegPObj).subscribe(
+      const formData=new FormData();
+      formData.append("jobId",this.jobId);
+      formData.append("cvFile",this.fileToUpload,this.fileToUpload.name)
+      console.log(formData.get("jobId"))
+      this.recruitmentService.registerJob(formData).subscribe(
         (data) => {
           console.log(data);
           // eslint-disable-next-line eqeqeq
-          if (data.statusCode == 'OK') {
+          if (data.status == 'OK') {
             this.showToaster(
               'Apple thành công, chúng tôi sẽ liên hệ sớm nhất.',
               'success',
             );
-            this.uploadFilePdf();
-            this.profileP.reset();
           } else {
             this.showToaster(
               'Apple không thành công thành công, chúng tôi sẽ liên hệ sớm nhất.',
@@ -109,29 +103,10 @@ export class DetaileJobPComponent implements OnInit {
           }
         },
       );
-    } else {
-      this.showToaster('Đăng nhập trước khi apply.', 'danger');
     }
   }
-  onChange(file: File) {
+  onSelect(file: File) {
     this.fileToUpload = file[0];
-    console.log(this.fileToUpload);
-  }
-
-  uploadFilePdf() {
-    const formDataUpLoad = new FormData();
-    formDataUpLoad.append('file', this.fileToUpload);
-    this.httpClient
-      .post('http://localhost:9090/api/public/uploadFile', formDataUpLoad, {
-        observe: 'response',
-      })
-      .subscribe((response) => {
-        if (response.status === 200) {
-          alert('a');
-        } else {
-          alert('b');
-        }
-      });
   }
 
   showToaster(message: string, typea: any) {
@@ -142,5 +117,19 @@ export class DetaileJobPComponent implements OnInit {
       type,
       duration: 3000,
     });
+  }
+
+  checkuser(){
+    const userinfo = JSON.parse(localStorage.getItem('auth-user'));
+    if(!userinfo){
+      this.checkloggin =false;
+    }
+    else{
+      const role = userinfo.auth;
+      const sub = userinfo.sub;
+      this.checkloggin = true;
+      this.userName = sub;
+
+    }
   }
 }

@@ -5,6 +5,7 @@ import { JobRegisterService } from "../../../@core/services/job-register.service
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dialog-interveiw.component";
 import { DialogreasonComponent } from "./detail-jobregis/dialogreason/dialogreason.component";
+import * as saveAs from "file-saver";
 
 @Component({
   selector: "ngx-jobs-register",
@@ -167,5 +168,7 @@ export class JobsRegisterComponent implements OnInit {
   getDetailJob(id:any){
     this.router.navigate([`/home/job-register/detail/${id}`]);
   }
+
+
 
 }

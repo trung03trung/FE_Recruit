@@ -9,7 +9,7 @@
                     </div>
                         
                         <div class="mb-5">
-                                <button   type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                                <button (click)="downloadCv()"   type="button" class="btn btn-outline-success mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                                     Tải xuống CV
                                 </button>
                                 <button *ngIf="statusJobRegister?.code==='Chờ duyệt'" (click)="statusChange('Chờ phỏng vấn')" type="button" class="btn btn-outline-secondary mr-4"  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">

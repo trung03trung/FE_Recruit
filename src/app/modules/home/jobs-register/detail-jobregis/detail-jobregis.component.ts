@@ -6,6 +6,7 @@ import { JobRegisterService } from '../../../../@core/services/job-register.serv
 import { DialogRejectComponent } from '../../detail-job/dialog-reject/dialog-reject.component';
 import { DialogreasonComponent } from './dialogreason/dialogreason.component';
 import { DialogInterveiwComponent } from './dialog-interveiw/dialog-interveiw.component';
+import * as saveAs from 'file-saver';
 
 @Component({
   selector: 'ngx-detail-jobregis',
@@ -84,6 +85,11 @@ export class DetailJobregisComponent implements OnInit {
   openDialogInterview(){
     const dialogRef=this.dialog.open(DialogInterveiwComponent,{
       data:this.jobRegister});
+  }
+  downloadCv(): void {
+    this.jobRegisterService.downloadCv(this.jobRegister.cvFile).subscribe(res => {
+      saveAs(new Blob([res.body]), this.jobRegister.cvFile);
+    });
   }
 
 }

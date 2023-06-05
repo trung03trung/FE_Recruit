@@ -4,6 +4,7 @@ import { job } from "../../@core/models/job";
 import { RecruitmentService } from "../../@core/services/recuitment-public.service";
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { ScriptService } from "../../@core/services/script.service";
+import { Router } from "@angular/router";
 @Component({
   selector: "ngx-recruitment-public",
   templateUrl: "./recruitment-public.component.html",
@@ -20,11 +21,12 @@ export class RecruitmentPublicComponent implements OnInit {
   checkloggin = false;
   userName = '';
   base64 = 'data:image/jpeg;base64,'
-  
+  id:any;
   userMenu = [ { title: 'Thông tin cá nhân' },{ title: 'Đổi mật khẩu' }, { title: 'Đăng xuất'   } ];
   constructor(
     private recuitmentse: RecruitmentService,
-    private script: ScriptService
+    private script: ScriptService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -68,14 +70,21 @@ export class RecruitmentPublicComponent implements OnInit {
     else{
       const role = userinfo.auth;
       const sub = userinfo.sub;
-      if(role === 'ROLE_ADMIN' || role === 'ROLE_JE' ||role === 'ROLE_USER'){
-        this.checkloggin = true;
-        this.userName = sub;
-      }
+      this.checkloggin = true;
+      this.userName = sub;
     }
   }
   logout(){
     localStorage.removeItem('auth-token'),
     localStorage.removeItem('auth-user')
   }
+
+  openNewTab(id:any){
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/public-job/detail/'+id])
+    );
+    window.open(url, '_blank');
+    this.id=id;
+  }
+
 }

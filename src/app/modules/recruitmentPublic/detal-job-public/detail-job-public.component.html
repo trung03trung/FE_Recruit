@@ -273,14 +273,14 @@
               <a href="about.html" class="nav-item nav-link">Blog IT</a>
               <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
             </ul>
-            <a *ngIf="!checkloggin" href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập<i
+            <a *ngIf="!checkloggin" routerLink="/auth" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập<i
                 class="fa fa-arrow-right ms-3"></i></a>
                 <div *ngIf="checkloggin" class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-bs-toggle="dropdown">{{this.userName}}</a>
                   <div class="dropdown-menu rounded-0 m-0">
                     <a href="category.html" class="dropdown-item">Thông tin cá nhân</a>
                     <a href="testimonial.html" class="dropdown-item">Đổi mật khẩu</a>
-                    <a href="/" class="dropdown-item">Đăng xuất</a>
+                    <a (click)="logout()" href="/" class="dropdown-item">Đăng xuất</a>
                   </div>
                 </div>
           </div>
@@ -334,26 +334,17 @@
                             </ul>
         
                         <div class="mt-5">
-                            <h4 class="mb-4">Apply For The Job</h4>
-                            <form>
+                            <h4 class="mb-4">Ứng tuyển ngay</h4>
+                            <form [formGroup]="formApply">
                                 <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Your Name">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control" placeholder="Your Email">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Portfolio Website">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="file" class="form-control bg-white">
+                                    <div class="col-12 col-sm-12">
+                                        <input type="file" accept="application/pdf,application/msword" (change)="onSelect($event.target.files)" class="form-control bg-white">
                                     </div>
                                     <div class="col-12">
-                                        <textarea class="form-control" rows="5" placeholder="Coverletter"></textarea>
+                                        <textarea class="form-control" rows="5" placeholder="Đoạn giới thiệu bản thân"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                        <button class="btn btn-primary w-100" (click)="registerJob()" type="submit">Gửi CV</button>
                                     </div>
                                 </div>
                             </form>

@@ -1,11 +1,18 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { JobRegisterPublic } from "../models/jobRegisterPublic";
+
+const httpOptionsFD = {
+  headers: new HttpHeaders({
+   Authorization:'Bearer '+localStorage.getItem('auth-token'),
+  }),
+};
 
 @Injectable({
   providedIn: "root",
 })
+
 export class RecruitmentService {
   getjob: string;
   getDetailJob: string;
@@ -25,7 +32,7 @@ export class RecruitmentService {
     return this.http.get<any>(this.getDetailJob+id);
   }
 
-  registerJob(rjob: JobRegisterPublic): Observable<any> {
-    return this.http.post<any>(this.registerJobUrl,rjob);
+  registerJob(data:any): Observable<any> {
+    return this.http.post<any>(this.registerJobUrl,data,httpOptionsFD);
   }
 }

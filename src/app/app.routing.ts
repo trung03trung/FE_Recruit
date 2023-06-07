@@ -7,6 +7,7 @@ import { ProfileUserPublicComponent } from "./modules/recruitmentPublic/profile-
 import { DetaileJobPComponent } from "./modules/recruitmentPublic/detal-job-public/detail-job-public.component";
 import { PopupApply } from "./modules/recruitmentPublic/popup-apply/popup-apply.component";
 import { ChangeThePasswordPublicComponent } from "./modules/recruitmentPublic/change-the-password-public/change-the-password-public.component";
+import { JobListingComponent } from "./modules/recruitmentPublic/job-listing/job-listing.component";
 
 
 export const routes: Routes = [
@@ -67,6 +68,10 @@ export const routes: Routes = [
   {
     path: 'change-the-password-public',
     component: ChangeThePasswordPublicComponent ,
+  },
+  {
+    path:'public-job/job-list/:keyword',
+    component: JobListingComponent,
   },
 ];
 

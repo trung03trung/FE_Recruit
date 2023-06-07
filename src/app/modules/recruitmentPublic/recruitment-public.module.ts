@@ -11,6 +11,9 @@ import { ToastrModule } from 'ngx-toastr';
 import{MaterialModule} from '../../shared/material.module';
 import { RecruitmentPublicComponent } from './recruitment-public.component';
 import { ProfileUserPublicComponent } from './profile-user-public/profile-user-public.component';
+import { HeaderPublicComponent } from '../header-public/header-public.component';
+import { DetaileJobPComponent } from './detal-job-public/detail-job-public.component';
+import { JobListingComponent } from './job-listing/job-listing.component';
 
 const routes: Routes = [{
   path: '',
@@ -26,7 +29,10 @@ const routes: Routes = [{
 @NgModule({
   declarations: [
     RecruitmentPublicComponent,
-    ProfileUserPublicComponent
+    ProfileUserPublicComponent,
+    DetaileJobPComponent,
+    HeaderPublicComponent,
+    JobListingComponent
   ],
   imports: [
     CommonModule,

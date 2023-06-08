@@ -113,19 +113,6 @@ export class StatisticalComponent implements OnInit {
               }
             ]
           };
-
-          (this.data[0] = 5),
-          (this.data[1] = 10),
-          (this.data[2] = 11),
-          (this.data[3] = 15),
-          (this.data[4] = 12),
-          (this.data[5] = 5),
-          (this.data[6] = 10),
-          (this.data[7] = 11),
-          (this.data[8] = 15),
-          (this.data[9] = 21),
-          (this.data[10] = 15),
-          (this.data[11] = 21);
       },
       (err) => {
         console.log("error while fetching data.");
@@ -247,4 +234,7 @@ export class StatisticalComponent implements OnInit {
     });
   }
  
+  more(){
+    window.open("http://localhost:3000/d/eJaN5T_Vz/recruit?orgId=1&from=1686196517705&to=1686198317705&kiosk=tv", "_blank");
+  }
 }

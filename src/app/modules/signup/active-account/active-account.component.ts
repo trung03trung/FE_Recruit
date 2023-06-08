@@ -17,7 +17,7 @@ export class ActiveAccountComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.code = params['code'];
     });
-    this.http.get('http://localhost:9090/api/auth/active?code=' + this.code).subscribe(data => {
+    this.http.get('http://localhost:8081/api/auth/active?code=' + this.code).subscribe(data => {
       console.log(data)
     });
     this.router.navigate(['/auth']);

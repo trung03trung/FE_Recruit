@@ -14,8 +14,8 @@ export class UserPublicService {
   changthepass: string;
   
   constructor(private http: HttpClient) {
-    this.updateUserUrl="http://localhost:9090/api/public/updateUser";
-    this.changthepass ="http://localhost:9090/api/public/changeThePassWord";
+    this.updateUserUrl="http://localhost:8081/api/public/updateUser";
+    this.changthepass ="http://localhost:8081/api/public/changeThePassWord";
   }
 
   updateUser(user: Users): Observable<Users> {

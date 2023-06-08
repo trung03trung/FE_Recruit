@@ -21,8 +21,8 @@ export class StatisticalService {
   baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.Urlstatistical = "http://localhost:9090/api/admin/statistical";
-    this.baseUrl = "http://localhost:9090/api/admin";
+    this.Urlstatistical = "http://localhost:8081/api/admin/statistical";
+    this.baseUrl = "http://localhost:8081/api/admin";
   }
 
   getStatistical(stati: any): Observable<any> {

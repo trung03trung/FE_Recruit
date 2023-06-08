@@ -10,7 +10,7 @@ export class ProfilePublickService {
   profilePulicUrl : string;
 
   constructor(private http: HttpClient) { 
-    this.profilePulicUrl = "http://localhost:9090/api/public/user/{userName}?userName=";
+    this.profilePulicUrl = "http://localhost:8081/api/public/user/{userName}?userName=";
   }
   
   getProfile(username: any):Observable<any>{

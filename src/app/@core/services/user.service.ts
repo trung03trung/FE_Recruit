@@ -22,12 +22,12 @@ export class UserService {
   deactivateUserUrl: string;
 
   constructor(private http: HttpClient) {
-    this.addUserURL = "http://localhost:9090/api/admin/addUserJe";
-    this.getUserURL = "http://localhost:9090/api/admin/user";
-    this.deactivateUserUrl = "http://localhost:9090/api/admin/deactivateUser";
-    this.getUserJeURL = "http://localhost:9090/api/admin/userSeach";
-    this.updateUserUrl = "http://localhost:9090/api/admin/updateUser";
-    this.changthepass = "http://localhost:9090/api/admin/changeThePassWord";
+    this.addUserURL = "http://localhost:8081/api/admin/addUserJe";
+    this.getUserURL = "http://localhost:8081/api/admin/user";
+    this.deactivateUserUrl = "http://localhost:8081/api/admin/deactivateUser";
+    this.getUserJeURL = "http://localhost:8081/api/admin/userSeach";
+    this.updateUserUrl = "http://localhost:8081/api/admin/updateUser";
+    this.changthepass = "http://localhost:8081/api/admin/changeThePassWord";
   }
 
   getAllUser(): Observable<Users[]> {

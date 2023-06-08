@@ -22,8 +22,8 @@ export class CompanyService {
   UrlUpdateCompany : string;
 
   constructor(private http: HttpClient) {
-    this.UrlCompany = "http://localhost:9090/api/admin/company/";
-    this.UrlUpdateCompany = "http://localhost:9090/api/admin/update-company";
+    this.UrlCompany = "http://localhost:8081/api/admin/company/";
+    this.UrlUpdateCompany = "http://localhost:8081/api/admin/update-company";
   }
 
   getCompanyById(companyId: number): Observable<Company> {

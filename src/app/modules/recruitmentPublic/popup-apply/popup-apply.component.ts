@@ -109,7 +109,7 @@ export class PopupApply implements OnInit {
     const formDataUpLoad = new FormData();
     formDataUpLoad.append("file", this.fileToUpload);
     this.httpClient
-      .post("http://localhost:9090/api/public/uploadFile", formDataUpLoad, {
+      .post("http://localhost:8081/api/public/uploadFile", formDataUpLoad, {
         observe: "response",
       })
       .subscribe((response) => {

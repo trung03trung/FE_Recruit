@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { AuthService } from "../../@core/services/auth.service";
 import { TokenService } from "../../@core/services/token.service";
 import { Router } from "@angular/router";
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'ngx-signup',
@@ -13,10 +14,12 @@ export class SignupComponent implements OnInit, DoCheck {
   message = 'a';
   formSignup: FormGroup;
   loading=""
+  waiting = true;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
+    private toaster:Toaster,
   ) {
   }
   disableClick = "disableClick";
@@ -56,14 +59,27 @@ export class SignupComponent implements OnInit, DoCheck {
   }
 
   signup() {
+    this.waiting = false;
     this.loading = "spinner-border spinner-border-sm";
     this.authService.signup(this.formSignup.value).subscribe(data => {
-      this.message = data.status
+      this.message = data.status;
       if (this.message == 'OK') {
+        this.showToaster('Đăng ký thành công vui lòng kiểm tra email để kích hoạt tài khoản','success');
         this.router.navigate(['/auth']);
       }
       else
+      this.showToaster('Đã có lỗi xẩy ra vui lòng thử lại','danger')
         this.loading="";
+    });
+  }
+
+  showToaster(message: string,typea:any) {
+    const type = typea;
+    this.toaster.open({
+      text: message,
+      caption: 'Thành công',
+      type: type,
+      duration: 5000
     });
   }
 

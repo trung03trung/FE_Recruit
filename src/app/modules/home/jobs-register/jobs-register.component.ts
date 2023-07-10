@@ -6,6 +6,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogInterveiwComponent } from "./detail-jobregis/dialog-interveiw/dialog-interveiw.component";
 import { DialogreasonComponent } from "./detail-jobregis/dialogreason/dialogreason.component";
 import * as saveAs from "file-saver";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "ngx-jobs-register",
@@ -27,6 +28,11 @@ export class JobsRegisterComponent implements OnInit {
   isClick = false;
   isSearch = false;
   name='';
+  formSearch = new FormGroup({ 
+    jobName: new FormControl(""),
+    applyName: new FormControl(""),
+   status: new FormControl(""),
+  });
   isChangeSize=false;
   constructor(
     private jobRegisterService: JobRegisterService,
@@ -169,6 +175,22 @@ export class JobsRegisterComponent implements OnInit {
     this.router.navigate([`/home/job-register/detail/${id}`]);
   }
 
+  onSearch(){
+      const data = {
+        jobName: this.formSearch.get('jobName').value,
+        applyName: this.formSearch.get('applyName').value,
+        status: this.formSearch.get('status').value,
+        pageNo: this.pageNo,
+        totalPages: this.totalPage,
+        pageSize: this.pageSize,
+        sortBy: this.sortSearchBy,
+        sortDir: this.sortDir,
+      };
+      this.jobRegisterService.searchJobRegister(data).subscribe((data) => {
+        this.getData(data);
+        this.isSearch = true;
+      });
+  }
 
 
 }

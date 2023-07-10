@@ -52,7 +52,7 @@
 
     <div class="clearfix">
       <button type="submit" class="{{disableClick}}" class="btn btn-success" (click)="signup()"
-              [disabled]="!formSignup.valid"><span class="{{loading}}"></span>Đăng ký
+              [disabled]="!formSignup.valid && waiting"><span class="{{loading}}"></span>Đăng ký
       </button>
     </div>
   </div>

@@ -1,83 +1,17 @@
-<!-- <body>
-    <div class="container p-0">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6"><h2>Hồ sơ <b>ứng tuyển</b></h2></div>
-                
-                        <div class="col-sm-6">
-                            <div class="search-box">
-                                <i class="material-icons" (change)="onChangeEvent($event)" style="cursor: pointer;">&#xE8B6;</i>
-                                <input type="text" (change)="onChangeEvent($event)"  class="form-control" placeholder="Tên,vị trí,trạng thái&hellip;">
-                            </div>
-                        </div>
-                    </div>
-                  
-                </div>
-                <table class="table table-striped table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Tên ứng viên <i (click)="onSortBy('U.user_name')"  class="fa fa-sort"></i></th>
-                            <th>Vị trí ứng tuyển <i (click)="onSortBy('J.name')"  class="fa fa-sort"></i></th>
-                            <th>Thời gian nộp hồ sơ <i (click)="onSortBy('JR.date_register')"  class="fa fa-sort"></i></th>
-                            <th>Trạng thái <i (click)="onSortBy('S.code')"  class="fa fa-sort"></i></th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let job of listJobsRegister;let i=index;">
-                            <td  [routerLink]="['/home/job-register/detail', job?.id]" style="cursor: pointer;">{{i+1}}</td>
-                            <td [routerLink]="['/home/job-register/detail', job?.id]" style="cursor: pointer;">{{job?.user?.userName}}</td>
-                            <td><a class="" [routerLink]="['/home/job/detail', job.job?.id]" style="color: blue;">{{job?.job?.name}}</a></td>
-                            <td>{{job?.dateRegister|date:'dd/MM/yyyy'}}</td>
-                            <td>{{job?.statusJobRegister?.code}}</td>
-                            <td>
-                                    <div class="btn-group">
-                                    <button type="button"  class="btn btn-primary btn-sm">Tải CV</button>
-                                    <button type="button" *ngIf="job?.statusJobRegister?.code==='Ứng viên bị từ chối'||job?.statusJobRegister?.code==='Ứng viên đã hủy ứng'" (click)="openDialogReason(job)" class="btn btn-success btn-sm">Xem lý do</button>
-                                    <button type="button" (click)="openDialogInterview(job)" *ngIf="job?.statusJobRegister?.code==='Chờ phỏng vấn'" class="btn btn-warning btn-sm">Đặt lịch</button>
-                                    </div>
-                            </td>
-                        </tr>
-                               
-                    </tbody>
-                </table>
-                <div class="clearfix">
-                    <div class="hint-text">Hiển thị <b><select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" (change)="changePageSize($event)" class="form-control-sm">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                        </select></b> mục</div>
-                    <ul class="pagination" *ngFor="let page of totalPageNum">
-                        <li *ngIf="page==pageNo" class="page-item active" ><a class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
-                        <li *ngIf="page!=pageNo" class="page-item" ><a routerLink="/home/job/detail"  class="page-link" (click)="onClick(page)">{{page+1}}</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>        
-    </div> 
-</body> -->
+
 <div class="table-wrapper">
     <h2 id="page-heading">
         <span>Hồ sơ ứng tuyển</span>
-        <button id="jh-import" type="button" class="btn btn-outline-dark float-right mr-2 jh-create-entity create-area">
-            <i class="fas fa-upload "></i>
-            <span>
-                Xuất Excel
-            </span>
-        </button>
     </h2>
 
 
     <div class="border-top">
         <div class="container">
-            <form class="ng-pristine ng-valid ng-touched">
+            <form class="ng-pristine ng-valid ng-touched" [formGroup]="formSearch">
                 <div class="card-body row pt-3">
                     <div class="form-group col-sm-3 row p-0 m-0 pt-3">
                         <div class="col-sm-3 pl-0 pt-2 text-sm-left"><label>Tên công việc</label></div>
-                        <div class="col-sm-9 pr-0"><input type="text" formControlName="code"
+                        <div class="col-sm-9 pr-0"><input type="text" formControlName="jobName"
                                 placeholder="Thông tin tìm kiếm" class="form-control ng-pristine ng-valid ng-touched"
                                 ng-reflect-name="code"></div>
                     </div>
@@ -85,7 +19,7 @@
                         <div class="col-sm-3 pl-0 pt-2 text-sm-right"><label>Tên ứng viên</label></div>
                         <div class="col-sm-9 pr-0">
                             <!--                            <input type="text" formControlName="name" placeholder="Nhập tên điều kiện" class="form-control ng-pristine ng-valid ng-touched">-->
-                            <input type="text" class="form-control" formControlName="productType" list="types"
+                            <input type="text" class="form-control" formControlName="applyName" list="types"
                                 placeholder="Thông tin tìm kiếm" />
                             <datalist id="types">
                                 <!-- <option *ngFor="let productType of productTypes">{{productType.productName}}</option> -->
@@ -97,14 +31,14 @@
                         <div class="col-sm-9 pr-0">
                             <select formControlName="status" class="form-control ng-pristine ng-valid ng-touched">
                                 <option value="" [selected]="true">Tất cả</option>
-                                <option value="Đã tuyển">Đã tuyển</option>
-                                <option value="Chờ phỏng vấn">Chờ phỏng vấn</option>
+                                <option value="4">Đã tuyển</option>
+                                <option value="2">Chờ phỏng vấn</option>
 
                             </select>
                         </div>
                     </div>
                     <div class="form-group col-sm-2 p-0 m-0 pt-3 text-right">
-                        <button class="btn btn-group" (click)="onChangeEvent($event)"
+                        <button class="btn btn-group" (click)="onSearch()"
                             style="background-color:  #ea0606;color:white;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 viewBox="0 0 16 16 " class="bi bi-search font-weight-bold"

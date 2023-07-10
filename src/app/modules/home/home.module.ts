@@ -25,6 +25,8 @@ import { CompanyComponent } from './company/company.component';
 import { DialogreasonComponent } from './jobs-register/detail-jobregis/dialogreason/dialogreason.component';
 import { DialogInterveiwComponent } from './jobs-register/detail-jobregis/dialog-interveiw/dialog-interveiw.component';
 import { ExportPdfComponent } from './job/export-pdf/export-pdf.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -113,6 +115,8 @@ const routes: Routes = [{
     MatDialogModule,
     ToastrModule.forRoot(),
     MaterialModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class HomeModule {}

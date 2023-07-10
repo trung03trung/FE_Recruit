@@ -11,7 +11,6 @@ import { job } from '../models/job';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-   Authorization:'Bearer '+localStorage.getItem('auth-token'),
   }),
 };
 
@@ -32,13 +31,13 @@ const httpOptionsFile = new HttpHeaders({
   providedIn: 'root',
 })
 export class JobService {
-    
+
   listJob:job[]=[];
   index:number;
   data:any;
   update: boolean;
   token=localStorage.getItem('auth-token');
-  private readonly baseUrl = `${environment.apiUrl}admin/`;
+  private readonly baseUrl = `${environment.apiUrl}public/`;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -64,10 +63,11 @@ export class JobService {
   }
   public tranferData(data:any){
     this.data=data;
-    
+
   }
-  public getJobById(id:any):Observable<any>{
-    return this.http.get(`${this.baseUrl}job/${id}`,httpOptions).pipe(catchError(this.handleError));
+  public searchTextBook(keyword:any,pageNumber:any,pageSize:any,sortBy:any,sortDir:any):Observable<any>{
+    return this.http.get(`${this.baseUrl}text-book?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`
+      ,httpOptions).pipe(catchError(this.handleError));
   }
   public getFieldSelect():Observable<any>{
     return this.http.get(`${this.baseUrl}select`,httpOptions);

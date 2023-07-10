@@ -21,6 +21,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
   userContact: Users;
   userCreateName;
   jpSelect = '';
+  companies;
   disableClick = "disableClick";
   dueDateFormat='';
   data=this.jobService.data;
@@ -45,6 +46,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
     userCreate: new FormControl("userCreate"),
     jobRequirement: new FormControl(""),
     startDate: new FormControl(""),
+    companyId: new FormControl(""),
     
   });
   constructor(
@@ -64,6 +66,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       this.workingForm = data.workingForms;
       this.rank = data.ranks;
       this.userContact = data.users;
+      this.companies = data.companies;
     });
     this.initForm();
   }
@@ -98,6 +101,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
       interrest: [this.data.interrest, Validators.required],
       startDate:[formatDate(this.data.startDate, 'yyyy-MM-dd', 'en'),Validators.required],
       userCreate:[this.userCreateName],
+      companyId:["",Validators.required],
     });
   }
   onSubmit() {
@@ -105,9 +109,7 @@ export class DiaglogUpdateComponent implements OnInit,DoCheck {
     const date2=new Date(this.formJob.controls.startDate.value);
   
     this.formJob.patchValue({ 
-      userCreate: this.userCreateName,
-      dueDate: date1,
-      startDate: date2,
+      userCreate: this.userCreateName
      });
     this.jobService.addNewJob(this.formJob.value).subscribe((data) => {
       if (data != null) {

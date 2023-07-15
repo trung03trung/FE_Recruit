@@ -42,7 +42,7 @@ export class JobService {
   constructor(private http: HttpClient, private router: Router) { }
 
   public getAllJob(pageNo:any,pageSize,sortBy,sortDir): Observable<any> {
-    return this.http.get(`${this.baseUrl}job?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`,httpOptions)
+    return this.http.get(`${this.baseUrl}job?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`,httpOptions);
   }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -65,9 +65,14 @@ export class JobService {
     this.data=data;
 
   }
-  public searchTextBook(keyword:any,pageNumber:any,pageSize:any,sortBy:any,sortDir:any):Observable<any>{
+
+  public getJobById(id:any):Observable<any>{
+    return this.http.get(`${this.baseUrl}job/${id}`,httpOptions).pipe(catchError(this.handleError));
+  }
+
+  public searchTextBook(keyword: any,pageNumber: any,pageSize: any,sortBy: any,sortDir: any): Observable<any>{
     return this.http.get(`${this.baseUrl}text-book?keyword=${keyword}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`
-      ,httpOptions).pipe(catchError(this.handleError));
+      ,httpOptions);
   }
   public getFieldSelect():Observable<any>{
     return this.http.get(`${this.baseUrl}select`,httpOptions);

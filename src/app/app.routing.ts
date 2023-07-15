@@ -13,7 +13,6 @@ import { JobListingComponent } from "./modules/recruitmentPublic/job-listing/job
 export const routes: Routes = [
   {
     path: "home",
-    canActivate: [AuthGuard],
     loadChildren: () =>
       import("./modules/home/home.module").then((m) => m.HomeModule),
   },

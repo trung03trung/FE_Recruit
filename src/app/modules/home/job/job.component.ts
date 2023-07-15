@@ -41,7 +41,7 @@ export class JobComponent implements OnInit {
   jobChild;
   isChangeSize = false;
   pdf=false;
-  formSearch = new FormGroup({ 
+  formSearch = new FormGroup({
     name: new FormControl(""),
   jobPosition: new FormControl(""),
   statusJob: new FormControl(""),
@@ -67,7 +67,7 @@ export class JobComponent implements OnInit {
     this.pageNo = data.pageNo;
     this.pageSize = data.pageSize;
 
-    this.totalJob = data.totalElements;    
+    this.totalJob = data.totalElements;
     if(!this.isChangeSize){
     this.totalPage = data.totalPages;
     }
@@ -170,11 +170,11 @@ export class JobComponent implements OnInit {
     console.log(id);
     const url = this.router.serializeUrl(
       this.router.createUrlTree(['/home/job-pdf/export/'+id])
-   
-    );  
-     
+
+    );
+
     window.open(url, '_blank');
-    
+
   }
 
   changePageSize(e) {
@@ -199,6 +199,23 @@ export class JobComponent implements OnInit {
         this.isSearch = true;
       });
     }
+  }
+  onClose() {
+    const data = {
+      name: this.formSearch.get('name').value,
+      statusJob: this.formSearch.get('statusJob').value,
+      jobPosition: this.formSearch.get('jobPosition').value,
+      pageNo: this.pageNo,
+      totalPages: this.totalPage,
+      pageSize: this.pageSize,
+      sortBy: this.sortSearchBy,
+      sortDir: this.sortDir,
+    };
+    this.jobService.searchJob(data).subscribe((data) => {
+      this.getData(data);
+      console.log(this.listJob);
+      this.isSearch = true;
+    });
   }
   onSubmit() {
     const data = {
